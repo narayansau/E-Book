@@ -1,0 +1,71 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML lang="en">
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link rel=stylesheet type="text/css" href="..\..\common_files\tmf.css">
+
+
+<TITLE>Billing Flow - Level 3 Advice of Charge</TITLE>
+<META NAME="author" CONTENT="ADMIN">
+</HEAD>
+<P style="width:60%;margin-bottom:20px;">
+<A NAME="topofpagediagram77e1aee2cb4511d8bc390003476dfa9bhtm"></A>
+<table width=100% border=0 style="background-color:white;" cellpadding=0>
+<tr><td><img src="..\..\common_files\TMF_eTom_Banner.gif" width=800 height=85></td></tr></table>
+
+<p class=navbar>
+<span style="float:right;font-color:white;margin-right=1%;">
+
+<span class="emaillink">
+<a href="mailto:deena.freed@casewise.com?subject=Feedback on Business Process Framework v9 Flows (now part of Frameworx)&body=Category:Billing Flow - Level 3%0A%0AName:Advice of Charge%0A%0AUUID:77e1aee2cb4511d8bc390003476dfa9b">Feedback</a>
+</span>
+ | <a href="..\..\common_files\license.htm" class=navlink>License Details</a></span>
+<a href=../../index.htm class=navlink>Content</a> | 
+<a href=indexdiagram.htm class=navlink>All diagrams</a> |
+<a href=indexETOMPROCESS.htm class=navlink>Frameworx Processes</a>
+</p>
+<H1>Billing Flow - Level 3 Advice of Charge</H1>
+<MAP NAME="COORDdiagram77e1aee2cb4511d8bc390003476dfa9bhtm">
+    <AREA SHAPE="RECT" COORDS="966, 23, 1102, 83" ALT="Internal Result Charge presented to Customer">
+    <AREA SHAPE="RECT" COORDS="15, 72, 136, 132" ALT="Internal Event Advice of Charge Request">
+    <AREA SHAPE="RECT" COORDS="957, 230, 1078, 290" HREF="etomprocess24.htm" ALT="(3) eTOM Process Type Manage Request (Including Self Service)">
+    <AREA SHAPE="RECT" COORDS="751, 230, 872, 290" HREF="etomprocess32.htm" ALT="(3) eTOM Process Type Create &amp; Deliver Bill">
+    <AREA SHAPE="RECT" COORDS="585, 230, 706, 290" HREF="etomprocess15.htm" ALT="(3) eTOM Process Type Apply Pricing, Discounting &amp; Rebate">
+    <AREA SHAPE="RECT" COORDS="438, 381, 559, 441" HREF="etomprocess37.htm" ALT="(3) eTOM Process Type Rate Usage Records">
+    <AREA SHAPE="RECT" COORDS="313, 517, 434, 577" HREF="etomprocess23.htm" ALT="(3) eTOM Process Type Distribute Management Information &amp; Data">
+    <AREA SHAPE="RECT" COORDS="151, 517, 272, 577" HREF="etomprocess26.htm" ALT="(3) eTOM Process Type Process Management Information &amp; Data">
+    <AREA SHAPE="RECT" COORDS="23, 366, 1110, 457" ALT="Functional Processes Service">
+    <AREA SHAPE="RECT" COORDS="23, 457, 1110, 623" ALT="Functional Processes Resource (Application, Computing and Network)">
+    <AREA SHAPE="RECT" COORDS="23, 170, 1110, 366" ALT="Functional Processes Market Product &amp; Customer">
+    <AREA SHAPE="RECT" COORDS="966, 23, 1102, 83" ALT="Internal Result Charge presented to Customer">
+</MAP>
+<P><IMG SRC="diagram14.png" USEMAP="#COORDdiagram77e1aee2cb4511d8bc390003476dfa9bhtm" ALT="Billing Flow - Level 3 Advice of Charge" LONGDESC="The end user indicates an interest in buying a product, a charge or rate for this product is displayed to the customer.  The end user is presented with this information, aka Advice of Charge (AoC) via a screen display, voice message, text message, etc.  This may also involve presenting relevant (to that user) alternative charges.
+
+Example.1: A video clip of a goal scored may be more expensive in the first ½ hour after the match is played and/or follow ‘normal’ time related charging rules, eg cheaper after 18.00 hours. The AoC would display the current cost of the video clip download, plus may display the reduced cost of the video clip if the user is prepared to wait until a later time. (NB. this is down to the business rules/policy of the company concerned). 
+
+Example.2: The download of a music CD may take 3 hours via a 500k Broadband line and cost $5 for the video and nothing for transport (covered by normal flat rate subscription), or it may take 5 minutes to download via the 500 BB line temporarily boosted to 10M and cost $5 for the video and $3 for the extra temporary bandwidth.  (NB. The charges displayed here would be decided by the company involved, but best practice would suggest both charges are displayed.)"></P>
+<H3>Diagram Description</H3>
+The end user indicates an interest in buying a product, a charge or rate for this product is displayed to the customer.  The end user is presented with this information, aka Advice of Charge (AoC) via a screen display, voice message, text message, etc.  This may also involve presenting relevant (to that user) alternative charges.
+<BR>
+<BR>Example.1: A video clip of a goal scored may be more expensive in the first ½ hour after the match is played and/or follow ‘normal’ time related charging rules, eg cheaper after 18.00 hours. The AoC would display the current cost of the video clip download, plus may display the reduced cost of the video clip if the user is prepared to wait until a later time. (NB. this is down to the business rules/policy of the company concerned). 
+<BR>
+<BR>Example.2: The download of a music CD may take 3 hours via a 500k Broadband line and cost $5 for the video and nothing for transport (covered by normal flat rate subscription), or it may take 5 minutes to download via the 500 BB line temporarily boosted to 10M and cost $5 for the video and $3 for the extra temporary bandwidth.  (NB. The charges displayed here would be decided by the company involved, but best practice would suggest both charges are displayed.)
+<H3>Pre Condition</H3>
+- The user must be using a valid/authorized device, 
+<BR>- The end user must be a valid/authorized user of that network 
+<BR>- The user must be permitted to buy that product (eg. End user of corporate intranet often have restrictions on value-add services)
+<BR>- The Network/Service Provider (which ever is responsible for the billing for this product) has dynamic access to the charging and rating rules for the specific service required 
+<BR>or*
+<BR>- The Network/Service Provider has dynamic access to the charging and rating rules for the specific service required plus the charging /discount rules for the individual end customer*. 
+<BR>
+<BR>* This will depend on whether the customer is a subscriber of the Network/Service Provider and/or whether that Network/Service Provider wishes to offer such an individualized AoC service.
+<HR><P>
+<P style="font-size:75%;text-align:center;"><a href=#top>Top of page</a> | 
+<a href=http://www.tmforum.org>TMF</a>
+</P>
+
+
+<BR><SMALL>
+Created from the TM Forum Model Business Process Framework v9 Flows (now part of Frameworx) on 4/23/2012 at 17:42</SMALL></P>
+</BODY>
+</HTML>

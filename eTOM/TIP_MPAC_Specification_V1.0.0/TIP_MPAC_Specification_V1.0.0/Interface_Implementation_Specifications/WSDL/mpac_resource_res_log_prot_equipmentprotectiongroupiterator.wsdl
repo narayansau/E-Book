@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+ *  Generated with Tigerstripe Workbench 0.6.935.201102010903 and 
+ *  Plugin Nortel Networks, Hewlett-Packard Company/TIP_Soap_Generator(1.1) (1.1)
+ *
+ *  DO NOT EDIT THIS CODE WHICH WAS AUTOMATICALLY GENERATED
+--><!--
+Copyright (C) 2011 TM Forum
+
+No recipient of this document and code shall in any way interpret this material as representing a position or agreement of TM Forum or its members. This material is draft working material of TM Forum and is provided solely for comments and evaluation. It is not "Forum Approved" and is solely circulated for the purposes of assisting TM Forum in the preparation of final material in furtherance of the aims and mission of TM Forum.
+
+Although it is copyrighted material of TM Forum:
+- Members of TM Forum are only granted the limited copyright waiver to distribute this material within their companies and may not make paper or electronic copies for distribution outside of their companies.
+- Non-members of the TM Forum are not permitted to make copies (paper or electronic) of this draft material other than for their internal use for the sole purpose of making comments thereon directly to TM Forum.
+- If this material forms part of a supply of information in support of an Industry Group Liaison relationship, the document may only be used as part of the work identified in the Liaison and may not be used or further distributed for any other purposes.
+
+Any use of this material by the recipient, other than as set forth specifically herein, is at its own risk, and under no circumstances will TM Forum be liable for direct or indirect damages or any costs or losses resulting from the use of this material by the recipient.
+
+This material is governed, and all recipients shall be bound, by all of the terms and conditions of the Intellectual Property Rights Policy of the TM Forum (http://www.tmforum.org/Bylaws/1094/home.html) and may involve a claim of patent rights by one or more TM Forum members or by non-members of TM Forum.
+-->
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://www.tmforum.org/xml/tip/resource/res/log/prot" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" name="EquipmentProtectionGroupIterator" targetNamespace="http://www.tmforum.org/xml/tip/resource/res/log/prot">
+   <wsdl:types>
+      <xsd:schema>
+         <xsd:import namespace="http://www.tmforum.org/xml/tip/resource/res/log/prot" schemaLocation="mpac_resource_res_log_prot_equipmentprotectiongroupiterator_msg.xsd"/>
+      </xsd:schema>
+   </wsdl:types>
+   <wsdl:message name="getNextEquipmentProtectionGroupIterationRequest">
+      <wsdl:documentation>
+         The entity iterator getNextEquipmentProtectionGroupIteration request message
+        </wsdl:documentation>
+      <wsdl:part name="body" element="tns:getNextEquipmentProtectionGroupIterationRequest"/>
+   </wsdl:message>
+   <wsdl:message name="getNextEquipmentProtectionGroupIterationResponse">
+      <wsdl:documentation>
+         The entity iterator getNextEquipmentProtectionGroupIteration response message
+        </wsdl:documentation>
+      <wsdl:part name="body" element="tns:getNextEquipmentProtectionGroupIterationResponse"/>
+   </wsdl:message>
+   <wsdl:message name="getNextEquipmentProtectionGroupIterationException">
+      <wsdl:documentation>
+         <p>The getNextEquipmentProtectionGroupIteration exception message.</p>
+      </wsdl:documentation>
+      <wsdl:part name="body" element="tns:getNextEquipmentProtectionGroupIterationException"/>
+   </wsdl:message>
+   <wsdl:message name="releaseEquipmentProtectionGroupIteratorRequest">
+      <wsdl:documentation>
+         The entity iterator releaseEquipmentProtectionGroupIterator request message
+        </wsdl:documentation>
+      <wsdl:part name="body" element="tns:releaseEquipmentProtectionGroupIteratorRequest"/>
+   </wsdl:message>
+   <wsdl:message name="releaseEquipmentProtectionGroupIteratorResponse">
+      <wsdl:documentation>
+         The entity iterator releaseEquipmentProtectionGroupIterator response message
+        </wsdl:documentation>
+      <wsdl:part name="body" element="tns:releaseEquipmentProtectionGroupIteratorResponse"/>
+   </wsdl:message>
+   <wsdl:message name="releaseEquipmentProtectionGroupIteratorException">
+      <wsdl:documentation>
+         <p>The releaseEquipmentProtectionGroupIterator exception message.</p>
+      </wsdl:documentation>
+      <wsdl:part name="body" element="tns:releaseEquipmentProtectionGroupIteratorException"/>
+   </wsdl:message>
+   <wsdl:portType name="EquipmentProtectionGroupIterator">
+      <wsdl:documentation>
+         The service interface definitions of the EquipmentProtectionGroup iterator 
+        </wsdl:documentation>
+      <wsdl:operation name="getNextEquipmentProtectionGroupIteration">
+         <wsdl:documentation>
+                The getNextEquipmentProtectionGroupIteration operation of the EquipmentProtectionGroup iterator
+            </wsdl:documentation>
+         <wsdl:input name="getNextEquipmentProtectionGroupIterationRequest" message="tns:getNextEquipmentProtectionGroupIterationRequest"/>
+         <wsdl:output name="getNextEquipmentProtectionGroupIterationResponse" message="tns:getNextEquipmentProtectionGroupIterationResponse"/>
+         <wsdl:fault name="getNextEquipmentProtectionGroupIterationException" message="tns:getNextEquipmentProtectionGroupIterationException"/>
+      </wsdl:operation>
+      <wsdl:operation name="releaseEquipmentProtectionGroupIterator">
+         <wsdl:documentation>
+                The releaseEquipmentProtectionGroupIterator operation of the EquipmentProtectionGroup iterator
+            </wsdl:documentation>
+         <wsdl:input name="releaseEquipmentProtectionGroupIteratorRequest" message="tns:releaseEquipmentProtectionGroupIteratorRequest"/>
+         <wsdl:output name="releaseEquipmentProtectionGroupIteratorResponse" message="tns:releaseEquipmentProtectionGroupIteratorResponse"/>
+         <wsdl:fault name="releaseEquipmentProtectionGroupIteratorException" message="tns:releaseEquipmentProtectionGroupIteratorException"/>
+      </wsdl:operation>
+   </wsdl:portType>
+   <wsdl:binding name="EquipmentProtectionGroupIteratorSoapHttpBinding" type="tns:EquipmentProtectionGroupIterator">
+      <wsdl:documentation>
+        Web Service (SOAP/HTTP) profile binding definitions.
+        </wsdl:documentation>
+      <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+      <wsdl:operation name="getNextEquipmentProtectionGroupIteration">
+         <soap:operation soapAction="getNextEquipmentProtectionGroupIteration" style="document"/>
+         <wsdl:input name="getNextEquipmentProtectionGroupIterationRequest">
+            <soap:body use="literal"/>
+         </wsdl:input>
+         <wsdl:output name="getNextEquipmentProtectionGroupIterationResponse">
+            <soap:body use="literal"/>
+         </wsdl:output>
+         <wsdl:fault name="getNextEquipmentProtectionGroupIterationException">
+            <soap:fault name="getNextEquipmentProtectionGroupIterationException" use="literal"/>
+         </wsdl:fault>
+      </wsdl:operation>
+      <wsdl:operation name="releaseEquipmentProtectionGroupIterator">
+         <soap:operation soapAction="releaseEquipmentProtectionGroupIterator" style="document"/>
+         <wsdl:input name="releaseEquipmentProtectionGroupIteratorRequest">
+            <soap:body use="literal"/>
+         </wsdl:input>
+         <wsdl:output name="releaseEquipmentProtectionGroupIteratorResponse">
+            <soap:body use="literal"/>
+         </wsdl:output>
+         <wsdl:fault name="releaseEquipmentProtectionGroupIteratorException">
+            <soap:fault name="releaseEquipmentProtectionGroupIteratorException" use="literal"/>
+         </wsdl:fault>
+      </wsdl:operation>
+   </wsdl:binding>
+   <wsdl:service name="EquipmentProtectionGroupIteratorWs">
+      <wsdl:documentation>
+        The service definition (necessary for code compilation)
+        </wsdl:documentation>
+      <wsdl:port name="EquipmentProtectionGroupIteratorPort" binding="tns:EquipmentProtectionGroupIteratorSoapHttpBinding">
+         <soap:address location="http://localhost/EquipmentProtectionGroupIterator"/>
+      </wsdl:port>
+   </wsdl:service>
+</wsdl:definitions>

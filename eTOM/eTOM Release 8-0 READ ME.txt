@@ -1,0 +1,36 @@
+This release is made of 12 Documents 
+
+Please refer to RN311 Business Process Framework Release Notes for complete details of this release, which is
+available as a standalone document on the eTOM Release 8.0 TM Forum web page
+
+
+The Release is packaged into 2 ZIP files namely: 
+ 
+GB921 Getting Started with Business Process Framework Release 8-0.zip:
+    eTOM Release 8-0 READ ME  (this file) 
+    GB921-P - Primer
+    GB921- Principles and Concepts - Main Business Process Framework document
+    GB921-U - User Guidelines
+
+
+GB921 Business Process Framework Release 8-0 Addenda Files.zip
+   eTOM Release 8-0 READ ME  (this file)
+   GB921-B B2B Integration Work
+   GB921-C Public_B2B_Bus_Ops_Map
+   GB921-D Process Decompositions and Descriptions
+   GB921-F Process Flow examples
+   GB921-G Guide to applying eTOM
+   GB921-R Real World UseCases
+   GB921-T eTOM/ITIL Mapping
+   GB921-V Guide for eTOM and ITIL Practitioners
+ 
+
+Suggested Reading Order:
+RN311 - eTOM Release Notes
+GB921-P - Primer
+GB921-Main - Main eTOM document
+GB921-U - User Guidelines
+
+All others as appropriate to readers area of interest.
+
+

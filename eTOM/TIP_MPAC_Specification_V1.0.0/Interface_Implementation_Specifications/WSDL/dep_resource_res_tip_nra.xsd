@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+ *  Generated with Tigerstripe Workbench 0.6.935.201102010903 and 
+ *  Plugin Nortel Networks, Hewlett-Packard Company/TIP_Soap_Generator(1.1) (1.1)
+ *
+ *  DO NOT EDIT THIS CODE WHICH WAS AUTOMATICALLY GENERATED
+--><!--
+Copyright (C) 2011 TM Forum
+
+No recipient of this document and code shall in any way interpret this material as representing a position or agreement of TM Forum or its members. This material is draft working material of TM Forum and is provided solely for comments and evaluation. It is not "Forum Approved" and is solely circulated for the purposes of assisting TM Forum in the preparation of final material in furtherance of the aims and mission of TM Forum.
+
+Although it is copyrighted material of TM Forum:
+- Members of TM Forum are only granted the limited copyright waiver to distribute this material within their companies and may not make paper or electronic copies for distribution outside of their companies.
+- Non-members of the TM Forum are not permitted to make copies (paper or electronic) of this draft material other than for their internal use for the sole purpose of making comments thereon directly to TM Forum.
+- If this material forms part of a supply of information in support of an Industry Group Liaison relationship, the document may only be used as part of the work identified in the Liaison and may not be used or further distributed for any other purposes.
+
+Any use of this material by the recipient, other than as set forth specifically herein, is at its own risk, and under no circumstances will TM Forum be liable for direct or indirect damages or any costs or losses resulting from the use of this material by the recipient.
+
+This material is governed, and all recipients shall be bound, by all of the terms and conditions of the Intellectual Property Rights Policy of the TM Forum (http://www.tmforum.org/Bylaws/1094/home.html) and may involve a claim of patent rights by one or more TM Forum members or by non-members of TM Forum.
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.tmforum.org/xml/tip/resource/res/tip/nra" targetNamespace="http://www.tmforum.org/xml/tip/resource/res/tip/nra" attributeFormDefault="unqualified" elementFormDefault="qualified" version="1.0">
+   <xsd:annotation>
+      <xsd:documentation>
+         <pre>TMF XML Schema Definitions from Tigerstripe model
+                      project name: TIP_MPAC_Model
+                        at version: 1.0
+      for all artifacts in package: org.tmforum.tip.resource.res.tip.nra
+      Model Description:
+      Model Project for TIP_MPAC.
+      Package Description:
+      
+      Package data summary information:
+            entities: 0
+ Association Classes: 0
+           datatypes: 1
+        enumerations: 3
+              events: 0
+          exceptions: 0
+      </pre>
+      </xsd:documentation>
+   </xsd:annotation><!-- ******************************* --><!-- Package Enumeration definitions --><!-- ******************************* -->
+   <xsd:simpleType name="AlarmStatus">
+      <xsd:annotation>
+         <xsd:documentation>
+            <p/>
+         </xsd:documentation>
+      </xsd:annotation>
+      <xsd:restriction base="xsd:string">
+         <xsd:enumeration value="0">
+            <xsd:annotation>
+               <xsd:documentation>
+                  <p/>
+                  <p>This literal  has  value 0</p>
+               </xsd:documentation>
+            </xsd:annotation>
+         </xsd:enumeration>
+         <xsd:enumeration value="5">
+            <xsd:annotation>
+               <xsd:documentation>
+                  <p/>
+                  <p>This literal  has  value 5</p>
+               </xsd:documentation>
+            </xsd:annotation>
+         </xsd:enumeration>
+         <xsd:enumeration value="6">
+            <xsd:annotation>
+               <xsd:documentation>
+                  <p/>
+                  <p>This literal  has  value 6</p>
+               </xsd:documentation>
+            </xsd:annotation>
+         </xsd:enumeration>
+         <xsd:enumeration value="2">
+            <xsd:annotation>
+               <xsd:documentation>
+                  <p/>
+                  <p>This literal  has  value 2</p>
+               </xsd:documentation>
+            </xsd:annotation>
+         </xsd:enumeration>
+         <xsd:enumeration value="4">
+            <xsd:annotation>
+               <xsd:documentation>
+                  <p/>
+                  <p>This literal  has  value 4</p>
+               </xsd:documentation>
+            </xsd:annotation>
+         </xsd:enumeration>
+         <xsd:enumeration value="3">
+            <xsd:annotation>
+               <xsd:documentation>
+                  <p/>
+                  <p>This literal  has  value 3</p>
+               </xsd:documentation>
+            </xsd:annotation>
+         </xsd:enumeration>
+         <xsd:enumeration value="1">
+            <xsd:annotation>
+               <xsd:documentation>
+                  <p/>
+                  <p>This literal  has  value 1</p>
+               </xsd:documentation>
+            </xsd:annotation>
+         </xsd:enumeration>
+      </xsd:restriction>
+   </xsd:simpleType>
+   <xsd:complexType name="ArrayOfAlarmStatus">
+      <xsd:sequence>
+         <xsd:element name="item" type="tns:AlarmStatus" minOccurs="0" maxOccurs="unbounded"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:simpleType name="ArcQIStatus">
+      <xsd:annotation>
+         <xsd:documentation>
+            <p/>
+         </xsd:documentation>
+      </xsd:annotation>
+      <xsd:restriction base="xsd:string">
+         <xsd:enumeration value="0">
+            <xsd:annotation>
+               <xsd:documentation>
+                  <p/>
+                  <p>This literal  has  value 0</p>
+               </xsd:documentation>
+            </xsd:annotation>
+         </xsd:enumeration>
+         <xsd:enumeration value="2">
+            <xsd:annotation>
+               <xsd:documentation>
+                  <p/>
+                  <p>This literal  has  value 2</p>
+               </xsd:documentation>
+            </xsd:annotation>
+         </xsd:enumeration>
+         <xsd:enumeration value="1">
+            <xsd:annotation>
+               <xsd:documentation>
+                  <p/>
+                  <p>This literal  has  value 1</p>
+               </xsd:documentation>
+            </xsd:annotation>
+         </xsd:enumeration>
+      </xsd:restriction>
+   </xsd:simpleType>
+   <xsd:complexType name="ArrayOfArcQIStatus">
+      <xsd:sequence>
+         <xsd:element name="item" type="tns:ArcQIStatus" minOccurs="0" maxOccurs="unbounded"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:simpleType name="ArcState">
+      <xsd:annotation>
+         <xsd:documentation>
+            <p/>
+         </xsd:documentation>
+      </xsd:annotation>
+      <xsd:restriction base="xsd:string">
+         <xsd:enumeration value="0">
+            <xsd:annotation>
+               <xsd:documentation>
+                  <p/>
+                  <p>This literal  has  value 0</p>
+               </xsd:documentation>
+            </xsd:annotation>
+         </xsd:enumeration>
+         <xsd:enumeration value="1">
+            <xsd:annotation>
+               <xsd:documentation>
+                  <p/>
+                  <p>This literal  has  value 1</p>
+               </xsd:documentation>
+            </xsd:annotation>
+         </xsd:enumeration>
+         <xsd:enumeration value="2">
+            <xsd:annotation>
+               <xsd:documentation>
+                  <p/>
+                  <p>This literal  has  value 2</p>
+               </xsd:documentation>
+            </xsd:annotation>
+         </xsd:enumeration>
+         <xsd:enumeration value="3">
+            <xsd:annotation>
+               <xsd:documentation>
+                  <p/>
+                  <p>This literal  has  value 3</p>
+               </xsd:documentation>
+            </xsd:annotation>
+         </xsd:enumeration>
+      </xsd:restriction>
+   </xsd:simpleType>
+   <xsd:complexType name="ArrayOfArcState">
+      <xsd:sequence>
+         <xsd:element name="item" type="tns:ArcState" minOccurs="0" maxOccurs="unbounded"/>
+      </xsd:sequence>
+   </xsd:complexType><!-- **************************** --><!-- Package Datatype definitions --><!-- **************************** -->
+   <xsd:element name="ituArcStateAndStatusList" type="tns:ItuArcStateAndStatusList"/>
+   <xsd:complexType name="ItuArcStateAndStatusList">
+      <xsd:annotation>
+         <xsd:documentation>
+            <p/>
+            <p>This datatype  is  not extendable</p>
+         </xsd:documentation>
+      </xsd:annotation>
+      <xsd:sequence>
+         <xsd:element name="m3100_ALARM_STATUS" type="tns:AlarmStatus" minOccurs="0" maxOccurs="1">
+            <xsd:annotation>
+               <xsd:documentation>
+                  <p/>
+                  <p>This element is generated from an attribute.</p>
+                  <p>This attribute  is  optional</p>
+               </xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="m3100_ARC_QI_STATUS" type="tns:ArcQIStatus" minOccurs="0" maxOccurs="1">
+            <xsd:annotation>
+               <xsd:documentation>
+                  <p/>
+                  <p>This element is generated from an attribute.</p>
+                  <p>This attribute  is  optional</p>
+               </xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="m3100_ARC_STATE" type="tns:ArcState" minOccurs="0" maxOccurs="1">
+            <xsd:annotation>
+               <xsd:documentation>
+                  <p/>
+                  <p>This element is generated from an attribute.</p>
+                  <p>This attribute  is  optional</p>
+               </xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="m3100_NALM_QI_INTERVAL" type="xsd:int" minOccurs="0" maxOccurs="1">
+            <xsd:annotation>
+               <xsd:documentation>
+                  <p/>
+                  <p>This element is generated from an attribute.</p>
+                  <p>This attribute  is  optional</p>
+               </xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="m3100_NALM_TI_INTERVAL" type="xsd:int" minOccurs="0" maxOccurs="1">
+            <xsd:annotation>
+               <xsd:documentation>
+                  <p/>
+                  <p>This element is generated from an attribute.</p>
+                  <p>This attribute  is  optional</p>
+               </xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="ArrayOfItuArcStateAndStatusList">
+      <xsd:sequence>
+         <xsd:element name="item" type="tns:ItuArcStateAndStatusList" minOccurs="0" maxOccurs="unbounded"/>
+      </xsd:sequence>
+   </xsd:complexType><!-- ************************** --><!-- package Entity definitions --><!-- ************************** --><!-- ************************************* --><!-- Package Association Class definitions --><!-- ************************************* --><!-- ************************** --><!-- package Event definitions --><!-- ************************** --><!-- ************************** --><!-- package Exception definitions --><!-- ************************** -->
+</xsd:schema>

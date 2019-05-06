@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+ *  Generated with Tigerstripe Workbench 0.6.935.201102010903 and 
+ *  Plugin Nortel Networks, Hewlett-Packard Company/TIP_Soap_Generator(1.1) (1.1)
+ *
+ *  DO NOT EDIT THIS CODE WHICH WAS AUTOMATICALLY GENERATED
+--><!--
+Copyright (C) 2011 TM Forum
+
+No recipient of this document and code shall in any way interpret this material as representing a position or agreement of TM Forum or its members. This material is draft working material of TM Forum and is provided solely for comments and evaluation. It is not "Forum Approved" and is solely circulated for the purposes of assisting TM Forum in the preparation of final material in furtherance of the aims and mission of TM Forum.
+
+Although it is copyrighted material of TM Forum:
+- Members of TM Forum are only granted the limited copyright waiver to distribute this material within their companies and may not make paper or electronic copies for distribution outside of their companies.
+- Non-members of the TM Forum are not permitted to make copies (paper or electronic) of this draft material other than for their internal use for the sole purpose of making comments thereon directly to TM Forum.
+- If this material forms part of a supply of information in support of an Industry Group Liaison relationship, the document may only be used as part of the work identified in the Liaison and may not be used or further distributed for any other purposes.
+
+Any use of this material by the recipient, other than as set forth specifically herein, is at its own risk, and under no circumstances will TM Forum be liable for direct or indirect damages or any costs or losses resulting from the use of this material by the recipient.
+
+This material is governed, and all recipients shall be bound, by all of the terms and conditions of the Intellectual Property Rights Policy of the TM Forum (http://www.tmforum.org/Bylaws/1094/home.html) and may involve a claim of patent rights by one or more TM Forum members or by non-members of TM Forum.
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.tmforum.org/xml/tip/resource/res/log" xmlns:entity="http://www.tmforum.org/xml/tip/internal/entity" xmlns:nrb="http://www.tmforum.org/xml/tip/resource/res/tip/nrb" targetNamespace="http://www.tmforum.org/xml/tip/resource/res/log" attributeFormDefault="unqualified" elementFormDefault="qualified" version="1.0">
+   <xsd:annotation>
+      <xsd:documentation>
+         <pre>TMF XML Schema Definitions from Tigerstripe model
+                      project name: TIP_MPAC_Model
+                        at version: 1.0
+      for all artifacts in package: org.tmforum.tip.resource.res.log
+      Model Description:
+      Model Project for TIP_MPAC.
+      Package Description:
+      
+      Package data summary information:
+            entities: 1
+ Association Classes: 0
+           datatypes: 0
+        enumerations: 0
+              events: 0
+          exceptions: 0
+      </pre>
+      </xsd:documentation>
+   </xsd:annotation>
+   <xsd:import namespace="http://www.tmforum.org/xml/tip/internal/entity" schemaLocation="internal_entity.xsd"/>
+   <xsd:import namespace="http://www.tmforum.org/xml/tip/resource/res/tip/nrb" schemaLocation="dep_resource_res_tip_nrb.xsd"/><!-- ******************************* --><!-- Package Enumeration definitions --><!-- ******************************* --><!-- **************************** --><!-- Package Datatype definitions --><!-- **************************** --><!-- ************************** --><!-- package Entity definitions --><!-- ************************** -->
+   <xsd:element name="logicalResource" type="tns:LogicalResource"/>
+   <xsd:complexType name="LogicalResource" abstract="true">
+      <xsd:annotation>
+         <xsd:documentation>
+            <p/>
+            <p>This entity  is  abstract</p>
+            <p>This entity  is  optional</p>
+         </xsd:documentation>
+      </xsd:annotation>
+      <xsd:complexContent>
+         <xsd:extension base="entity:EntityBase">
+            <xsd:sequence>
+               <xsd:element name="userLabel" type="xsd:string" minOccurs="0" maxOccurs="1">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                        <p/>
+                        <p>This element is generated from an attribute.</p>
+                        <p>This attribute  is  optional</p>
+                        <p>This attribute  is  AVC enabled</p>
+                     </xsd:documentation>
+                  </xsd:annotation>
+               </xsd:element>
+               <xsd:element name="namingOsRef" type="xsd:string" minOccurs="0" maxOccurs="1">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                        <p/>
+                        <p>This element is generated from an attribute.</p>
+                        <p>This attribute  is  invariant</p>
+                        <p>This attribute  is  optional</p>
+                        <p>This attribute  is  AVC disabled</p>
+                     </xsd:documentation>
+                  </xsd:annotation>
+               </xsd:element>
+               <xsd:element name="discoveredName" type="xsd:string" minOccurs="0" maxOccurs="1">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                        <p/>
+                        <p>This element is generated from an attribute.</p>
+                        <p>This attribute  is  invariant</p>
+                        <p>This attribute  is  optional</p>
+                        <p>This attribute  is  AVC disabled</p>
+                     </xsd:documentation>
+                  </xsd:annotation>
+               </xsd:element>
+               <xsd:element name="source" type="nrb:ObjectSource" minOccurs="0" maxOccurs="1" default="3">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                        <p/>
+                        <p>This element is generated from an attribute.</p>
+                        <p>This attribute  is  optional</p>
+                        <p>This attribute  is  AVC enabled</p>
+                     </xsd:documentation>
+                  </xsd:annotation>
+               </xsd:element>
+               <xsd:element name="resourceState" type="nrb:ResourceState" minOccurs="0" maxOccurs="1" default="0">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                        <p/>
+                        <p>This element is generated from an attribute.</p>
+                        <p>This attribute  is  optional</p>
+                        <p>This attribute  is  AVC enabled</p>
+                     </xsd:documentation>
+                  </xsd:annotation>
+               </xsd:element>
+               <xsd:element name="ituStateAndStatusList" type="nrb:ItuStateAndStatusList" minOccurs="0" maxOccurs="1">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                        <p/>
+                        <p>This element is generated from an attribute.</p>
+                        <p>This attribute  is  optional</p>
+                        <p>This attribute  is  AVC enabled</p>
+                     </xsd:documentation>
+                  </xsd:annotation>
+               </xsd:element>
+            </xsd:sequence>
+         </xsd:extension>
+      </xsd:complexContent>
+   </xsd:complexType>
+   <xsd:complexType name="ArrayOfLogicalResource">
+      <xsd:sequence>
+         <xsd:element name="item" type="tns:LogicalResource" minOccurs="0" maxOccurs="unbounded"/>
+      </xsd:sequence>
+   </xsd:complexType><!-- ************************************* --><!-- Package Association Class definitions --><!-- ************************************* --><!-- ************************** --><!-- package Event definitions --><!-- ************************** --><!-- ************************** --><!-- package Exception definitions --><!-- ************************** -->
+</xsd:schema>

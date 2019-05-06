@@ -1,0 +1,465 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+ *  Generated with Tigerstripe Workbench 0.6.935.201102010903 and 
+ *  Plugin Nortel Networks, Hewlett-Packard Company/TIP_Soap_Generator(1.1) (1.1)
+ *
+ *  DO NOT EDIT THIS CODE WHICH WAS AUTOMATICALLY GENERATED
+--><!--
+Copyright (C) 2011 TM Forum
+
+No recipient of this document and code shall in any way interpret this material as representing a position or agreement of TM Forum or its members. This material is draft working material of TM Forum and is provided solely for comments and evaluation. It is not "Forum Approved" and is solely circulated for the purposes of assisting TM Forum in the preparation of final material in furtherance of the aims and mission of TM Forum.
+
+Although it is copyrighted material of TM Forum:
+- Members of TM Forum are only granted the limited copyright waiver to distribute this material within their companies and may not make paper or electronic copies for distribution outside of their companies.
+- Non-members of the TM Forum are not permitted to make copies (paper or electronic) of this draft material other than for their internal use for the sole purpose of making comments thereon directly to TM Forum.
+- If this material forms part of a supply of information in support of an Industry Group Liaison relationship, the document may only be used as part of the work identified in the Liaison and may not be used or further distributed for any other purposes.
+
+Any use of this material by the recipient, other than as set forth specifically herein, is at its own risk, and under no circumstances will TM Forum be liable for direct or indirect damages or any costs or losses resulting from the use of this material by the recipient.
+
+This material is governed, and all recipients shall be bound, by all of the terms and conditions of the Intellectual Property Rights Policy of the TM Forum (http://www.tmforum.org/Bylaws/1094/home.html) and may involve a claim of patent rights by one or more TM Forum members or by non-members of TM Forum.
+-->
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://www.tmforum.org/xml/tip/resource/res/log/prot" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsn_bindings_http="http://www.tmforum.org/xml/tip/wsnbindings/http" name="ProtectionRetrievalService" targetNamespace="http://www.tmforum.org/xml/tip/resource/res/log/prot">
+   <wsdl:import namespace="http://www.tmforum.org/xml/tip/wsnbindings/http" location="wsn_bindings_http.wsdl"/><!-- WSDL Types -->
+   <wsdl:types>
+      <xsd:schema>
+         <xsd:import namespace="http://www.tmforum.org/xml/tip/resource/res/log/prot" schemaLocation="mpac_resource_res_log_prot_protectionretrievalservice_msg.xsd"/>
+      </xsd:schema>
+   </wsdl:types><!-- Message Definitions of the Service Interface -->
+   <wsdl:message name="getAllEquipmentProtectionGroupsRequest">
+      <wsdl:documentation>
+         <p>The getAllEquipmentProtectionGroups request message.</p>
+      </wsdl:documentation>
+      <wsdl:part name="body" element="tns:getAllEquipmentProtectionGroupsRequest"/>
+   </wsdl:message>
+   <wsdl:message name="getAllEquipmentProtectionGroupsResponse">
+      <wsdl:documentation>
+         <p>The getAllEquipmentProtectionGroups response message.</p>
+      </wsdl:documentation>
+      <wsdl:part name="body" element="tns:getAllEquipmentProtectionGroupsResponse"/>
+   </wsdl:message>
+   <wsdl:message name="getAllEquipmentProtectionGroupsException">
+      <wsdl:documentation>
+         <p>The getAllEquipmentProtectionGroups exception message.</p>
+      </wsdl:documentation>
+      <wsdl:part name="body" element="tns:getAllEquipmentProtectionGroupsException"/>
+   </wsdl:message>
+   <wsdl:message name="getAllNonPreemptibleUnprotectedTpNamesRequest">
+      <wsdl:documentation>
+         <p>The getAllNonPreemptibleUnprotectedTpNames request message.</p>
+      </wsdl:documentation>
+      <wsdl:part name="body" element="tns:getAllNonPreemptibleUnprotectedTpNamesRequest"/>
+   </wsdl:message>
+   <wsdl:message name="getAllNonPreemptibleUnprotectedTpNamesResponse">
+      <wsdl:documentation>
+         <p>The getAllNonPreemptibleUnprotectedTpNames response message.</p>
+      </wsdl:documentation>
+      <wsdl:part name="body" element="tns:getAllNonPreemptibleUnprotectedTpNamesResponse"/>
+   </wsdl:message>
+   <wsdl:message name="getAllNonPreemptibleUnprotectedTpNamesException">
+      <wsdl:documentation>
+         <p>The getAllNonPreemptibleUnprotectedTpNames exception message.</p>
+      </wsdl:documentation>
+      <wsdl:part name="body" element="tns:getAllNonPreemptibleUnprotectedTpNamesException"/>
+   </wsdl:message>
+   <wsdl:message name="getAllPreemptibleTerminationPointNamesRequest">
+      <wsdl:documentation>
+         <p>The getAllPreemptibleTerminationPointNames request message.</p>
+      </wsdl:documentation>
+      <wsdl:part name="body" element="tns:getAllPreemptibleTerminationPointNamesRequest"/>
+   </wsdl:message>
+   <wsdl:message name="getAllPreemptibleTerminationPointNamesResponse">
+      <wsdl:documentation>
+         <p>The getAllPreemptibleTerminationPointNames response message.</p>
+      </wsdl:documentation>
+      <wsdl:part name="body" element="tns:getAllPreemptibleTerminationPointNamesResponse"/>
+   </wsdl:message>
+   <wsdl:message name="getAllPreemptibleTerminationPointNamesException">
+      <wsdl:documentation>
+         <p>The getAllPreemptibleTerminationPointNames exception message.</p>
+      </wsdl:documentation>
+      <wsdl:part name="body" element="tns:getAllPreemptibleTerminationPointNamesException"/>
+   </wsdl:message>
+   <wsdl:message name="getAllProtectedTerminationPointNamesRequest">
+      <wsdl:documentation>
+         <p>The getAllProtectedTerminationPointNames request message.</p>
+      </wsdl:documentation>
+      <wsdl:part name="body" element="tns:getAllProtectedTerminationPointNamesRequest"/>
+   </wsdl:message>
+   <wsdl:message name="getAllProtectedTerminationPointNamesResponse">
+      <wsdl:documentation>
+         <p>The getAllProtectedTerminationPointNames response message.</p>
+      </wsdl:documentation>
+      <wsdl:part name="body" element="tns:getAllProtectedTerminationPointNamesResponse"/>
+   </wsdl:message>
+   <wsdl:message name="getAllProtectedTerminationPointNamesException">
+      <wsdl:documentation>
+         <p>The getAllProtectedTerminationPointNames exception message.</p>
+      </wsdl:documentation>
+      <wsdl:part name="body" element="tns:getAllProtectedTerminationPointNamesException"/>
+   </wsdl:message>
+   <wsdl:message name="getAllProtectionGroupsRequest">
+      <wsdl:documentation>
+         <p>The getAllProtectionGroups request message.</p>
+      </wsdl:documentation>
+      <wsdl:part name="body" element="tns:getAllProtectionGroupsRequest"/>
+   </wsdl:message>
+   <wsdl:message name="getAllProtectionGroupsResponse">
+      <wsdl:documentation>
+         <p>The getAllProtectionGroups response message.</p>
+      </wsdl:documentation>
+      <wsdl:part name="body" element="tns:getAllProtectionGroupsResponse"/>
+   </wsdl:message>
+   <wsdl:message name="getAllProtectionGroupsException">
+      <wsdl:documentation>
+         <p>The getAllProtectionGroups exception message.</p>
+      </wsdl:documentation>
+      <wsdl:part name="body" element="tns:getAllProtectionGroupsException"/>
+   </wsdl:message>
+   <wsdl:message name="getContainingProtectionGroupNamesRequest">
+      <wsdl:documentation>
+         <p>The getContainingProtectionGroupNames request message.</p>
+      </wsdl:documentation>
+      <wsdl:part name="body" element="tns:getContainingProtectionGroupNamesRequest"/>
+   </wsdl:message>
+   <wsdl:message name="getContainingProtectionGroupNamesResponse">
+      <wsdl:documentation>
+         <p>The getContainingProtectionGroupNames response message.</p>
+      </wsdl:documentation>
+      <wsdl:part name="body" element="tns:getContainingProtectionGroupNamesResponse"/>
+   </wsdl:message>
+   <wsdl:message name="getContainingProtectionGroupNamesException">
+      <wsdl:documentation>
+         <p>The getContainingProtectionGroupNames exception message.</p>
+      </wsdl:documentation>
+      <wsdl:part name="body" element="tns:getContainingProtectionGroupNamesException"/>
+   </wsdl:message>
+   <wsdl:message name="retrieveEquipmentSwitchDataRequest">
+      <wsdl:documentation>
+         <p>The retrieveEquipmentSwitchData request message.</p>
+      </wsdl:documentation>
+      <wsdl:part name="body" element="tns:retrieveEquipmentSwitchDataRequest"/>
+   </wsdl:message>
+   <wsdl:message name="retrieveEquipmentSwitchDataResponse">
+      <wsdl:documentation>
+         <p>The retrieveEquipmentSwitchData response message.</p>
+      </wsdl:documentation>
+      <wsdl:part name="body" element="tns:retrieveEquipmentSwitchDataResponse"/>
+   </wsdl:message>
+   <wsdl:message name="retrieveEquipmentSwitchDataException">
+      <wsdl:documentation>
+         <p>The retrieveEquipmentSwitchData exception message.</p>
+      </wsdl:documentation>
+      <wsdl:part name="body" element="tns:retrieveEquipmentSwitchDataException"/>
+   </wsdl:message>
+   <wsdl:message name="retrieveSwitchDataRequest">
+      <wsdl:documentation>
+         <p>The retrieveSwitchData request message.</p>
+      </wsdl:documentation>
+      <wsdl:part name="body" element="tns:retrieveSwitchDataRequest"/>
+   </wsdl:message>
+   <wsdl:message name="retrieveSwitchDataResponse">
+      <wsdl:documentation>
+         <p>The retrieveSwitchData response message.</p>
+      </wsdl:documentation>
+      <wsdl:part name="body" element="tns:retrieveSwitchDataResponse"/>
+   </wsdl:message>
+   <wsdl:message name="retrieveSwitchDataException">
+      <wsdl:documentation>
+         <p>The retrieveSwitchData exception message.</p>
+      </wsdl:documentation>
+      <wsdl:part name="body" element="tns:retrieveSwitchDataException"/>
+   </wsdl:message>
+   <wsdl:message name="getProtectionGroupRequest">
+      <wsdl:documentation>
+         <p>The getProtectionGroup request message.</p>
+      </wsdl:documentation>
+      <wsdl:part name="body" element="tns:getProtectionGroupRequest"/>
+   </wsdl:message>
+   <wsdl:message name="getProtectionGroupResponse">
+      <wsdl:documentation>
+         <p>The getProtectionGroup response message.</p>
+      </wsdl:documentation>
+      <wsdl:part name="body" element="tns:getProtectionGroupResponse"/>
+   </wsdl:message>
+   <wsdl:message name="getProtectionGroupException">
+      <wsdl:documentation>
+         <p>The getProtectionGroup exception message.</p>
+      </wsdl:documentation>
+      <wsdl:part name="body" element="tns:getProtectionGroupException"/>
+   </wsdl:message>
+   <wsdl:message name="getEquipmentProtectionGroupRequest">
+      <wsdl:documentation>
+         <p>The getEquipmentProtectionGroup request message.</p>
+      </wsdl:documentation>
+      <wsdl:part name="body" element="tns:getEquipmentProtectionGroupRequest"/>
+   </wsdl:message>
+   <wsdl:message name="getEquipmentProtectionGroupResponse">
+      <wsdl:documentation>
+         <p>The getEquipmentProtectionGroup response message.</p>
+      </wsdl:documentation>
+      <wsdl:part name="body" element="tns:getEquipmentProtectionGroupResponse"/>
+   </wsdl:message>
+   <wsdl:message name="getEquipmentProtectionGroupException">
+      <wsdl:documentation>
+         <p>The getEquipmentProtectionGroup exception message.</p>
+      </wsdl:documentation>
+      <wsdl:part name="body" element="tns:getEquipmentProtectionGroupException"/>
+   </wsdl:message><!-- Port Type (abstract interface) Definitions of the Service Interface -->
+   <wsdl:portType name="ProtectionRetrievalService">
+      <wsdl:documentation>
+         <p/>
+         <p/>
+         <p>This service interface  is  optional</p>
+      </wsdl:documentation>
+      <wsdl:operation name="getAllEquipmentProtectionGroups">
+         <wsdl:documentation>
+            <p>This is a request-response operation.</p>
+            <p>This operation discovers all the Equipment Protection Groups currently in operation for the Managed Element.</p>
+            <p>This operation  is  iterator bulk transfer pattern</p>
+            <p>This operation  is  not extendable</p>
+            <p>This operation  is  optional</p>
+         </wsdl:documentation>
+         <wsdl:input name="getAllEquipmentProtectionGroupsRequest" message="tns:getAllEquipmentProtectionGroupsRequest"/>
+         <wsdl:output name="getAllEquipmentProtectionGroupsResponse" message="tns:getAllEquipmentProtectionGroupsResponse"/>
+         <wsdl:fault name="getAllEquipmentProtectionGroupsException" message="tns:getAllEquipmentProtectionGroupsException"/>
+      </wsdl:operation>
+      <wsdl:operation name="getAllNonPreemptibleUnprotectedTpNames">
+         <wsdl:documentation>
+            <p>This is a request-response operation.</p>
+            <p/>
+            <p>This operation  is  not extendable</p>
+            <p>This operation  is  optional</p>
+         </wsdl:documentation>
+         <wsdl:input name="getAllNonPreemptibleUnprotectedTpNamesRequest" message="tns:getAllNonPreemptibleUnprotectedTpNamesRequest"/>
+         <wsdl:output name="getAllNonPreemptibleUnprotectedTpNamesResponse" message="tns:getAllNonPreemptibleUnprotectedTpNamesResponse"/>
+         <wsdl:fault name="getAllNonPreemptibleUnprotectedTpNamesException" message="tns:getAllNonPreemptibleUnprotectedTpNamesException"/>
+      </wsdl:operation>
+      <wsdl:operation name="getAllPreemptibleTerminationPointNames">
+         <wsdl:documentation>
+            <p>This is a request-response operation.</p>
+            <p>This operation discovers which of the CTPs in a Protection Group provide pre-emptible (and unprotected) services.</p>
+            <p>This operation  is  not extendable</p>
+            <p>This operation  is  optional</p>
+         </wsdl:documentation>
+         <wsdl:input name="getAllPreemptibleTerminationPointNamesRequest" message="tns:getAllPreemptibleTerminationPointNamesRequest"/>
+         <wsdl:output name="getAllPreemptibleTerminationPointNamesResponse" message="tns:getAllPreemptibleTerminationPointNamesResponse"/>
+         <wsdl:fault name="getAllPreemptibleTerminationPointNamesException" message="tns:getAllPreemptibleTerminationPointNamesException"/>
+      </wsdl:operation>
+      <wsdl:operation name="getAllProtectedTerminationPointNames">
+         <wsdl:documentation>
+            <p>This is a request-response operation.</p>
+            <p>This operation discovers which of the CTPs in a Protection Group provide protected services.</p>
+            <p>This operation  is  not extendable</p>
+            <p>This operation  is  optional</p>
+         </wsdl:documentation>
+         <wsdl:input name="getAllProtectedTerminationPointNamesRequest" message="tns:getAllProtectedTerminationPointNamesRequest"/>
+         <wsdl:output name="getAllProtectedTerminationPointNamesResponse" message="tns:getAllProtectedTerminationPointNamesResponse"/>
+         <wsdl:fault name="getAllProtectedTerminationPointNamesException" message="tns:getAllProtectedTerminationPointNamesException"/>
+      </wsdl:operation>
+      <wsdl:operation name="getAllProtectionGroups">
+         <wsdl:documentation>
+            <p>This is a request-response operation.</p>
+            <p/>
+            <p>This operation  is  iterator bulk transfer pattern</p>
+            <p>This operation  is  not extendable</p>
+            <p>This operation  is  optional</p>
+         </wsdl:documentation>
+         <wsdl:input name="getAllProtectionGroupsRequest" message="tns:getAllProtectionGroupsRequest"/>
+         <wsdl:output name="getAllProtectionGroupsResponse" message="tns:getAllProtectionGroupsResponse"/>
+         <wsdl:fault name="getAllProtectionGroupsException" message="tns:getAllProtectionGroupsException"/>
+      </wsdl:operation>
+      <wsdl:operation name="getContainingProtectionGroupNames">
+         <wsdl:documentation>
+            <p>This is a request-response operation.</p>
+            <p>This operation allows the requesting OS to retrieve the names of the Protection Groups containing a given Physical Termination Point.</p>
+            <p>This operation  is  not extendable</p>
+            <p>This operation  is  optional</p>
+         </wsdl:documentation>
+         <wsdl:input name="getContainingProtectionGroupNamesRequest" message="tns:getContainingProtectionGroupNamesRequest"/>
+         <wsdl:output name="getContainingProtectionGroupNamesResponse" message="tns:getContainingProtectionGroupNamesResponse"/>
+         <wsdl:fault name="getContainingProtectionGroupNamesException" message="tns:getContainingProtectionGroupNamesException"/>
+      </wsdl:operation>
+      <wsdl:operation name="retrieveEquipmentSwitchData">
+         <wsdl:documentation>
+            <p>This is a request-response operation.</p>
+            <p>This operation is used to retrieve the latest switch status on a Protection Group.
+- When used on a 1+1 trail protection (e.g. MSP), a single SwitchData data type with the relevant data is returned.
+- When used on a 1:N trail protection (e.g. MSP), a SwitchData data type per worker TP is presented with the protected TP being the worker TP Name and the switchToTpRef identifying the present source of the traffic.
+- When used on a 2F BLSR, two SwitchData data types are returned, one per TP. The protected TP and the switchToTpRef are all the same in an unswitched state and in the switched state, the switchToTpRef is the TP in the other direction. The switchFromTpRef is Null.
+- When used on a 4F BLSR ( as an input group), two SwitchData data types are returned each one identifying a span with the protected TP being the worker TP, the switchToTpRef identifying the present source, the switchFromTpRef is Null.</p>
+            <p>This operation  is  not extendable</p>
+            <p>This operation  is  optional</p>
+         </wsdl:documentation>
+         <wsdl:input name="retrieveEquipmentSwitchDataRequest" message="tns:retrieveEquipmentSwitchDataRequest"/>
+         <wsdl:output name="retrieveEquipmentSwitchDataResponse" message="tns:retrieveEquipmentSwitchDataResponse"/>
+         <wsdl:fault name="retrieveEquipmentSwitchDataException" message="tns:retrieveEquipmentSwitchDataException"/>
+      </wsdl:operation>
+      <wsdl:operation name="retrieveSwitchData">
+         <wsdl:documentation>
+            <p>This is a request-response operation.</p>
+            <p>This operation is used to retrieve the latest switch status on a Protection Group.
+- When used on a 1+1 trail protection (e.g. MSP), a single SwitchData data type with the relevant data is returned.
+- When used on a 1:N trail protection (e.g. MSP), a SwitchData data type per worker TP is presented with the protected TP being the worker TP Name and the switchToTpRef identifying the present source of the traffic.
+- When used on a 2F BLSR, two SwitchData data types are returned, one per TP. The protected TP and the switchToTpRef are all the same in an unswitched state and in the switched state, the switchToTpRef is the TP in the other direction. The switchFromTpRef is Null.
+- When used on a 4F BLSR ( as an input group), two SwitchData data types are returned each one identifying a span with the protected TP being the worker TP, the switchToTpRef identifying the present source, the switchFromTpRef is Null.</p>
+            <p>This operation  is  not extendable</p>
+            <p>This operation  is  optional</p>
+         </wsdl:documentation>
+         <wsdl:input name="retrieveSwitchDataRequest" message="tns:retrieveSwitchDataRequest"/>
+         <wsdl:output name="retrieveSwitchDataResponse" message="tns:retrieveSwitchDataResponse"/>
+         <wsdl:fault name="retrieveSwitchDataException" message="tns:retrieveSwitchDataException"/>
+      </wsdl:operation>
+      <wsdl:operation name="getProtectionGroup">
+         <wsdl:documentation>
+            <p>This is the Get common request-response operation.</p>
+         </wsdl:documentation>
+         <wsdl:input name="getProtectionGroupRequest" message="tns:getProtectionGroupRequest"/>
+         <wsdl:output name="getProtectionGroupResponse" message="tns:getProtectionGroupResponse"/>
+         <wsdl:fault name="getProtectionGroupException" message="tns:getProtectionGroupException"/>
+      </wsdl:operation>
+      <wsdl:operation name="getEquipmentProtectionGroup">
+         <wsdl:documentation>
+            <p>This is the Get common request-response operation.</p>
+         </wsdl:documentation>
+         <wsdl:input name="getEquipmentProtectionGroupRequest" message="tns:getEquipmentProtectionGroupRequest"/>
+         <wsdl:output name="getEquipmentProtectionGroupResponse" message="tns:getEquipmentProtectionGroupResponse"/>
+         <wsdl:fault name="getEquipmentProtectionGroupException" message="tns:getEquipmentProtectionGroupException"/>
+      </wsdl:operation>
+   </wsdl:portType><!-- Binding - Concrete Service Interface deployment SOAP/HTTP -->
+   <wsdl:binding name="ProtectionRetrievalServiceSoapHttpBinding" type="tns:ProtectionRetrievalService">
+      <wsdl:documentation>
+         <p>Web Service (SOAP/HTTP) profile binding definitions.</p>
+      </wsdl:documentation>
+      <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/><!--wsaw:UsingAddressing wsdl:required="true"/-->
+      <wsdl:operation name="getAllEquipmentProtectionGroups">
+         <soap:operation soapAction="getAllEquipmentProtectionGroups" style="document"/>
+         <wsdl:input name="getAllEquipmentProtectionGroupsRequest">
+            <soap:body use="literal"/>
+         </wsdl:input>
+         <wsdl:output name="getAllEquipmentProtectionGroupsResponse">
+            <soap:body use="literal"/>
+         </wsdl:output>
+         <wsdl:fault name="getAllEquipmentProtectionGroupsException">
+            <soap:fault name="getAllEquipmentProtectionGroupsException" use="literal"/>
+         </wsdl:fault>
+      </wsdl:operation>
+      <wsdl:operation name="getAllNonPreemptibleUnprotectedTpNames">
+         <soap:operation soapAction="getAllNonPreemptibleUnprotectedTpNames" style="document"/>
+         <wsdl:input name="getAllNonPreemptibleUnprotectedTpNamesRequest">
+            <soap:body use="literal"/>
+         </wsdl:input>
+         <wsdl:output name="getAllNonPreemptibleUnprotectedTpNamesResponse">
+            <soap:body use="literal"/>
+         </wsdl:output>
+         <wsdl:fault name="getAllNonPreemptibleUnprotectedTpNamesException">
+            <soap:fault name="getAllNonPreemptibleUnprotectedTpNamesException" use="literal"/>
+         </wsdl:fault>
+      </wsdl:operation>
+      <wsdl:operation name="getAllPreemptibleTerminationPointNames">
+         <soap:operation soapAction="getAllPreemptibleTerminationPointNames" style="document"/>
+         <wsdl:input name="getAllPreemptibleTerminationPointNamesRequest">
+            <soap:body use="literal"/>
+         </wsdl:input>
+         <wsdl:output name="getAllPreemptibleTerminationPointNamesResponse">
+            <soap:body use="literal"/>
+         </wsdl:output>
+         <wsdl:fault name="getAllPreemptibleTerminationPointNamesException">
+            <soap:fault name="getAllPreemptibleTerminationPointNamesException" use="literal"/>
+         </wsdl:fault>
+      </wsdl:operation>
+      <wsdl:operation name="getAllProtectedTerminationPointNames">
+         <soap:operation soapAction="getAllProtectedTerminationPointNames" style="document"/>
+         <wsdl:input name="getAllProtectedTerminationPointNamesRequest">
+            <soap:body use="literal"/>
+         </wsdl:input>
+         <wsdl:output name="getAllProtectedTerminationPointNamesResponse">
+            <soap:body use="literal"/>
+         </wsdl:output>
+         <wsdl:fault name="getAllProtectedTerminationPointNamesException">
+            <soap:fault name="getAllProtectedTerminationPointNamesException" use="literal"/>
+         </wsdl:fault>
+      </wsdl:operation>
+      <wsdl:operation name="getAllProtectionGroups">
+         <soap:operation soapAction="getAllProtectionGroups" style="document"/>
+         <wsdl:input name="getAllProtectionGroupsRequest">
+            <soap:body use="literal"/>
+         </wsdl:input>
+         <wsdl:output name="getAllProtectionGroupsResponse">
+            <soap:body use="literal"/>
+         </wsdl:output>
+         <wsdl:fault name="getAllProtectionGroupsException">
+            <soap:fault name="getAllProtectionGroupsException" use="literal"/>
+         </wsdl:fault>
+      </wsdl:operation>
+      <wsdl:operation name="getContainingProtectionGroupNames">
+         <soap:operation soapAction="getContainingProtectionGroupNames" style="document"/>
+         <wsdl:input name="getContainingProtectionGroupNamesRequest">
+            <soap:body use="literal"/>
+         </wsdl:input>
+         <wsdl:output name="getContainingProtectionGroupNamesResponse">
+            <soap:body use="literal"/>
+         </wsdl:output>
+         <wsdl:fault name="getContainingProtectionGroupNamesException">
+            <soap:fault name="getContainingProtectionGroupNamesException" use="literal"/>
+         </wsdl:fault>
+      </wsdl:operation>
+      <wsdl:operation name="retrieveEquipmentSwitchData">
+         <soap:operation soapAction="retrieveEquipmentSwitchData" style="document"/>
+         <wsdl:input name="retrieveEquipmentSwitchDataRequest">
+            <soap:body use="literal"/>
+         </wsdl:input>
+         <wsdl:output name="retrieveEquipmentSwitchDataResponse">
+            <soap:body use="literal"/>
+         </wsdl:output>
+         <wsdl:fault name="retrieveEquipmentSwitchDataException">
+            <soap:fault name="retrieveEquipmentSwitchDataException" use="literal"/>
+         </wsdl:fault>
+      </wsdl:operation>
+      <wsdl:operation name="retrieveSwitchData">
+         <soap:operation soapAction="retrieveSwitchData" style="document"/>
+         <wsdl:input name="retrieveSwitchDataRequest">
+            <soap:body use="literal"/>
+         </wsdl:input>
+         <wsdl:output name="retrieveSwitchDataResponse">
+            <soap:body use="literal"/>
+         </wsdl:output>
+         <wsdl:fault name="retrieveSwitchDataException">
+            <soap:fault name="retrieveSwitchDataException" use="literal"/>
+         </wsdl:fault>
+      </wsdl:operation>
+      <wsdl:operation name="getProtectionGroup">
+         <soap:operation soapAction="getProtectionGroup" style="document"/>
+         <wsdl:input name="getProtectionGroupRequest">
+            <soap:body use="literal"/>
+         </wsdl:input>
+         <wsdl:output name="getProtectionGroupResponse">
+            <soap:body use="literal"/>
+         </wsdl:output>
+         <wsdl:fault name="getProtectionGroupException">
+            <soap:fault name="getProtectionGroupException" use="literal"/>
+         </wsdl:fault>
+      </wsdl:operation>
+      <wsdl:operation name="getEquipmentProtectionGroup">
+         <soap:operation soapAction="getEquipmentProtectionGroup" style="document"/>
+         <wsdl:input name="getEquipmentProtectionGroupRequest">
+            <soap:body use="literal"/>
+         </wsdl:input>
+         <wsdl:output name="getEquipmentProtectionGroupResponse">
+            <soap:body use="literal"/>
+         </wsdl:output>
+         <wsdl:fault name="getEquipmentProtectionGroupException">
+            <soap:fault name="getEquipmentProtectionGroupException" use="literal"/>
+         </wsdl:fault>
+      </wsdl:operation>
+   </wsdl:binding><!-- Service definition -->
+   <wsdl:service name="ProtectionRetrievalServiceWs">
+      <wsdl:port name="ProtectionRetrievalServiceHttpPort" binding="tns:ProtectionRetrievalServiceSoapHttpBinding">
+         <soap:address location="http://localhost/ProtectionRetrievalService"/>
+      </wsdl:port>
+      <wsdl:port name="NotificationProducerHttpPort" binding="wsn_bindings_http:NotificationProducerSoapHttpBinding">
+         <soap:address location="http://localhost/ProtectionRetrievalService/NotificationProducer"/>
+      </wsdl:port>
+      <wsdl:port name="SubscriptionManagerHttpPort" binding="wsn_bindings_http:SubscriptionManagerSoapHttpBinding">
+         <soap:address location="http://localhost/ProtectionRetrievalService/SubscriptionManager"/>
+      </wsdl:port>
+   </wsdl:service>
+</wsdl:definitions>

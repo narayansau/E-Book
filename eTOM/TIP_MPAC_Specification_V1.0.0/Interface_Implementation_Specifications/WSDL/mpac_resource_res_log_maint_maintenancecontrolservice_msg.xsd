@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+ *  Generated with Tigerstripe Workbench 0.6.935.201102010903 and 
+ *  Plugin Nortel Networks, Hewlett-Packard Company/TIP_Soap_Generator(1.1) (1.1)
+ *
+ *  DO NOT EDIT THIS CODE WHICH WAS AUTOMATICALLY GENERATED
+--><!--
+Copyright (C) 2011 TM Forum
+
+No recipient of this document and code shall in any way interpret this material as representing a position or agreement of TM Forum or its members. This material is draft working material of TM Forum and is provided solely for comments and evaluation. It is not "Forum Approved" and is solely circulated for the purposes of assisting TM Forum in the preparation of final material in furtherance of the aims and mission of TM Forum.
+
+Although it is copyrighted material of TM Forum:
+- Members of TM Forum are only granted the limited copyright waiver to distribute this material within their companies and may not make paper or electronic copies for distribution outside of their companies.
+- Non-members of the TM Forum are not permitted to make copies (paper or electronic) of this draft material other than for their internal use for the sole purpose of making comments thereon directly to TM Forum.
+- If this material forms part of a supply of information in support of an Industry Group Liaison relationship, the document may only be used as part of the work identified in the Liaison and may not be used or further distributed for any other purposes.
+
+Any use of this material by the recipient, other than as set forth specifically herein, is at its own risk, and under no circumstances will TM Forum be liable for direct or indirect damages or any costs or losses resulting from the use of this material by the recipient.
+
+This material is governed, and all recipients shall be bound, by all of the terms and conditions of the Intellectual Property Rights Policy of the TM Forum (http://www.tmforum.org/Bylaws/1094/home.html) and may involve a claim of patent rights by one or more TM Forum members or by non-members of TM Forum.
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.tmforum.org/xml/tip/resource/res/log/maint" xmlns:primitives="http://www.tmforum.org/xml/tip/internal/primitives" xmlns:entity="http://www.tmforum.org/xml/tip/internal/entity" xmlns:exceptions="http://www.tmforum.org/xml/tip/internal/exceptions" xmlns:iterator="http://www.tmforum.org/xml/tip/internal/iterator" xmlns:exceptions1="http://www.tmforum.org/xml/tip/common/exceptions" xmlns:filter="http://www.tmforum.org/xml/tip/internal/filter" targetNamespace="http://www.tmforum.org/xml/tip/resource/res/log/maint" attributeFormDefault="unqualified" elementFormDefault="qualified" version="1.0">
+   <xsd:annotation>
+      <xsd:documentation>
+         <p>TMF Service Interface: MaintenanceControlService</p>
+      </xsd:documentation>
+   </xsd:annotation>
+   <xsd:include schemaLocation="mpac_resource_res_log_maint.xsd"/>
+   <xsd:import namespace="http://www.tmforum.org/xml/tip/internal/primitives" schemaLocation="internal_primitives.xsd"/>
+   <xsd:import namespace="http://www.tmforum.org/xml/tip/internal/entity" schemaLocation="internal_entity.xsd"/>
+   <xsd:import namespace="http://www.tmforum.org/xml/tip/internal/exceptions" schemaLocation="internal_exceptions.xsd"/>
+   <xsd:import namespace="http://www.tmforum.org/xml/tip/internal/iterator" schemaLocation="internal_iterator.xsd"/>
+   <xsd:import namespace="http://www.tmforum.org/xml/tip/common/exceptions" schemaLocation="common_exceptions.xsd"/>
+   <xsd:import namespace="http://www.tmforum.org/xml/tip/internal/filter" schemaLocation="internal_filter.xsd"/>
+   <xsd:element name="getActiveMaintenanceOperationsRequest" type="tns:getActiveMaintenanceOperationsRequest">
+      <xsd:annotation>
+         <xsd:documentation>
+        The getActiveMaintenanceOperations request message XML schema.
+      </xsd:documentation>
+      </xsd:annotation>
+   </xsd:element>
+   <xsd:complexType name="getActiveMaintenanceOperationsRequest">
+      <xsd:sequence>
+         <xsd:element name="resourceRef" type="entity:EntityIdentifier" minOccurs="1" maxOccurs="1">
+            <xsd:annotation>
+               <xsd:documentation>
+                  <p>This parameter contains the name of the resource.</p>
+                  <p>This parameter  is  input parameter</p>
+                  <p>This parameter  has  multiplicity 1</p>
+                  <p>This parameter  is  unique</p>
+                  <p>This parameter  is  mandatory</p>
+               </xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:element name="getActiveMaintenanceOperationsResponse" type="tns:getActiveMaintenanceOperationsResponse">
+      <xsd:annotation>
+         <xsd:documentation>
+            <p>The getActiveMaintenanceOperations response message XML schema.</p>
+         </xsd:documentation>
+      </xsd:annotation>
+   </xsd:element>
+   <xsd:complexType name="getActiveMaintenanceOperationsResponse">
+      <xsd:sequence>
+         <xsd:element name="currentMaintenceOperationList" type="tns:ArrayOfCurrentMaintenanceOperation" minOccurs="0" maxOccurs="1">
+            <xsd:annotation>
+               <xsd:documentation>
+                  <p>This parameter returns all persistent maintenance commands that have been invoked for the given resource and Layer Rate if applicable.</p>
+                  <p>This parameter  is  output parameter</p>
+                  <p>This parameter  has  multiplicity *</p>
+                  <p>This parameter  is  unique</p>
+                  <p>This parameter  is  bulk potential</p>
+                  <p>This parameter  is  mandatory</p>
+               </xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:element name="getActiveMaintenanceOperationsException" type="tns:getActiveMaintenanceOperationsException">
+      <xsd:annotation>
+         <xsd:documentation>
+            <p>The getActiveMaintenanceOperations exception message XML schema.</p>
+         </xsd:documentation>
+      </xsd:annotation>
+   </xsd:element>
+   <xsd:complexType name="getActiveMaintenanceOperationsException">
+      <xsd:choice>
+         <xsd:element name="accessDenied" type="exceptions:AccessDenied"/>
+         <xsd:element name="communicationLoss" type="exceptions:CommunicationLoss"/>
+         <xsd:element name="internalError" type="exceptions:InternalError"/>
+         <xsd:element name="invalidInput" type="exceptions:InvalidInput"/>
+         <xsd:element name="notImplemented" type="exceptions:NotImplemented"/>
+         <xsd:element name="unableToComply" type="exceptions:UnableToComply"/>
+      </xsd:choice>
+   </xsd:complexType>
+   <xsd:element name="performMaintenanceOperationRequest" type="tns:performMaintenanceOperationRequest">
+      <xsd:annotation>
+         <xsd:documentation>
+        The performMaintenanceOperation request message XML schema.
+      </xsd:documentation>
+      </xsd:annotation>
+   </xsd:element>
+   <xsd:complexType name="performMaintenanceOperationRequest">
+      <xsd:sequence>
+         <xsd:element name="resourceRef" type="entity:EntityIdentifier" minOccurs="0" maxOccurs="1">
+            <xsd:annotation>
+               <xsd:documentation>
+                  <p>This parameter contains the name of the resource.</p>
+                  <p>This parameter  is  input parameter</p>
+                  <p>This parameter  has  multiplicity 0..1</p>
+                  <p>This parameter  is  unique</p>
+                  <p>This parameter  is  optional</p>
+               </xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="maintenanceOperation" type="tns:CurrentMaintenanceOperation" minOccurs="0" maxOccurs="1">
+            <xsd:annotation>
+               <xsd:documentation>
+                  <p>This parameter contains information on the maintenance operation to perform.</p>
+                  <p>This parameter  is  input parameter</p>
+                  <p>This parameter  has  multiplicity 0..1</p>
+                  <p>This parameter  is  unique</p>
+                  <p>This parameter  is  optional</p>
+               </xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="maintenanceOperationMode" type="tns:MaintenanceOperationMode" minOccurs="0" maxOccurs="1">
+            <xsd:annotation>
+               <xsd:documentation>
+                  <p>This parameter indicates whether the maintenance operation should be operated or released.</p>
+                  <p>This parameter  is  input parameter</p>
+                  <p>This parameter  has  multiplicity 0..1</p>
+                  <p>This parameter  is  unique</p>
+                  <p>This parameter  is  optional</p>
+               </xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:element name="performMaintenanceOperationResponse" type="tns:performMaintenanceOperationResponse">
+      <xsd:annotation>
+         <xsd:documentation>
+            <p>The performMaintenanceOperation response message XML schema.</p>
+         </xsd:documentation>
+      </xsd:annotation>
+   </xsd:element>
+   <xsd:complexType name="performMaintenanceOperationResponse">
+      <xsd:sequence/>
+   </xsd:complexType>
+   <xsd:element name="performMaintenanceOperationException" type="tns:performMaintenanceOperationException">
+      <xsd:annotation>
+         <xsd:documentation>
+            <p>The performMaintenanceOperation exception message XML schema.</p>
+         </xsd:documentation>
+      </xsd:annotation>
+   </xsd:element>
+   <xsd:complexType name="performMaintenanceOperationException">
+      <xsd:choice>
+         <xsd:element name="accessDenied" type="exceptions:AccessDenied"/>
+         <xsd:element name="communicationLoss" type="exceptions:CommunicationLoss"/>
+         <xsd:element name="internalError" type="exceptions:InternalError"/>
+         <xsd:element name="invalidInput" type="exceptions:InvalidInput"/>
+         <xsd:element name="notImplemented" type="exceptions:NotImplemented"/>
+         <xsd:element name="unableToComply" type="exceptions:UnableToComply"/>
+      </xsd:choice>
+   </xsd:complexType>
+</xsd:schema>

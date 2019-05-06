@@ -1,0 +1,734 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+ *  Generated with Tigerstripe Workbench 0.6.935.201102010903 and 
+ *  Plugin Nortel Networks, Hewlett-Packard Company/TIP_Soap_Generator(1.1) (1.1)
+ *
+ *  DO NOT EDIT THIS CODE WHICH WAS AUTOMATICALLY GENERATED
+--><!--
+Copyright (C) 2011 TM Forum
+
+No recipient of this document and code shall in any way interpret this material as representing a position or agreement of TM Forum or its members. This material is draft working material of TM Forum and is provided solely for comments and evaluation. It is not "Forum Approved" and is solely circulated for the purposes of assisting TM Forum in the preparation of final material in furtherance of the aims and mission of TM Forum.
+
+Although it is copyrighted material of TM Forum:
+- Members of TM Forum are only granted the limited copyright waiver to distribute this material within their companies and may not make paper or electronic copies for distribution outside of their companies.
+- Non-members of the TM Forum are not permitted to make copies (paper or electronic) of this draft material other than for their internal use for the sole purpose of making comments thereon directly to TM Forum.
+- If this material forms part of a supply of information in support of an Industry Group Liaison relationship, the document may only be used as part of the work identified in the Liaison and may not be used or further distributed for any other purposes.
+
+Any use of this material by the recipient, other than as set forth specifically herein, is at its own risk, and under no circumstances will TM Forum be liable for direct or indirect damages or any costs or losses resulting from the use of this material by the recipient.
+
+This material is governed, and all recipients shall be bound, by all of the terms and conditions of the Intellectual Property Rights Policy of the TM Forum (http://www.tmforum.org/Bylaws/1094/home.html) and may involve a claim of patent rights by one or more TM Forum members or by non-members of TM Forum.
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.tmforum.org/xml/tip/resource/res/log/prot" xmlns:primitives="http://www.tmforum.org/xml/tip/internal/primitives" xmlns:entity="http://www.tmforum.org/xml/tip/internal/entity" xmlns:exceptions="http://www.tmforum.org/xml/tip/internal/exceptions" xmlns:iterator="http://www.tmforum.org/xml/tip/internal/iterator" xmlns:exceptions1="http://www.tmforum.org/xml/tip/common/exceptions" xmlns:filter="http://www.tmforum.org/xml/tip/internal/filter" targetNamespace="http://www.tmforum.org/xml/tip/resource/res/log/prot" attributeFormDefault="unqualified" elementFormDefault="qualified" version="1.0">
+   <xsd:annotation>
+      <xsd:documentation>
+         <p>TMF Service Interface: ProtectionRetrievalService</p>
+      </xsd:documentation>
+   </xsd:annotation>
+   <xsd:import namespace="http://www.tmforum.org/xml/tip/internal/primitives" schemaLocation="internal_primitives.xsd"/>
+   <xsd:import namespace="http://www.tmforum.org/xml/tip/internal/entity" schemaLocation="internal_entity.xsd"/>
+   <xsd:import namespace="http://www.tmforum.org/xml/tip/internal/exceptions" schemaLocation="internal_exceptions.xsd"/>
+   <xsd:include schemaLocation="mpac_resource_res_log_prot.xsd"/>
+   <xsd:import namespace="http://www.tmforum.org/xml/tip/internal/iterator" schemaLocation="internal_iterator.xsd"/>
+   <xsd:import namespace="http://www.tmforum.org/xml/tip/common/exceptions" schemaLocation="common_exceptions.xsd"/>
+   <xsd:import namespace="http://www.tmforum.org/xml/tip/internal/filter" schemaLocation="internal_filter.xsd"/>
+   <xsd:element name="getAllEquipmentProtectionGroupsRequest" type="tns:getAllEquipmentProtectionGroupsRequest">
+      <xsd:annotation>
+         <xsd:documentation>
+            <p>The getAllEquipmentProtectionGroups request message XML schema.</p>
+         </xsd:documentation>
+      </xsd:annotation>
+   </xsd:element>
+   <xsd:complexType name="getAllEquipmentProtectionGroupsRequest">
+      <xsd:complexContent>
+         <xsd:extension base="iterator:CommonRequest">
+            <xsd:sequence>
+               <xsd:element name="meRef" type="entity:EntityIdentifier" minOccurs="1" maxOccurs="1">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                        <p>This parameter provides the name of the Managed Element containing the Equipment Protection Groups to be retrieved.</p>
+                        <p>This parameter  is  input parameter</p>
+                        <p>This parameter  has  multiplicity 1</p>
+                        <p>This parameter  is  unique</p>
+                        <p>This parameter  is  mandatory</p>
+                     </xsd:documentation>
+                  </xsd:annotation>
+               </xsd:element>
+            </xsd:sequence>
+         </xsd:extension>
+      </xsd:complexContent>
+   </xsd:complexType>
+   <xsd:element name="getAllEquipmentProtectionGroupsResponse" type="tns:getAllEquipmentProtectionGroupsResponse">
+      <xsd:annotation>
+         <xsd:documentation>
+            <p>The getAllEquipmentProtectionGroups response message XML schema.</p>
+         </xsd:documentation>
+      </xsd:annotation>
+   </xsd:element>
+   <xsd:complexType name="getAllEquipmentProtectionGroupsResponse">
+      <xsd:complexContent>
+         <xsd:extension base="iterator:CommonResponse">
+            <xsd:sequence>
+               <xsd:element name="epgList" type="tns:EquipmentProtectionGroupResultWithIterator" minOccurs="0" maxOccurs="1">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                        <p>This parameter returns the list of Equipment Protection Group objects.</p>
+                        <p>This parameter  is  output parameter</p>
+                        <p>This parameter  has  multiplicity *</p>
+                        <p>This parameter  is  unique</p>
+                        <p>This parameter  is  passed by value</p>
+                        <p>This parameter  is  bulk potential</p>
+                        <p>This parameter  is  mandatory</p>
+                     </xsd:documentation>
+                  </xsd:annotation>
+               </xsd:element>
+            </xsd:sequence>
+         </xsd:extension>
+      </xsd:complexContent>
+   </xsd:complexType>
+   <xsd:element name="getAllEquipmentProtectionGroupsException" type="tns:getAllEquipmentProtectionGroupsException">
+      <xsd:annotation>
+         <xsd:documentation>
+            <p>The getAllEquipmentProtectionGroups exception message XML schema.</p>
+         </xsd:documentation>
+      </xsd:annotation>
+   </xsd:element>
+   <xsd:complexType name="getAllEquipmentProtectionGroupsException">
+      <xsd:choice>
+         <xsd:element name="accessDenied" type="exceptions:AccessDenied"/>
+         <xsd:element name="communicationLoss" type="exceptions:CommunicationLoss"/>
+         <xsd:element name="internalError" type="exceptions:InternalError"/>
+         <xsd:element name="invalidInput" type="exceptions:InvalidInput"/>
+         <xsd:element name="notImplemented" type="exceptions:NotImplemented"/>
+         <xsd:element name="unableToComply" type="exceptions:UnableToComply"/>
+      </xsd:choice>
+   </xsd:complexType>
+   <xsd:element name="getAllNonPreemptibleUnprotectedTpNamesRequest" type="tns:getAllNonPreemptibleUnprotectedTpNamesRequest">
+      <xsd:annotation>
+         <xsd:documentation>
+        The getAllNonPreemptibleUnprotectedTpNames request message XML schema.
+      </xsd:documentation>
+      </xsd:annotation>
+   </xsd:element>
+   <xsd:complexType name="getAllNonPreemptibleUnprotectedTpNamesRequest">
+      <xsd:sequence>
+         <xsd:element name="pgRef" type="entity:EntityIdentifier" minOccurs="1" maxOccurs="1">
+            <xsd:annotation>
+               <xsd:documentation>
+                  <p>This parameter provides the name of the Protection Group.</p>
+                  <p>This parameter  is  input parameter</p>
+                  <p>This parameter  has  multiplicity 1</p>
+                  <p>This parameter  is  unique</p>
+                  <p>This parameter  is  passed by id</p>
+                  <p>This parameter  is  mandatory</p>
+               </xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:element name="getAllNonPreemptibleUnprotectedTpNamesResponse" type="tns:getAllNonPreemptibleUnprotectedTpNamesResponse">
+      <xsd:annotation>
+         <xsd:documentation>
+            <p>The getAllNonPreemptibleUnprotectedTpNames response message XML schema.</p>
+         </xsd:documentation>
+      </xsd:annotation>
+   </xsd:element>
+   <xsd:complexType name="getAllNonPreemptibleUnprotectedTpNamesResponse">
+      <xsd:sequence>
+         <xsd:element name="ctpRefList" type="entity:ArrayOfEntityIdentifier" minOccurs="0" maxOccurs="1">
+            <xsd:annotation>
+               <xsd:documentation>
+                  <p>This parameter returns the names of the CTPs that have NUT turned on.</p>
+                  <p>This parameter  is  output parameter</p>
+                  <p>This parameter  has  multiplicity *</p>
+                  <p>This parameter  is  unique</p>
+                  <p>This parameter  is  mandatory</p>
+               </xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:element name="getAllNonPreemptibleUnprotectedTpNamesException" type="tns:getAllNonPreemptibleUnprotectedTpNamesException">
+      <xsd:annotation>
+         <xsd:documentation>
+            <p>The getAllNonPreemptibleUnprotectedTpNames exception message XML schema.</p>
+         </xsd:documentation>
+      </xsd:annotation>
+   </xsd:element>
+   <xsd:complexType name="getAllNonPreemptibleUnprotectedTpNamesException">
+      <xsd:choice>
+         <xsd:element name="accessDenied" type="exceptions:AccessDenied"/>
+         <xsd:element name="communicationLoss" type="exceptions:CommunicationLoss"/>
+         <xsd:element name="internalError" type="exceptions:InternalError"/>
+         <xsd:element name="invalidInput" type="exceptions:InvalidInput"/>
+         <xsd:element name="notImplemented" type="exceptions:NotImplemented"/>
+         <xsd:element name="unableToComply" type="exceptions:UnableToComply"/>
+      </xsd:choice>
+   </xsd:complexType>
+   <xsd:element name="getAllPreemptibleTerminationPointNamesRequest" type="tns:getAllPreemptibleTerminationPointNamesRequest">
+      <xsd:annotation>
+         <xsd:documentation>
+        The getAllPreemptibleTerminationPointNames request message XML schema.
+      </xsd:documentation>
+      </xsd:annotation>
+   </xsd:element>
+   <xsd:complexType name="getAllPreemptibleTerminationPointNamesRequest">
+      <xsd:sequence>
+         <xsd:element name="pgRef" type="entity:EntityIdentifier" minOccurs="1" maxOccurs="1">
+            <xsd:annotation>
+               <xsd:documentation>
+                  <p>This parameter provides the name of the Protection Group.</p>
+                  <p>This parameter  is  input parameter</p>
+                  <p>This parameter  has  multiplicity 1</p>
+                  <p>This parameter  is  unique</p>
+                  <p>This parameter  is  passed by id</p>
+                  <p>This parameter  is  mandatory</p>
+               </xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:element name="getAllPreemptibleTerminationPointNamesResponse" type="tns:getAllPreemptibleTerminationPointNamesResponse">
+      <xsd:annotation>
+         <xsd:documentation>
+            <p>The getAllPreemptibleTerminationPointNames response message XML schema.</p>
+         </xsd:documentation>
+      </xsd:annotation>
+   </xsd:element>
+   <xsd:complexType name="getAllPreemptibleTerminationPointNamesResponse">
+      <xsd:sequence>
+         <xsd:element name="ctpRefList" type="entity:ArrayOfEntityIdentifier" minOccurs="0" maxOccurs="1">
+            <xsd:annotation>
+               <xsd:documentation>
+                  <p>This parameter returns the names of the CTPs that can carry preemptible extra traffic.</p>
+                  <p>This parameter  is  output parameter</p>
+                  <p>This parameter  has  multiplicity *</p>
+                  <p>This parameter  is  unique</p>
+                  <p>This parameter  is  mandatory</p>
+               </xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:element name="getAllPreemptibleTerminationPointNamesException" type="tns:getAllPreemptibleTerminationPointNamesException">
+      <xsd:annotation>
+         <xsd:documentation>
+            <p>The getAllPreemptibleTerminationPointNames exception message XML schema.</p>
+         </xsd:documentation>
+      </xsd:annotation>
+   </xsd:element>
+   <xsd:complexType name="getAllPreemptibleTerminationPointNamesException">
+      <xsd:choice>
+         <xsd:element name="accessDenied" type="exceptions:AccessDenied"/>
+         <xsd:element name="communicationLoss" type="exceptions:CommunicationLoss"/>
+         <xsd:element name="internalError" type="exceptions:InternalError"/>
+         <xsd:element name="invalidInput" type="exceptions:InvalidInput"/>
+         <xsd:element name="notImplemented" type="exceptions:NotImplemented"/>
+         <xsd:element name="unableToComply" type="exceptions:UnableToComply"/>
+      </xsd:choice>
+   </xsd:complexType>
+   <xsd:element name="getAllProtectedTerminationPointNamesRequest" type="tns:getAllProtectedTerminationPointNamesRequest">
+      <xsd:annotation>
+         <xsd:documentation>
+        The getAllProtectedTerminationPointNames request message XML schema.
+      </xsd:documentation>
+      </xsd:annotation>
+   </xsd:element>
+   <xsd:complexType name="getAllProtectedTerminationPointNamesRequest">
+      <xsd:sequence>
+         <xsd:element name="ptpRef" type="entity:EntityIdentifier" minOccurs="1" maxOccurs="1">
+            <xsd:annotation>
+               <xsd:documentation>
+                  <p>This parameter provides the name of the Physical Termination Point.</p>
+                  <p>This parameter  is  input parameter</p>
+                  <p>This parameter  has  multiplicity 1</p>
+                  <p>This parameter  is  unique</p>
+                  <p>This parameter  is  mandatory</p>
+               </xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:element name="getAllProtectedTerminationPointNamesResponse" type="tns:getAllProtectedTerminationPointNamesResponse">
+      <xsd:annotation>
+         <xsd:documentation>
+            <p>The getAllProtectedTerminationPointNames response message XML schema.</p>
+         </xsd:documentation>
+      </xsd:annotation>
+   </xsd:element>
+   <xsd:complexType name="getAllProtectedTerminationPointNamesResponse">
+      <xsd:sequence>
+         <xsd:element name="pgRefList" type="entity:ArrayOfEntityIdentifier" minOccurs="0" maxOccurs="1">
+            <xsd:annotation>
+               <xsd:documentation>
+                  <p>This parameter returns the names of the containing Protection Groups.</p>
+                  <p>This parameter  is  output parameter</p>
+                  <p>This parameter  has  multiplicity *</p>
+                  <p>This parameter  is  unique</p>
+                  <p>This parameter  is  mandatory</p>
+               </xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:element name="getAllProtectedTerminationPointNamesException" type="tns:getAllProtectedTerminationPointNamesException">
+      <xsd:annotation>
+         <xsd:documentation>
+            <p>The getAllProtectedTerminationPointNames exception message XML schema.</p>
+         </xsd:documentation>
+      </xsd:annotation>
+   </xsd:element>
+   <xsd:complexType name="getAllProtectedTerminationPointNamesException">
+      <xsd:choice>
+         <xsd:element name="accessDenied" type="exceptions:AccessDenied"/>
+         <xsd:element name="communicationLoss" type="exceptions:CommunicationLoss"/>
+         <xsd:element name="internalError" type="exceptions:InternalError"/>
+         <xsd:element name="invalidInput" type="exceptions:InvalidInput"/>
+         <xsd:element name="notImplemented" type="exceptions:NotImplemented"/>
+         <xsd:element name="unableToComply" type="exceptions:UnableToComply"/>
+      </xsd:choice>
+   </xsd:complexType>
+   <xsd:element name="getAllProtectionGroupsRequest" type="tns:getAllProtectionGroupsRequest">
+      <xsd:annotation>
+         <xsd:documentation>
+            <p>The getAllProtectionGroups request message XML schema.</p>
+         </xsd:documentation>
+      </xsd:annotation>
+   </xsd:element>
+   <xsd:complexType name="getAllProtectionGroupsRequest">
+      <xsd:complexContent>
+         <xsd:extension base="iterator:CommonRequest">
+            <xsd:sequence>
+               <xsd:element name="meRef" type="entity:EntityIdentifier" minOccurs="1" maxOccurs="1">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                        <p>This parameter provides the name of the Managed Element containing the Equipment Protection Groups to be retrieved.</p>
+                        <p>This parameter  is  input parameter</p>
+                        <p>This parameter  has  multiplicity 1</p>
+                        <p>This parameter  is  unique</p>
+                        <p>This parameter  is  mandatory</p>
+                     </xsd:documentation>
+                  </xsd:annotation>
+               </xsd:element>
+            </xsd:sequence>
+         </xsd:extension>
+      </xsd:complexContent>
+   </xsd:complexType>
+   <xsd:element name="getAllProtectionGroupsResponse" type="tns:getAllProtectionGroupsResponse">
+      <xsd:annotation>
+         <xsd:documentation>
+            <p>The getAllProtectionGroups response message XML schema.</p>
+         </xsd:documentation>
+      </xsd:annotation>
+   </xsd:element>
+   <xsd:complexType name="getAllProtectionGroupsResponse">
+      <xsd:complexContent>
+         <xsd:extension base="iterator:CommonResponse">
+            <xsd:sequence>
+               <xsd:element name="pgList" type="tns:ProtectionGroupResultWithIterator" minOccurs="0" maxOccurs="1">
+                  <xsd:annotation>
+                     <xsd:documentation>
+                        <p>This parameter returns the list of Protection Group objects.</p>
+                        <p>This parameter  is  output parameter</p>
+                        <p>This parameter  has  multiplicity *</p>
+                        <p>This parameter  is  unique</p>
+                        <p>This parameter  is  passed by value</p>
+                        <p>This parameter  is  bulk potential</p>
+                        <p>This parameter  is  mandatory</p>
+                     </xsd:documentation>
+                  </xsd:annotation>
+               </xsd:element>
+            </xsd:sequence>
+         </xsd:extension>
+      </xsd:complexContent>
+   </xsd:complexType>
+   <xsd:element name="getAllProtectionGroupsException" type="tns:getAllProtectionGroupsException">
+      <xsd:annotation>
+         <xsd:documentation>
+            <p>The getAllProtectionGroups exception message XML schema.</p>
+         </xsd:documentation>
+      </xsd:annotation>
+   </xsd:element>
+   <xsd:complexType name="getAllProtectionGroupsException">
+      <xsd:choice>
+         <xsd:element name="accessDenied" type="exceptions:AccessDenied"/>
+         <xsd:element name="communicationLoss" type="exceptions:CommunicationLoss"/>
+         <xsd:element name="internalError" type="exceptions:InternalError"/>
+         <xsd:element name="invalidInput" type="exceptions:InvalidInput"/>
+         <xsd:element name="notImplemented" type="exceptions:NotImplemented"/>
+         <xsd:element name="unableToComply" type="exceptions:UnableToComply"/>
+      </xsd:choice>
+   </xsd:complexType>
+   <xsd:element name="getContainingProtectionGroupNamesRequest" type="tns:getContainingProtectionGroupNamesRequest">
+      <xsd:annotation>
+         <xsd:documentation>
+        The getContainingProtectionGroupNames request message XML schema.
+      </xsd:documentation>
+      </xsd:annotation>
+   </xsd:element>
+   <xsd:complexType name="getContainingProtectionGroupNamesRequest">
+      <xsd:sequence>
+         <xsd:element name="ptpRef" type="entity:EntityIdentifier" minOccurs="1" maxOccurs="1">
+            <xsd:annotation>
+               <xsd:documentation>
+                  <p>This parameter provides the name of the Physical Termination Point.</p>
+                  <p>This parameter  is  input parameter</p>
+                  <p>This parameter  has  multiplicity 1</p>
+                  <p>This parameter  is  unique</p>
+                  <p>This parameter  is  mandatory</p>
+               </xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:element name="getContainingProtectionGroupNamesResponse" type="tns:getContainingProtectionGroupNamesResponse">
+      <xsd:annotation>
+         <xsd:documentation>
+            <p>The getContainingProtectionGroupNames response message XML schema.</p>
+         </xsd:documentation>
+      </xsd:annotation>
+   </xsd:element>
+   <xsd:complexType name="getContainingProtectionGroupNamesResponse">
+      <xsd:sequence>
+         <xsd:element name="pgRefList" type="tns:ArrayOfProtectionGroup" minOccurs="0" maxOccurs="1">
+            <xsd:annotation>
+               <xsd:documentation>
+                  <p>This parameter returns the names of the containing Protection Groups.</p>
+                  <p>This parameter  is  output parameter</p>
+                  <p>This parameter  has  multiplicity *</p>
+                  <p>This parameter  is  unique</p>
+                  <p>This parameter  is  passed by value</p>
+                  <p>This parameter  is  bulk potential</p>
+                  <p>This parameter  is  mandatory</p>
+               </xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:element name="getContainingProtectionGroupNamesException" type="tns:getContainingProtectionGroupNamesException">
+      <xsd:annotation>
+         <xsd:documentation>
+            <p>The getContainingProtectionGroupNames exception message XML schema.</p>
+         </xsd:documentation>
+      </xsd:annotation>
+   </xsd:element>
+   <xsd:complexType name="getContainingProtectionGroupNamesException">
+      <xsd:choice>
+         <xsd:element name="accessDenied" type="exceptions:AccessDenied"/>
+         <xsd:element name="communicationLoss" type="exceptions:CommunicationLoss"/>
+         <xsd:element name="internalError" type="exceptions:InternalError"/>
+         <xsd:element name="invalidInput" type="exceptions:InvalidInput"/>
+         <xsd:element name="notImplemented" type="exceptions:NotImplemented"/>
+         <xsd:element name="unableToComply" type="exceptions:UnableToComply"/>
+      </xsd:choice>
+   </xsd:complexType>
+   <xsd:element name="retrieveEquipmentSwitchDataRequest" type="tns:retrieveEquipmentSwitchDataRequest">
+      <xsd:annotation>
+         <xsd:documentation>
+        The retrieveEquipmentSwitchData request message XML schema.
+      </xsd:documentation>
+      </xsd:annotation>
+   </xsd:element>
+   <xsd:complexType name="retrieveEquipmentSwitchDataRequest">
+      <xsd:sequence>
+         <xsd:element name="epgRef" type="entity:EntityIdentifier" minOccurs="1" maxOccurs="1">
+            <xsd:annotation>
+               <xsd:documentation>
+                  <p>This parameter provides the name of the Equipment Protection Group whose switch status is to be retrieved.</p>
+                  <p>This parameter  is  input parameter</p>
+                  <p>This parameter  has  multiplicity 1</p>
+                  <p>This parameter  is  unique</p>
+                  <p>This parameter  is  passed by id</p>
+                  <p>This parameter  is  mandatory</p>
+               </xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:element name="retrieveEquipmentSwitchDataResponse" type="tns:retrieveEquipmentSwitchDataResponse">
+      <xsd:annotation>
+         <xsd:documentation>
+            <p>The retrieveEquipmentSwitchData response message XML schema.</p>
+         </xsd:documentation>
+      </xsd:annotation>
+   </xsd:element>
+   <xsd:complexType name="retrieveEquipmentSwitchDataResponse">
+      <xsd:sequence>
+         <xsd:element name="equipmentSwitchDataList" type="tns:ArrayOfEquipmentSwitchData" minOccurs="0" maxOccurs="1">
+            <xsd:annotation>
+               <xsd:documentation>
+                  <p>This parameter returns the current protection switch status of the Equipment Protection Group.</p>
+                  <p>This parameter  is  output parameter</p>
+                  <p>This parameter  has  multiplicity *</p>
+                  <p>This parameter  is  unique</p>
+                  <p>This parameter  is  mandatory</p>
+               </xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:element name="retrieveEquipmentSwitchDataException" type="tns:retrieveEquipmentSwitchDataException">
+      <xsd:annotation>
+         <xsd:documentation>
+            <p>The retrieveEquipmentSwitchData exception message XML schema.</p>
+         </xsd:documentation>
+      </xsd:annotation>
+   </xsd:element>
+   <xsd:complexType name="retrieveEquipmentSwitchDataException">
+      <xsd:choice>
+         <xsd:element name="accessDenied" type="exceptions:AccessDenied"/>
+         <xsd:element name="communicationLoss" type="exceptions:CommunicationLoss"/>
+         <xsd:element name="internalError" type="exceptions:InternalError"/>
+         <xsd:element name="invalidInput" type="exceptions:InvalidInput"/>
+         <xsd:element name="notImplemented" type="exceptions:NotImplemented"/>
+         <xsd:element name="unableToComply" type="exceptions:UnableToComply"/>
+      </xsd:choice>
+   </xsd:complexType>
+   <xsd:element name="retrieveSwitchDataRequest" type="tns:retrieveSwitchDataRequest">
+      <xsd:annotation>
+         <xsd:documentation>
+        The retrieveSwitchData request message XML schema.
+      </xsd:documentation>
+      </xsd:annotation>
+   </xsd:element>
+   <xsd:complexType name="retrieveSwitchDataRequest">
+      <xsd:sequence>
+         <xsd:element name="ctpOrPgRef" type="entity:EntityIdentifier" minOccurs="1" maxOccurs="1">
+            <xsd:annotation>
+               <xsd:documentation>
+                  <p>This parameter provides the name of the reliable CTP or the Protection Group whose switch status is to be retrieved.</p>
+                  <p>This parameter  is  input parameter</p>
+                  <p>This parameter  has  multiplicity 1</p>
+                  <p>This parameter  is  unique</p>
+                  <p>This parameter  is  mandatory</p>
+               </xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:element name="retrieveSwitchDataResponse" type="tns:retrieveSwitchDataResponse">
+      <xsd:annotation>
+         <xsd:documentation>
+            <p>The retrieveSwitchData response message XML schema.</p>
+         </xsd:documentation>
+      </xsd:annotation>
+   </xsd:element>
+   <xsd:complexType name="retrieveSwitchDataResponse">
+      <xsd:sequence>
+         <xsd:element name="switchDataList" type="tns:ArrayOfSwitchData" minOccurs="0" maxOccurs="1">
+            <xsd:annotation>
+               <xsd:documentation>
+                  <p>This parameter returns the current protection switch status of the CTP or Protection Group.</p>
+                  <p>This parameter  is  output parameter</p>
+                  <p>This parameter  has  multiplicity *</p>
+                  <p>This parameter  is  unique</p>
+                  <p>This parameter  is  mandatory</p>
+               </xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:element name="retrieveSwitchDataException" type="tns:retrieveSwitchDataException">
+      <xsd:annotation>
+         <xsd:documentation>
+            <p>The retrieveSwitchData exception message XML schema.</p>
+         </xsd:documentation>
+      </xsd:annotation>
+   </xsd:element>
+   <xsd:complexType name="retrieveSwitchDataException">
+      <xsd:choice>
+         <xsd:element name="accessDenied" type="exceptions:AccessDenied"/>
+         <xsd:element name="communicationLoss" type="exceptions:CommunicationLoss"/>
+         <xsd:element name="internalError" type="exceptions:InternalError"/>
+         <xsd:element name="invalidInput" type="exceptions:InvalidInput"/>
+         <xsd:element name="notImplemented" type="exceptions:NotImplemented"/>
+         <xsd:element name="unableToComply" type="exceptions:UnableToComply"/>
+      </xsd:choice>
+   </xsd:complexType>
+   <xsd:element name="getProtectionGroupRequest" type="tns:getProtectionGroupRequest">
+      <xsd:annotation>
+         <xsd:documentation>
+        The getProtectionGroup request message XML schema.
+      </xsd:documentation>
+      </xsd:annotation>
+   </xsd:element>
+   <xsd:complexType name="getProtectionGroupRequest">
+      <xsd:sequence>
+         <xsd:element name="objectToGet" type="entity:EntityIdentifier" minOccurs="1" maxOccurs="1">
+            <xsd:annotation>
+               <xsd:documentation>
+                  <p>ProtectionGroup to return. Passed by id</p>
+                  <p>This parameter  is  input parameter</p>
+                  <p>This parameter  has  multiplicity 1</p>
+                  <p>This parameter  is  unique</p>
+                  <p>This parameter  is  passed by id</p>
+                  <p>This parameter  is  mandatory</p>
+               </xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="extensionInfo" minOccurs="0">
+            <xsd:annotation>
+               <xsd:documentation>
+       a generic list of any type of elements. Used for vendor extensions or loose element encapsulation from other namespaces.
+      </xsd:documentation>
+            </xsd:annotation>
+            <xsd:complexType>
+               <xsd:sequence>
+                  <xsd:any namespace="##any" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+               </xsd:sequence>
+            </xsd:complexType>
+         </xsd:element>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:element name="getProtectionGroupResponse" type="tns:getProtectionGroupResponse">
+      <xsd:annotation>
+         <xsd:documentation>
+            <p>The getProtectionGroup response message XML schema.</p>
+         </xsd:documentation>
+      </xsd:annotation>
+   </xsd:element>
+   <xsd:complexType name="getProtectionGroupResponse">
+      <xsd:sequence>
+         <xsd:element name="protectionGroup" type="tns:ProtectionGroup" minOccurs="1" maxOccurs="1">
+            <xsd:annotation>
+               <xsd:documentation>
+                  <p>ProtectionGroup being returned</p>
+                  <p>This parameter  is  output parameter</p>
+                  <p>This parameter  has  multiplicity 1</p>
+                  <p>This parameter  is  unique</p>
+                  <p>This parameter  is  passed by value</p>
+                  <p>This parameter  is  mandatory</p>
+               </xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="extensionInfo" minOccurs="0">
+            <xsd:annotation>
+               <xsd:documentation>
+       a generic list of any type of elements. Used for vendor extensions or loose element encapsulation from other namespaces.
+      </xsd:documentation>
+            </xsd:annotation>
+            <xsd:complexType>
+               <xsd:sequence>
+                  <xsd:any namespace="##any" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+               </xsd:sequence>
+            </xsd:complexType>
+         </xsd:element>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:element name="getProtectionGroupException" type="tns:getProtectionGroupException">
+      <xsd:annotation>
+         <xsd:documentation>
+            <p>The "getProtectionGroupException" exception message XML schema.</p>
+         </xsd:documentation>
+      </xsd:annotation>
+   </xsd:element>
+   <xsd:complexType name="getProtectionGroupException">
+      <xsd:choice>
+         <xsd:element name="entityNotFound" type="exceptions1:EntityNotFound">
+            <xsd:annotation>
+               <xsd:documentation>
+                  <p/>
+               </xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="accessDenied" type="exceptions:AccessDenied"/>
+         <xsd:element name="communicationLoss" type="exceptions:CommunicationLoss"/>
+         <xsd:element name="internalError" type="exceptions:InternalError"/>
+         <xsd:element name="invalidInput" type="exceptions:InvalidInput"/>
+         <xsd:element name="notImplemented" type="exceptions:NotImplemented"/>
+         <xsd:element name="unableToComply" type="exceptions:UnableToComply"/>
+      </xsd:choice>
+   </xsd:complexType>
+   <xsd:element name="getEquipmentProtectionGroupRequest" type="tns:getEquipmentProtectionGroupRequest">
+      <xsd:annotation>
+         <xsd:documentation>
+        The getEquipmentProtectionGroup request message XML schema.
+      </xsd:documentation>
+      </xsd:annotation>
+   </xsd:element>
+   <xsd:complexType name="getEquipmentProtectionGroupRequest">
+      <xsd:sequence>
+         <xsd:element name="objectToGet" type="entity:EntityIdentifier" minOccurs="1" maxOccurs="1">
+            <xsd:annotation>
+               <xsd:documentation>
+                  <p>EquipmentProtectionGroup to return. Passed by id</p>
+                  <p>This parameter  is  input parameter</p>
+                  <p>This parameter  has  multiplicity 1</p>
+                  <p>This parameter  is  unique</p>
+                  <p>This parameter  is  passed by id</p>
+                  <p>This parameter  is  mandatory</p>
+               </xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="extensionInfo" minOccurs="0">
+            <xsd:annotation>
+               <xsd:documentation>
+       a generic list of any type of elements. Used for vendor extensions or loose element encapsulation from other namespaces.
+      </xsd:documentation>
+            </xsd:annotation>
+            <xsd:complexType>
+               <xsd:sequence>
+                  <xsd:any namespace="##any" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+               </xsd:sequence>
+            </xsd:complexType>
+         </xsd:element>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:element name="getEquipmentProtectionGroupResponse" type="tns:getEquipmentProtectionGroupResponse">
+      <xsd:annotation>
+         <xsd:documentation>
+            <p>The getEquipmentProtectionGroup response message XML schema.</p>
+         </xsd:documentation>
+      </xsd:annotation>
+   </xsd:element>
+   <xsd:complexType name="getEquipmentProtectionGroupResponse">
+      <xsd:sequence>
+         <xsd:element name="equipmentProtectionGroup" type="tns:EquipmentProtectionGroup" minOccurs="1" maxOccurs="1">
+            <xsd:annotation>
+               <xsd:documentation>
+                  <p>EquipmentProtectionGroup being returned</p>
+                  <p>This parameter  is  output parameter</p>
+                  <p>This parameter  has  multiplicity 1</p>
+                  <p>This parameter  is  unique</p>
+                  <p>This parameter  is  passed by value</p>
+                  <p>This parameter  is  mandatory</p>
+               </xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="extensionInfo" minOccurs="0">
+            <xsd:annotation>
+               <xsd:documentation>
+       a generic list of any type of elements. Used for vendor extensions or loose element encapsulation from other namespaces.
+      </xsd:documentation>
+            </xsd:annotation>
+            <xsd:complexType>
+               <xsd:sequence>
+                  <xsd:any namespace="##any" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+               </xsd:sequence>
+            </xsd:complexType>
+         </xsd:element>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:element name="getEquipmentProtectionGroupException" type="tns:getEquipmentProtectionGroupException">
+      <xsd:annotation>
+         <xsd:documentation>
+            <p>The "getEquipmentProtectionGroupException" exception message XML schema.</p>
+         </xsd:documentation>
+      </xsd:annotation>
+   </xsd:element>
+   <xsd:complexType name="getEquipmentProtectionGroupException">
+      <xsd:choice>
+         <xsd:element name="entityNotFound" type="exceptions1:EntityNotFound">
+            <xsd:annotation>
+               <xsd:documentation>
+                  <p/>
+               </xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="accessDenied" type="exceptions:AccessDenied"/>
+         <xsd:element name="communicationLoss" type="exceptions:CommunicationLoss"/>
+         <xsd:element name="internalError" type="exceptions:InternalError"/>
+         <xsd:element name="invalidInput" type="exceptions:InvalidInput"/>
+         <xsd:element name="notImplemented" type="exceptions:NotImplemented"/>
+         <xsd:element name="unableToComply" type="exceptions:UnableToComply"/>
+      </xsd:choice>
+   </xsd:complexType>
+</xsd:schema>

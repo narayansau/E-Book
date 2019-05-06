@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+ *  Generated with Tigerstripe Workbench 0.6.935.201102010903 and 
+ *  Plugin Nortel Networks, Hewlett-Packard Company/TIP_Soap_Generator(1.1) (1.1)
+ *
+ *  DO NOT EDIT THIS CODE WHICH WAS AUTOMATICALLY GENERATED
+--><!--
+Copyright (C) 2011 TM Forum
+
+No recipient of this document and code shall in any way interpret this material as representing a position or agreement of TM Forum or its members. This material is draft working material of TM Forum and is provided solely for comments and evaluation. It is not "Forum Approved" and is solely circulated for the purposes of assisting TM Forum in the preparation of final material in furtherance of the aims and mission of TM Forum.
+
+Although it is copyrighted material of TM Forum:
+- Members of TM Forum are only granted the limited copyright waiver to distribute this material within their companies and may not make paper or electronic copies for distribution outside of their companies.
+- Non-members of the TM Forum are not permitted to make copies (paper or electronic) of this draft material other than for their internal use for the sole purpose of making comments thereon directly to TM Forum.
+- If this material forms part of a supply of information in support of an Industry Group Liaison relationship, the document may only be used as part of the work identified in the Liaison and may not be used or further distributed for any other purposes.
+
+Any use of this material by the recipient, other than as set forth specifically herein, is at its own risk, and under no circumstances will TM Forum be liable for direct or indirect damages or any costs or losses resulting from the use of this material by the recipient.
+
+This material is governed, and all recipients shall be bound, by all of the terms and conditions of the Intellectual Property Rights Policy of the TM Forum (http://www.tmforum.org/Bylaws/1094/home.html) and may involve a claim of patent rights by one or more TM Forum members or by non-members of TM Forum.
+-->
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://www.tmforum.org/xml/tip/resource/trouble/asap" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsn_bindings_http="http://www.tmforum.org/xml/tip/wsnbindings/http" name="ASAPControlService" targetNamespace="http://www.tmforum.org/xml/tip/resource/trouble/asap">
+   <wsdl:import namespace="http://www.tmforum.org/xml/tip/wsnbindings/http" location="wsn_bindings_http.wsdl"/><!-- WSDL Types -->
+   <wsdl:types>
+      <xsd:schema>
+         <xsd:import namespace="http://www.tmforum.org/xml/tip/resource/trouble/asap" schemaLocation="mpac_resource_trouble_asap_asapcontrolservice_msg.xsd"/>
+      </xsd:schema>
+   </wsdl:types><!-- Message Definitions of the Service Interface -->
+   <wsdl:message name="assignAlarmSeverityAssignmentProfileRequest">
+      <wsdl:documentation>
+         <p>The assignAlarmSeverityAssignmentProfile request message.</p>
+      </wsdl:documentation>
+      <wsdl:part name="body" element="tns:assignAlarmSeverityAssignmentProfileRequest"/>
+   </wsdl:message>
+   <wsdl:message name="assignAlarmSeverityAssignmentProfileResponse">
+      <wsdl:documentation>
+         <p>The assignAlarmSeverityAssignmentProfile response message.</p>
+      </wsdl:documentation>
+      <wsdl:part name="body" element="tns:assignAlarmSeverityAssignmentProfileResponse"/>
+   </wsdl:message>
+   <wsdl:message name="assignAlarmSeverityAssignmentProfileException">
+      <wsdl:documentation>
+         <p>The assignAlarmSeverityAssignmentProfile exception message.</p>
+      </wsdl:documentation>
+      <wsdl:part name="body" element="tns:assignAlarmSeverityAssignmentProfileException"/>
+   </wsdl:message>
+   <wsdl:message name="deassignAlarmSeverityAssignmentProfileRequest">
+      <wsdl:documentation>
+         <p>The deassignAlarmSeverityAssignmentProfile request message.</p>
+      </wsdl:documentation>
+      <wsdl:part name="body" element="tns:deassignAlarmSeverityAssignmentProfileRequest"/>
+   </wsdl:message>
+   <wsdl:message name="deassignAlarmSeverityAssignmentProfileResponse">
+      <wsdl:documentation>
+         <p>The deassignAlarmSeverityAssignmentProfile response message.</p>
+      </wsdl:documentation>
+      <wsdl:part name="body" element="tns:deassignAlarmSeverityAssignmentProfileResponse"/>
+   </wsdl:message>
+   <wsdl:message name="deassignAlarmSeverityAssignmentProfileException">
+      <wsdl:documentation>
+         <p>The deassignAlarmSeverityAssignmentProfile exception message.</p>
+      </wsdl:documentation>
+      <wsdl:part name="body" element="tns:deassignAlarmSeverityAssignmentProfileException"/>
+   </wsdl:message>
+   <wsdl:message name="setAlarmSeverityAssignmentProfileRequest">
+      <wsdl:documentation>
+         <p>The setAlarmSeverityAssignmentProfile request message.</p>
+      </wsdl:documentation>
+      <wsdl:part name="body" element="tns:setAlarmSeverityAssignmentProfileRequest"/>
+   </wsdl:message>
+   <wsdl:message name="setAlarmSeverityAssignmentProfileResponse">
+      <wsdl:documentation>
+         <p>The setAlarmSeverityAssignmentProfile response message.</p>
+      </wsdl:documentation>
+      <wsdl:part name="body" element="tns:setAlarmSeverityAssignmentProfileResponse"/>
+   </wsdl:message>
+   <wsdl:message name="setAlarmSeverityAssignmentProfileException">
+      <wsdl:documentation>
+         <p>The setAlarmSeverityAssignmentProfile exception message.</p>
+      </wsdl:documentation>
+      <wsdl:part name="body" element="tns:setAlarmSeverityAssignmentProfileException"/>
+   </wsdl:message>
+   <wsdl:message name="createAlarmSeverityAssignmentProfileRequest">
+      <wsdl:documentation>
+         <p>The createAlarmSeverityAssignmentProfile request message.</p>
+      </wsdl:documentation>
+      <wsdl:part name="body" element="tns:createAlarmSeverityAssignmentProfileRequest"/>
+   </wsdl:message>
+   <wsdl:message name="createAlarmSeverityAssignmentProfileResponse">
+      <wsdl:documentation>
+         <p>The createAlarmSeverityAssignmentProfile response message.</p>
+      </wsdl:documentation>
+      <wsdl:part name="body" element="tns:createAlarmSeverityAssignmentProfileResponse"/>
+   </wsdl:message>
+   <wsdl:message name="createAlarmSeverityAssignmentProfileException">
+      <wsdl:documentation>
+         <p>The createAlarmSeverityAssignmentProfile exception message.</p>
+      </wsdl:documentation>
+      <wsdl:part name="body" element="tns:createAlarmSeverityAssignmentProfileException"/>
+   </wsdl:message>
+   <wsdl:message name="deleteAlarmSeverityAssignmentProfilesRequest">
+      <wsdl:documentation>
+         <p>The deleteAlarmSeverityAssignmentProfiles request message.</p>
+      </wsdl:documentation>
+      <wsdl:part name="body" element="tns:deleteAlarmSeverityAssignmentProfilesRequest"/>
+   </wsdl:message>
+   <wsdl:message name="deleteAlarmSeverityAssignmentProfilesResponse">
+      <wsdl:documentation>
+         <p>The deleteAlarmSeverityAssignmentProfiles response message.</p>
+      </wsdl:documentation>
+      <wsdl:part name="body" element="tns:deleteAlarmSeverityAssignmentProfilesResponse"/>
+   </wsdl:message>
+   <wsdl:message name="deleteAlarmSeverityAssignmentProfilesException">
+      <wsdl:documentation>
+         <p>The deleteAlarmSeverityAssignmentProfiles exception message.</p>
+      </wsdl:documentation>
+      <wsdl:part name="body" element="tns:deleteAlarmSeverityAssignmentProfilesException"/>
+   </wsdl:message><!-- Port Type (abstract interface) Definitions of the Service Interface -->
+   <wsdl:portType name="ASAPControlService">
+      <wsdl:documentation>
+         <p>This service interface provides the operations related to the control of Alarm Severity Assignement Profiles (ASAP). Common operations are used on the ASAP entity.</p>
+         <p/>
+         <p>This service interface  is  optional</p>
+      </wsdl:documentation>
+      <wsdl:operation name="assignAlarmSeverityAssignmentProfile">
+         <wsdl:documentation>
+            <p>This is a request-response operation.</p>
+            <p>This operation assigns the addressed ASAP to the addressed resource, i.e. the asapRef attribute is updated accordingly. The formerly referenced ASAP, if any, is deassigned. For TPs, it is necessary to indicate also the Layer Rate the ASAP will apply to. For a TP with multiple layers, the operation can be used repeatedly to assign an ASAP to each layer as appropriate.
+This operation causes an Alarm re-evaluation of the already detected defects according to the following rules.
+
+If Alarms are reportable (*):
+- if the severity changes from any of critical, major, minor, warning, to not alarmed, then an Alarm notification with cleared is sent and the Alarm is no longer available for any Alarm retrieval operation
+- if the severity changes from not alarmed to any of critical, major, minor, warning, then an Alarm notification with the new perceivedSeverity is sent (with the current target OS/NE time) and the alarm is available for any Alarm retrieval operation
+- if the severity changes from any of critical, major, minor, warning, to any of critical, major, minor, warning, then the Alarm re-evaluation process is not performed.
+
+(*) Note that an alarm is reportable by NE/target OS:
+- when either the AlarmReporting layered parameter = "on"
+- or the alarmReportingIndicator attribute = true
+- or always for all other objects which do not have any Alarm reporting layered parameter or attribute.
+
+Note that the clear notification is not send in case of transient events.
+If the addressed resource originates Alarms from within the NE, then this operation could imply the "activation" of the ASAP instance and functionality over the proper NE. E.g. the target OS will download the ASAP to a given NE only once the ASAP is assigned for the first time to a resource of that NE.</p>
+            <p>This operation  is  extendable</p>
+            <p>This operation  is  optional</p>
+         </wsdl:documentation>
+         <wsdl:input name="assignAlarmSeverityAssignmentProfileRequest" message="tns:assignAlarmSeverityAssignmentProfileRequest"/>
+         <wsdl:output name="assignAlarmSeverityAssignmentProfileResponse" message="tns:assignAlarmSeverityAssignmentProfileResponse"/>
+         <wsdl:fault name="assignAlarmSeverityAssignmentProfileException" message="tns:assignAlarmSeverityAssignmentProfileException"/>
+      </wsdl:operation>
+      <wsdl:operation name="deassignAlarmSeverityAssignmentProfile">
+         <wsdl:documentation>
+            <p>This is a request-response operation.</p>
+            <p>This operation deassigns the ASAP from the addressed resource, i.e. the asapRef attribute of the resource is updated to no name. For TPs, it is necessary to indicate also the Layer Rate, in order to identify the ASAP to be deassigned.
+This operation causes an Alarm re-evaluation of the already detected defects according to the same rules as ASAP assignment, considering as "newly assigned ASAP" the default alarm severity assignment.
+If the addressed resource originates Alarms from within the Network Element (NE), then this operation could imply the "deactivation" of the ASAP instance and functionality over the proper NE. E.g. the target OS will remove the ASAP from a given NE only when the ASAP is no longer assigned to any resource of that NE.</p>
+            <p>This operation  is  extendable</p>
+            <p>This operation  is  optional</p>
+         </wsdl:documentation>
+         <wsdl:input name="deassignAlarmSeverityAssignmentProfileRequest" message="tns:deassignAlarmSeverityAssignmentProfileRequest"/>
+         <wsdl:output name="deassignAlarmSeverityAssignmentProfileResponse" message="tns:deassignAlarmSeverityAssignmentProfileResponse"/>
+         <wsdl:fault name="deassignAlarmSeverityAssignmentProfileException" message="tns:deassignAlarmSeverityAssignmentProfileException"/>
+      </wsdl:operation>
+      <wsdl:operation name="setAlarmSeverityAssignmentProfile">
+         <wsdl:documentation>
+            <p>This is the SET common request-response operation.</p>
+         </wsdl:documentation>
+         <wsdl:input name="setAlarmSeverityAssignmentProfileRequest" message="tns:setAlarmSeverityAssignmentProfileRequest"/>
+         <wsdl:output name="setAlarmSeverityAssignmentProfileResponse" message="tns:setAlarmSeverityAssignmentProfileResponse"/>
+         <wsdl:fault name="setAlarmSeverityAssignmentProfileException" message="tns:setAlarmSeverityAssignmentProfileException"/>
+      </wsdl:operation>
+      <wsdl:operation name="createAlarmSeverityAssignmentProfile">
+         <wsdl:documentation>
+            <p>This is the Create common request-response operation.</p>
+         </wsdl:documentation>
+         <wsdl:input name="createAlarmSeverityAssignmentProfileRequest" message="tns:createAlarmSeverityAssignmentProfileRequest"/>
+         <wsdl:output name="createAlarmSeverityAssignmentProfileResponse" message="tns:createAlarmSeverityAssignmentProfileResponse"/>
+         <wsdl:fault name="createAlarmSeverityAssignmentProfileException" message="tns:createAlarmSeverityAssignmentProfileException"/>
+      </wsdl:operation>
+      <wsdl:operation name="deleteAlarmSeverityAssignmentProfiles">
+         <wsdl:documentation>
+            <p>This is the Delete common request-response operation.</p>
+         </wsdl:documentation>
+         <wsdl:input name="deleteAlarmSeverityAssignmentProfilesRequest" message="tns:deleteAlarmSeverityAssignmentProfilesRequest"/>
+         <wsdl:output name="deleteAlarmSeverityAssignmentProfilesResponse" message="tns:deleteAlarmSeverityAssignmentProfilesResponse"/>
+         <wsdl:fault name="deleteAlarmSeverityAssignmentProfilesException" message="tns:deleteAlarmSeverityAssignmentProfilesException"/>
+      </wsdl:operation>
+   </wsdl:portType><!-- Binding - Concrete Service Interface deployment SOAP/HTTP -->
+   <wsdl:binding name="ASAPControlServiceSoapHttpBinding" type="tns:ASAPControlService">
+      <wsdl:documentation>
+         <p>Web Service (SOAP/HTTP) profile binding definitions.</p>
+      </wsdl:documentation>
+      <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/><!--wsaw:UsingAddressing wsdl:required="true"/-->
+      <wsdl:operation name="assignAlarmSeverityAssignmentProfile">
+         <soap:operation soapAction="assignAlarmSeverityAssignmentProfile" style="document"/>
+         <wsdl:input name="assignAlarmSeverityAssignmentProfileRequest">
+            <soap:body use="literal"/>
+         </wsdl:input>
+         <wsdl:output name="assignAlarmSeverityAssignmentProfileResponse">
+            <soap:body use="literal"/>
+         </wsdl:output>
+         <wsdl:fault name="assignAlarmSeverityAssignmentProfileException">
+            <soap:fault name="assignAlarmSeverityAssignmentProfileException" use="literal"/>
+         </wsdl:fault>
+      </wsdl:operation>
+      <wsdl:operation name="deassignAlarmSeverityAssignmentProfile">
+         <soap:operation soapAction="deassignAlarmSeverityAssignmentProfile" style="document"/>
+         <wsdl:input name="deassignAlarmSeverityAssignmentProfileRequest">
+            <soap:body use="literal"/>
+         </wsdl:input>
+         <wsdl:output name="deassignAlarmSeverityAssignmentProfileResponse">
+            <soap:body use="literal"/>
+         </wsdl:output>
+         <wsdl:fault name="deassignAlarmSeverityAssignmentProfileException">
+            <soap:fault name="deassignAlarmSeverityAssignmentProfileException" use="literal"/>
+         </wsdl:fault>
+      </wsdl:operation>
+      <wsdl:operation name="setAlarmSeverityAssignmentProfile">
+         <soap:operation soapAction="setAlarmSeverityAssignmentProfile" style="document"/>
+         <wsdl:input name="setAlarmSeverityAssignmentProfileRequest">
+            <soap:body use="literal"/>
+         </wsdl:input>
+         <wsdl:output name="setAlarmSeverityAssignmentProfileResponse">
+            <soap:body use="literal"/>
+         </wsdl:output>
+         <wsdl:fault name="setAlarmSeverityAssignmentProfileException">
+            <soap:fault name="setAlarmSeverityAssignmentProfileException" use="literal"/>
+         </wsdl:fault>
+      </wsdl:operation>
+      <wsdl:operation name="createAlarmSeverityAssignmentProfile">
+         <soap:operation soapAction="createAlarmSeverityAssignmentProfile" style="document"/>
+         <wsdl:input name="createAlarmSeverityAssignmentProfileRequest">
+            <soap:body use="literal"/>
+         </wsdl:input>
+         <wsdl:output name="createAlarmSeverityAssignmentProfileResponse">
+            <soap:body use="literal"/>
+         </wsdl:output>
+         <wsdl:fault name="createAlarmSeverityAssignmentProfileException">
+            <soap:fault name="createAlarmSeverityAssignmentProfileException" use="literal"/>
+         </wsdl:fault>
+      </wsdl:operation>
+      <wsdl:operation name="deleteAlarmSeverityAssignmentProfiles">
+         <soap:operation soapAction="deleteAlarmSeverityAssignmentProfiles" style="document"/>
+         <wsdl:input name="deleteAlarmSeverityAssignmentProfilesRequest">
+            <soap:body use="literal"/>
+         </wsdl:input>
+         <wsdl:output name="deleteAlarmSeverityAssignmentProfilesResponse">
+            <soap:body use="literal"/>
+         </wsdl:output>
+         <wsdl:fault name="deleteAlarmSeverityAssignmentProfilesException">
+            <soap:fault name="deleteAlarmSeverityAssignmentProfilesException" use="literal"/>
+         </wsdl:fault>
+      </wsdl:operation>
+   </wsdl:binding><!-- Service definition -->
+   <wsdl:service name="ASAPControlServiceWs">
+      <wsdl:port name="ASAPControlServiceHttpPort" binding="tns:ASAPControlServiceSoapHttpBinding">
+         <soap:address location="http://localhost/ASAPControlService"/>
+      </wsdl:port>
+      <wsdl:port name="NotificationProducerHttpPort" binding="wsn_bindings_http:NotificationProducerSoapHttpBinding">
+         <soap:address location="http://localhost/ASAPControlService/NotificationProducer"/>
+      </wsdl:port>
+      <wsdl:port name="SubscriptionManagerHttpPort" binding="wsn_bindings_http:SubscriptionManagerSoapHttpBinding">
+         <soap:address location="http://localhost/ASAPControlService/SubscriptionManager"/>
+      </wsdl:port>
+   </wsdl:service>
+</wsdl:definitions>

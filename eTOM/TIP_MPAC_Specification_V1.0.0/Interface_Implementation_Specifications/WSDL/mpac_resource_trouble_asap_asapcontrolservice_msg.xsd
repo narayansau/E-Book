@@ -1,0 +1,478 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+ *  Generated with Tigerstripe Workbench 0.6.935.201102010903 and 
+ *  Plugin Nortel Networks, Hewlett-Packard Company/TIP_Soap_Generator(1.1) (1.1)
+ *
+ *  DO NOT EDIT THIS CODE WHICH WAS AUTOMATICALLY GENERATED
+--><!--
+Copyright (C) 2011 TM Forum
+
+No recipient of this document and code shall in any way interpret this material as representing a position or agreement of TM Forum or its members. This material is draft working material of TM Forum and is provided solely for comments and evaluation. It is not "Forum Approved" and is solely circulated for the purposes of assisting TM Forum in the preparation of final material in furtherance of the aims and mission of TM Forum.
+
+Although it is copyrighted material of TM Forum:
+- Members of TM Forum are only granted the limited copyright waiver to distribute this material within their companies and may not make paper or electronic copies for distribution outside of their companies.
+- Non-members of the TM Forum are not permitted to make copies (paper or electronic) of this draft material other than for their internal use for the sole purpose of making comments thereon directly to TM Forum.
+- If this material forms part of a supply of information in support of an Industry Group Liaison relationship, the document may only be used as part of the work identified in the Liaison and may not be used or further distributed for any other purposes.
+
+Any use of this material by the recipient, other than as set forth specifically herein, is at its own risk, and under no circumstances will TM Forum be liable for direct or indirect damages or any costs or losses resulting from the use of this material by the recipient.
+
+This material is governed, and all recipients shall be bound, by all of the terms and conditions of the Intellectual Property Rights Policy of the TM Forum (http://www.tmforum.org/Bylaws/1094/home.html) and may involve a claim of patent rights by one or more TM Forum members or by non-members of TM Forum.
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.tmforum.org/xml/tip/resource/trouble/asap" xmlns:primitives="http://www.tmforum.org/xml/tip/internal/primitives" xmlns:entity="http://www.tmforum.org/xml/tip/internal/entity" xmlns:exceptions="http://www.tmforum.org/xml/tip/internal/exceptions" xmlns:iterator="http://www.tmforum.org/xml/tip/internal/iterator" xmlns:nrb="http://www.tmforum.org/xml/tip/resource/res/tip/nrb" xmlns:exceptions1="http://www.tmforum.org/xml/tip/common/exceptions" xmlns:filter="http://www.tmforum.org/xml/tip/internal/filter" targetNamespace="http://www.tmforum.org/xml/tip/resource/trouble/asap" attributeFormDefault="unqualified" elementFormDefault="qualified" version="1.0">
+   <xsd:annotation>
+      <xsd:documentation>
+         <p>TMF Service Interface: ASAPControlService</p>
+      </xsd:documentation>
+   </xsd:annotation>
+   <xsd:include schemaLocation="mpac_resource_trouble_asap.xsd"/>
+   <xsd:import namespace="http://www.tmforum.org/xml/tip/internal/primitives" schemaLocation="internal_primitives.xsd"/>
+   <xsd:import namespace="http://www.tmforum.org/xml/tip/internal/entity" schemaLocation="internal_entity.xsd"/>
+   <xsd:import namespace="http://www.tmforum.org/xml/tip/internal/exceptions" schemaLocation="internal_exceptions.xsd"/>
+   <xsd:import namespace="http://www.tmforum.org/xml/tip/internal/iterator" schemaLocation="internal_iterator.xsd"/>
+   <xsd:import namespace="http://www.tmforum.org/xml/tip/resource/res/tip/nrb" schemaLocation="dep_resource_res_tip_nrb.xsd"/>
+   <xsd:import namespace="http://www.tmforum.org/xml/tip/common/exceptions" schemaLocation="common_exceptions.xsd"/>
+   <xsd:import namespace="http://www.tmforum.org/xml/tip/internal/filter" schemaLocation="internal_filter.xsd"/>
+   <xsd:element name="assignAlarmSeverityAssignmentProfileRequest" type="tns:assignAlarmSeverityAssignmentProfileRequest">
+      <xsd:annotation>
+         <xsd:documentation>
+        The assignAlarmSeverityAssignmentProfile request message XML schema.
+      </xsd:documentation>
+      </xsd:annotation>
+   </xsd:element>
+   <xsd:complexType name="assignAlarmSeverityAssignmentProfileRequest">
+      <xsd:sequence>
+         <xsd:element name="asapRef" type="entity:EntityIdentifier" minOccurs="1" maxOccurs="1">
+            <xsd:annotation>
+               <xsd:documentation>
+                  <p>This parameter contains the name of the ASAP object to be assigned.</p>
+                  <p>This parameter  is  input parameter</p>
+                  <p>This parameter  has  multiplicity 1</p>
+                  <p>This parameter  is  unique</p>
+                  <p>This parameter  is  passed by id</p>
+                  <p>This parameter  is  mandatory</p>
+               </xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="layerRate" type="nrb:LayerRate" minOccurs="0" maxOccurs="1">
+            <xsd:annotation>
+               <xsd:documentation>
+                  <p>This parameter contains the TP Layer Rate the ASAP object is assigned to. If the resource is not a TP, then the Layer Rate value shall be LR_Not_Applicable.</p>
+                  <p>This parameter  is  input parameter</p>
+                  <p>This parameter  has  multiplicity 0..1</p>
+                  <p>This parameter  is  unique</p>
+                  <p>This parameter  is  optional</p>
+               </xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="resourceRef" type="entity:EntityIdentifier" minOccurs="0" maxOccurs="1">
+            <xsd:annotation>
+               <xsd:documentation>
+                  <p>This parameter contains the name of the resource to assign the ASAP to.</p>
+                  <p>This parameter  is  input parameter</p>
+                  <p>This parameter  has  multiplicity 0..1</p>
+                  <p>This parameter  is  unique</p>
+                  <p>This parameter  is  optional</p>
+               </xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="extensionInfo" minOccurs="0">
+            <xsd:annotation>
+               <xsd:documentation>
+       a generic list of any type of elements. Used for vendor extensions or loose element encapsulation from other namespaces.
+      </xsd:documentation>
+            </xsd:annotation>
+            <xsd:complexType>
+               <xsd:sequence>
+                  <xsd:any namespace="##any" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+               </xsd:sequence>
+            </xsd:complexType>
+         </xsd:element>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:element name="assignAlarmSeverityAssignmentProfileResponse" type="tns:assignAlarmSeverityAssignmentProfileResponse">
+      <xsd:annotation>
+         <xsd:documentation>
+            <p>The assignAlarmSeverityAssignmentProfile response message XML schema.</p>
+         </xsd:documentation>
+      </xsd:annotation>
+   </xsd:element>
+   <xsd:complexType name="assignAlarmSeverityAssignmentProfileResponse">
+      <xsd:sequence>
+         <xsd:element name="extensionInfo" minOccurs="0">
+            <xsd:annotation>
+               <xsd:documentation>
+       a generic list of any type of elements. Used for vendor extensions or loose element encapsulation from other namespaces.
+      </xsd:documentation>
+            </xsd:annotation>
+            <xsd:complexType>
+               <xsd:sequence>
+                  <xsd:any namespace="##any" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+               </xsd:sequence>
+            </xsd:complexType>
+         </xsd:element>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:element name="assignAlarmSeverityAssignmentProfileException" type="tns:assignAlarmSeverityAssignmentProfileException">
+      <xsd:annotation>
+         <xsd:documentation>
+            <p>The assignAlarmSeverityAssignmentProfile exception message XML schema.</p>
+         </xsd:documentation>
+      </xsd:annotation>
+   </xsd:element>
+   <xsd:complexType name="assignAlarmSeverityAssignmentProfileException">
+      <xsd:choice>
+         <xsd:element name="accessDenied" type="exceptions:AccessDenied"/>
+         <xsd:element name="communicationLoss" type="exceptions:CommunicationLoss"/>
+         <xsd:element name="internalError" type="exceptions:InternalError"/>
+         <xsd:element name="invalidInput" type="exceptions:InvalidInput"/>
+         <xsd:element name="notImplemented" type="exceptions:NotImplemented"/>
+         <xsd:element name="unableToComply" type="exceptions:UnableToComply"/>
+      </xsd:choice>
+   </xsd:complexType>
+   <xsd:element name="deassignAlarmSeverityAssignmentProfileRequest" type="tns:deassignAlarmSeverityAssignmentProfileRequest">
+      <xsd:annotation>
+         <xsd:documentation>
+        The deassignAlarmSeverityAssignmentProfile request message XML schema.
+      </xsd:documentation>
+      </xsd:annotation>
+   </xsd:element>
+   <xsd:complexType name="deassignAlarmSeverityAssignmentProfileRequest">
+      <xsd:sequence>
+         <xsd:element name="layerRate" type="nrb:LayerRate" minOccurs="0" maxOccurs="1">
+            <xsd:annotation>
+               <xsd:documentation>
+                  <p>This parameter contains the TP Layer Rate from which the ASAP shall be deassigned. If the resource is not a TP, then the Layer Rate value shall be LR_Not_Applicable.</p>
+                  <p>This parameter  is  input parameter</p>
+                  <p>This parameter  has  multiplicity 0..1</p>
+                  <p>This parameter  is  unique</p>
+                  <p>This parameter  is  optional</p>
+               </xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="resourceRef" type="entity:EntityIdentifier" minOccurs="0" maxOccurs="1">
+            <xsd:annotation>
+               <xsd:documentation>
+                  <p>This parameter contains the name of the resource to deassign the ASAP from.</p>
+                  <p>This parameter  is  input parameter</p>
+                  <p>This parameter  has  multiplicity 0..1</p>
+                  <p>This parameter  is  unique</p>
+                  <p>This parameter  is  optional</p>
+               </xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="extensionInfo" minOccurs="0">
+            <xsd:annotation>
+               <xsd:documentation>
+       a generic list of any type of elements. Used for vendor extensions or loose element encapsulation from other namespaces.
+      </xsd:documentation>
+            </xsd:annotation>
+            <xsd:complexType>
+               <xsd:sequence>
+                  <xsd:any namespace="##any" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+               </xsd:sequence>
+            </xsd:complexType>
+         </xsd:element>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:element name="deassignAlarmSeverityAssignmentProfileResponse" type="tns:deassignAlarmSeverityAssignmentProfileResponse">
+      <xsd:annotation>
+         <xsd:documentation>
+            <p>The deassignAlarmSeverityAssignmentProfile response message XML schema.</p>
+         </xsd:documentation>
+      </xsd:annotation>
+   </xsd:element>
+   <xsd:complexType name="deassignAlarmSeverityAssignmentProfileResponse">
+      <xsd:sequence>
+         <xsd:element name="extensionInfo" minOccurs="0">
+            <xsd:annotation>
+               <xsd:documentation>
+       a generic list of any type of elements. Used for vendor extensions or loose element encapsulation from other namespaces.
+      </xsd:documentation>
+            </xsd:annotation>
+            <xsd:complexType>
+               <xsd:sequence>
+                  <xsd:any namespace="##any" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+               </xsd:sequence>
+            </xsd:complexType>
+         </xsd:element>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:element name="deassignAlarmSeverityAssignmentProfileException" type="tns:deassignAlarmSeverityAssignmentProfileException">
+      <xsd:annotation>
+         <xsd:documentation>
+            <p>The deassignAlarmSeverityAssignmentProfile exception message XML schema.</p>
+         </xsd:documentation>
+      </xsd:annotation>
+   </xsd:element>
+   <xsd:complexType name="deassignAlarmSeverityAssignmentProfileException">
+      <xsd:choice>
+         <xsd:element name="accessDenied" type="exceptions:AccessDenied"/>
+         <xsd:element name="communicationLoss" type="exceptions:CommunicationLoss"/>
+         <xsd:element name="internalError" type="exceptions:InternalError"/>
+         <xsd:element name="invalidInput" type="exceptions:InvalidInput"/>
+         <xsd:element name="notImplemented" type="exceptions:NotImplemented"/>
+         <xsd:element name="unableToComply" type="exceptions:UnableToComply"/>
+      </xsd:choice>
+   </xsd:complexType>
+   <xsd:element name="setAlarmSeverityAssignmentProfileRequest" type="tns:setAlarmSeverityAssignmentProfileRequest">
+      <xsd:annotation>
+         <xsd:documentation>
+        The setAlarmSeverityAssignmentProfile request message XML schema.
+      </xsd:documentation>
+      </xsd:annotation>
+   </xsd:element>
+   <xsd:complexType name="setAlarmSeverityAssignmentProfileRequest">
+      <xsd:sequence>
+         <xsd:element name="objectToSet" type="entity:EntityIdentifier" minOccurs="1" maxOccurs="1">
+            <xsd:annotation>
+               <xsd:documentation>
+                  <p>object to Set, passed as an Entity Identifier</p>
+                  <p>This parameter  is  input parameter</p>
+                  <p>This parameter  has  multiplicity 1</p>
+                  <p>This parameter  is  unique</p>
+                  <p>This parameter  is  passed by id</p>
+                  <p>This parameter  is  mandatory</p>
+               </xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="valuesToBeSet" type="tns:SetDataForAlarmSeverityAssignmentProfile" minOccurs="0" maxOccurs="1">
+            <xsd:annotation>
+               <xsd:documentation>
+                  <p>Xalues to be set, using datatype built by generators. Note that at least one of the parameters valuesToBeSet, valuesToAdd and valuesToRemove should be present.</p>
+                  <p>This parameter  is  input parameter</p>
+                  <p>This parameter  has  multiplicity 0..1</p>
+                  <p>This parameter  is  unique</p>
+                  <p>This parameter  is  optional</p>
+               </xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="valuesToAdd" type="tns:AddDataForAlarmSeverityAssignmentProfile" minOccurs="0" maxOccurs="1">
+            <xsd:annotation>
+               <xsd:documentation>
+                  <p>Values to add, using datatype built by generators. Note that at least one of the parameters valuesToBeSet, valuesToAdd and valuesToRemove should be present.</p>
+                  <p>This parameter  is  input parameter</p>
+                  <p>This parameter  has  multiplicity 0..1</p>
+                  <p>This parameter  is  unique</p>
+                  <p>This parameter  is  optional</p>
+               </xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="valuesToRemove" type="tns:RemoveDataForAlarmSeverityAssignmentProfile" minOccurs="0" maxOccurs="1">
+            <xsd:annotation>
+               <xsd:documentation>
+                  <p>Values to remove, using datatype built by generators. Note that at least one of the parameters valuesToBeSet, valuesToAdd and valuesToRemove should be present.</p>
+                  <p>This parameter  is  input parameter</p>
+                  <p>This parameter  has  multiplicity 0..1</p>
+                  <p>This parameter  is  unique</p>
+                  <p>This parameter  is  optional</p>
+               </xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:element name="setAlarmSeverityAssignmentProfileResponse" type="tns:setAlarmSeverityAssignmentProfileResponse">
+      <xsd:annotation>
+         <xsd:documentation>
+            <p>The setAlarmSeverityAssignmentProfile response message XML schema.</p>
+         </xsd:documentation>
+      </xsd:annotation>
+   </xsd:element>
+   <xsd:complexType name="setAlarmSeverityAssignmentProfileResponse">
+      <xsd:sequence>
+         <xsd:element name="modifiedObject" type="tns:AlarmSeverityAssignmentProfile" minOccurs="1" maxOccurs="1">
+            <xsd:annotation>
+               <xsd:documentation>
+                  <p>modified object by value</p>
+                  <p>This parameter  is  output parameter</p>
+                  <p>This parameter  has  multiplicity 1</p>
+                  <p>This parameter  is  unique</p>
+                  <p>This parameter  is  passed by value</p>
+                  <p>This parameter  is  mandatory</p>
+               </xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:element name="setAlarmSeverityAssignmentProfileException" type="tns:setAlarmSeverityAssignmentProfileException">
+      <xsd:annotation>
+         <xsd:documentation>
+            <p>The setAlarmSeverityAssignmentProfile exception message XML schema.</p>
+         </xsd:documentation>
+      </xsd:annotation>
+   </xsd:element>
+   <xsd:complexType name="setAlarmSeverityAssignmentProfileException">
+      <xsd:choice>
+         <xsd:element name="notInValidState" type="exceptions1:NotInValidState">
+            <xsd:annotation>
+               <xsd:documentation>
+                  <p/>
+               </xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="entityNotFound" type="exceptions1:EntityNotFound">
+            <xsd:annotation>
+               <xsd:documentation>
+                  <p/>
+               </xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="accessDenied" type="exceptions:AccessDenied"/>
+         <xsd:element name="communicationLoss" type="exceptions:CommunicationLoss"/>
+         <xsd:element name="internalError" type="exceptions:InternalError"/>
+         <xsd:element name="invalidInput" type="exceptions:InvalidInput"/>
+         <xsd:element name="notImplemented" type="exceptions:NotImplemented"/>
+         <xsd:element name="unableToComply" type="exceptions:UnableToComply"/>
+      </xsd:choice>
+   </xsd:complexType>
+   <xsd:element name="createAlarmSeverityAssignmentProfileRequest" type="tns:createAlarmSeverityAssignmentProfileRequest">
+      <xsd:annotation>
+         <xsd:documentation>
+        The createAlarmSeverityAssignmentProfile request message XML schema.
+      </xsd:documentation>
+      </xsd:annotation>
+   </xsd:element>
+   <xsd:complexType name="createAlarmSeverityAssignmentProfileRequest">
+      <xsd:sequence>
+         <xsd:element name="referenceObject" type="entity:EntityIdentifier" minOccurs="0" maxOccurs="1">
+            <xsd:annotation>
+               <xsd:documentation>
+                  <p>It specifies an existing instance of a AlarmSeverityAssignmentProfile.</p>
+                  <p>This parameter  is  input parameter</p>
+                  <p>This parameter  has  multiplicity 0..1</p>
+                  <p>This parameter  is  unique</p>
+                  <p>This parameter  is  passed by id</p>
+                  <p>This parameter  is  optional</p>
+               </xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="createData" type="tns:CreateDataForAlarmSeverityAssignmentProfile" minOccurs="1" maxOccurs="1">
+            <xsd:annotation>
+               <xsd:documentation>
+                  <p>create data using the datatype generated</p>
+                  <p>This parameter  is  input parameter</p>
+                  <p>This parameter  has  multiplicity 1</p>
+                  <p>This parameter  is  unique</p>
+                  <p>This parameter  is  mandatory</p>
+               </xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:element name="createAlarmSeverityAssignmentProfileResponse" type="tns:createAlarmSeverityAssignmentProfileResponse">
+      <xsd:annotation>
+         <xsd:documentation>
+            <p>The createAlarmSeverityAssignmentProfile response message XML schema.</p>
+         </xsd:documentation>
+      </xsd:annotation>
+   </xsd:element>
+   <xsd:complexType name="createAlarmSeverityAssignmentProfileResponse">
+      <xsd:sequence>
+         <xsd:element name="createdObject" type="tns:AlarmSeverityAssignmentProfile" minOccurs="1" maxOccurs="1">
+            <xsd:annotation>
+               <xsd:documentation>
+                  <p>created AlarmSeverityAssignmentProfile</p>
+                  <p>This parameter  is  output parameter</p>
+                  <p>This parameter  has  multiplicity 1</p>
+                  <p>This parameter  is  unique</p>
+                  <p>This parameter  is  passed by value</p>
+                  <p>This parameter  is  mandatory</p>
+               </xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:element name="createAlarmSeverityAssignmentProfileException" type="tns:createAlarmSeverityAssignmentProfileException">
+      <xsd:annotation>
+         <xsd:documentation>
+            <p>The createAlarmSeverityAssignmentProfile exception message XML schema.</p>
+         </xsd:documentation>
+      </xsd:annotation>
+   </xsd:element>
+   <xsd:complexType name="createAlarmSeverityAssignmentProfileException">
+      <xsd:choice>
+         <xsd:element name="duplicate" type="exceptions1:Duplicate">
+            <xsd:annotation>
+               <xsd:documentation>
+                  <p/>
+               </xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="capacityExceeded" type="exceptions1:CapacityExceeded">
+            <xsd:annotation>
+               <xsd:documentation>
+                  <p/>
+               </xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="accessDenied" type="exceptions:AccessDenied"/>
+         <xsd:element name="communicationLoss" type="exceptions:CommunicationLoss"/>
+         <xsd:element name="internalError" type="exceptions:InternalError"/>
+         <xsd:element name="invalidInput" type="exceptions:InvalidInput"/>
+         <xsd:element name="notImplemented" type="exceptions:NotImplemented"/>
+         <xsd:element name="unableToComply" type="exceptions:UnableToComply"/>
+      </xsd:choice>
+   </xsd:complexType>
+   <xsd:element name="deleteAlarmSeverityAssignmentProfilesRequest" type="tns:deleteAlarmSeverityAssignmentProfilesRequest">
+      <xsd:annotation>
+         <xsd:documentation>
+            <p>The deleteAlarmSeverityAssignmentProfiles request message XML schema.</p>
+         </xsd:documentation>
+      </xsd:annotation>
+   </xsd:element>
+   <xsd:complexType name="deleteAlarmSeverityAssignmentProfilesRequest">
+      <xsd:sequence>
+         <xsd:element name="objectsToDelete" type="entity:ArrayOfEntityIdentifier" minOccurs="0" maxOccurs="1">
+            <xsd:annotation>
+               <xsd:documentation>
+                  <p>Filter to be used</p>
+                  <p>This parameter  is  input parameter</p>
+                  <p>This parameter  has  multiplicity 1..*</p>
+                  <p>This parameter  is  unique</p>
+                  <p>This parameter  is  passed by value</p>
+                  <p>This parameter  is  mandatory</p>
+               </xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:element name="deleteAlarmSeverityAssignmentProfilesResponse" type="tns:deleteAlarmSeverityAssignmentProfilesResponse">
+      <xsd:annotation>
+         <xsd:documentation>
+            <p>The deleteAlarmSeverityAssignmentProfiles  response message XML schema.</p>
+         </xsd:documentation>
+      </xsd:annotation>
+   </xsd:element>
+   <xsd:complexType name="deleteAlarmSeverityAssignmentProfilesResponse">
+      <xsd:sequence>
+         <xsd:element name="failedIds" type="entity:ArrayOfEntityIdentifier" minOccurs="0" maxOccurs="1">
+            <xsd:annotation>
+               <xsd:documentation>
+                  <p>failed objects that could not be deleted (by id)</p>
+                  <p>This parameter  is  output parameter</p>
+                  <p>This parameter  has  multiplicity 0..*</p>
+                  <p>This parameter  is  unique</p>
+                  <p>This parameter  is  passed by value</p>
+                  <p>This parameter  is  bulk potential</p>
+                  <p>This parameter  is  mandatory</p>
+               </xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:element name="deleteAlarmSeverityAssignmentProfilesException" type="tns:deleteAlarmSeverityAssignmentProfilesException">
+      <xsd:annotation>
+         <xsd:documentation>
+            <p>The "deleteAlarmSeverityAssignmentProfilesException" exception message XML schema.</p>
+         </xsd:documentation>
+      </xsd:annotation>
+   </xsd:element>
+   <xsd:complexType name="deleteAlarmSeverityAssignmentProfilesException">
+      <xsd:choice>
+         <xsd:element name="accessDenied" type="exceptions:AccessDenied"/>
+         <xsd:element name="communicationLoss" type="exceptions:CommunicationLoss"/>
+         <xsd:element name="internalError" type="exceptions:InternalError"/>
+         <xsd:element name="invalidInput" type="exceptions:InvalidInput"/>
+         <xsd:element name="notImplemented" type="exceptions:NotImplemented"/>
+         <xsd:element name="unableToComply" type="exceptions:UnableToComply"/>
+      </xsd:choice>
+   </xsd:complexType>
+</xsd:schema>

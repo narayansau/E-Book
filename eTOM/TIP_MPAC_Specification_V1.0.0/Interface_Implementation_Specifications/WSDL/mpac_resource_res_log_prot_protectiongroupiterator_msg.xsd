@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+ *  Generated with Tigerstripe Workbench 0.6.935.201102010903 and 
+ *  Plugin Nortel Networks, Hewlett-Packard Company/TIP_Soap_Generator(1.1) (1.1)
+ *
+ *  DO NOT EDIT THIS CODE WHICH WAS AUTOMATICALLY GENERATED
+--><!--
+Copyright (C) 2011 TM Forum
+
+No recipient of this document and code shall in any way interpret this material as representing a position or agreement of TM Forum or its members. This material is draft working material of TM Forum and is provided solely for comments and evaluation. It is not "Forum Approved" and is solely circulated for the purposes of assisting TM Forum in the preparation of final material in furtherance of the aims and mission of TM Forum.
+
+Although it is copyrighted material of TM Forum:
+- Members of TM Forum are only granted the limited copyright waiver to distribute this material within their companies and may not make paper or electronic copies for distribution outside of their companies.
+- Non-members of the TM Forum are not permitted to make copies (paper or electronic) of this draft material other than for their internal use for the sole purpose of making comments thereon directly to TM Forum.
+- If this material forms part of a supply of information in support of an Industry Group Liaison relationship, the document may only be used as part of the work identified in the Liaison and may not be used or further distributed for any other purposes.
+
+Any use of this material by the recipient, other than as set forth specifically herein, is at its own risk, and under no circumstances will TM Forum be liable for direct or indirect damages or any costs or losses resulting from the use of this material by the recipient.
+
+This material is governed, and all recipients shall be bound, by all of the terms and conditions of the Intellectual Property Rights Policy of the TM Forum (http://www.tmforum.org/Bylaws/1094/home.html) and may involve a claim of patent rights by one or more TM Forum members or by non-members of TM Forum.
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.tmforum.org/xml/tip/resource/res/log/prot" xmlns:iterator="http://www.tmforum.org/xml/tip/internal/iterator" xmlns:exceptions1="http://www.tmforum.org/xml/tip/common/exceptions" xmlns:exceptions="http://www.tmforum.org/xml/tip/internal/exceptions" targetNamespace="http://www.tmforum.org/xml/tip/resource/res/log/prot" attributeFormDefault="unqualified" elementFormDefault="qualified" version="1.0">
+   <xsd:annotation>
+      <xsd:documentation>
+    Iterator for entity ProtectionGroup
+    </xsd:documentation>
+   </xsd:annotation>
+   <xsd:import namespace="http://www.tmforum.org/xml/tip/common/exceptions" schemaLocation="common_exceptions.xsd"/>
+   <xsd:import namespace="http://www.tmforum.org/xml/tip/internal/exceptions" schemaLocation="internal_exceptions.xsd"/>
+   <xsd:import namespace="http://www.tmforum.org/xml/tip/internal/iterator" schemaLocation="internal_iterator.xsd"/>
+   <xsd:include schemaLocation="mpac_resource_res_log_prot.xsd"/>
+   <xsd:element name="getNextProtectionGroupIterationRequest" type="iterator:GetNextRequest"/>
+   <xsd:element name="getNextProtectionGroupIterationResponse">
+      <xsd:complexType>
+         <xsd:complexContent>
+            <xsd:extension base="iterator:GetNextResponse">
+               <xsd:sequence>
+                  <xsd:element name="result" type="tns:ArrayOfProtectionGroup"/>
+               </xsd:sequence>
+            </xsd:extension>
+         </xsd:complexContent>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="getNextProtectionGroupIterationException">
+      <xsd:annotation>
+         <xsd:documentation>
+            <p>The getNextProtectionGroupIteration exception message XML schema.</p>
+         </xsd:documentation>
+      </xsd:annotation>
+      <xsd:complexType>
+         <xsd:choice>
+            <xsd:element name="invalidEnumerationContext" type="iterator:InvalidEnumerationContext">
+               <xsd:annotation>
+                  <xsd:documentation>
+                     <p/>
+                  </xsd:documentation>
+               </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="IteratorNotFound" type="iterator:IteratorNotFound">
+               <xsd:annotation>
+                  <xsd:documentation>
+                     <p/>
+                  </xsd:documentation>
+               </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="accessDenied" type="exceptions:AccessDenied"/>
+            <xsd:element name="communicationLoss" type="exceptions:CommunicationLoss"/>
+            <xsd:element name="internalError" type="exceptions:InternalError"/>
+            <xsd:element name="invalidInput" type="exceptions:InvalidInput"/>
+            <xsd:element name="notImplemented" type="exceptions:NotImplemented"/>
+            <xsd:element name="unableToComply" type="exceptions:UnableToComply"/>
+         </xsd:choice>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="releaseProtectionGroupIteratorRequest" type="iterator:ReleaseRequest"/>
+   <xsd:element name="releaseProtectionGroupIteratorResponse" type="iterator:ReleaseResponse"/>
+   <xsd:element name="releaseProtectionGroupIteratorException">
+      <xsd:annotation>
+         <xsd:documentation>
+            <p>The releaseProtectionGroupIterator exception message XML schema.</p>
+         </xsd:documentation>
+      </xsd:annotation>
+      <xsd:complexType>
+         <xsd:choice>
+            <xsd:element name="invalidEnumerationContext" type="iterator:InvalidEnumerationContext">
+               <xsd:annotation>
+                  <xsd:documentation>
+                     <p/>
+                  </xsd:documentation>
+               </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="IteratorNotFound" type="iterator:IteratorNotFound">
+               <xsd:annotation>
+                  <xsd:documentation>
+                     <p/>
+                  </xsd:documentation>
+               </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="accessDenied" type="exceptions:AccessDenied"/>
+            <xsd:element name="communicationLoss" type="exceptions:CommunicationLoss"/>
+            <xsd:element name="internalError" type="exceptions:InternalError"/>
+            <xsd:element name="invalidInput" type="exceptions:InvalidInput"/>
+            <xsd:element name="notImplemented" type="exceptions:NotImplemented"/>
+            <xsd:element name="unableToComply" type="exceptions:UnableToComply"/>
+         </xsd:choice>
+      </xsd:complexType>
+   </xsd:element>
+</xsd:schema>

@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+ *  Generated with Tigerstripe Workbench 0.6.935.201102010903 and 
+ *  Plugin Nortel Networks, Hewlett-Packard Company/TIP_Soap_Generator(1.1) (1.1)
+ *
+ *  DO NOT EDIT THIS CODE WHICH WAS AUTOMATICALLY GENERATED
+--><!--
+Copyright (C) 2011 TM Forum
+
+No recipient of this document and code shall in any way interpret this material as representing a position or agreement of TM Forum or its members. This material is draft working material of TM Forum and is provided solely for comments and evaluation. It is not "Forum Approved" and is solely circulated for the purposes of assisting TM Forum in the preparation of final material in furtherance of the aims and mission of TM Forum.
+
+Although it is copyrighted material of TM Forum:
+- Members of TM Forum are only granted the limited copyright waiver to distribute this material within their companies and may not make paper or electronic copies for distribution outside of their companies.
+- Non-members of the TM Forum are not permitted to make copies (paper or electronic) of this draft material other than for their internal use for the sole purpose of making comments thereon directly to TM Forum.
+- If this material forms part of a supply of information in support of an Industry Group Liaison relationship, the document may only be used as part of the work identified in the Liaison and may not be used or further distributed for any other purposes.
+
+Any use of this material by the recipient, other than as set forth specifically herein, is at its own risk, and under no circumstances will TM Forum be liable for direct or indirect damages or any costs or losses resulting from the use of this material by the recipient.
+
+This material is governed, and all recipients shall be bound, by all of the terms and conditions of the Intellectual Property Rights Policy of the TM Forum (http://www.tmforum.org/Bylaws/1094/home.html) and may involve a claim of patent rights by one or more TM Forum members or by non-members of TM Forum.
+-->
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://www.tmforum.org/xml/tip/resource/trouble/asap" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsn_bindings_http="http://www.tmforum.org/xml/tip/wsnbindings/http" name="ASAPRetrievalService" targetNamespace="http://www.tmforum.org/xml/tip/resource/trouble/asap">
+   <wsdl:import namespace="http://www.tmforum.org/xml/tip/wsnbindings/http" location="wsn_bindings_http.wsdl"/><!-- WSDL Types -->
+   <wsdl:types>
+      <xsd:schema>
+         <xsd:import namespace="http://www.tmforum.org/xml/tip/resource/trouble/asap" schemaLocation="mpac_resource_trouble_asap_asapretrievalservice_msg.xsd"/>
+      </xsd:schema>
+   </wsdl:types><!-- Message Definitions of the Service Interface -->
+   <wsdl:message name="getAlarmSeverityAssignmentProfileRequest">
+      <wsdl:documentation>
+         <p>The getAlarmSeverityAssignmentProfile request message.</p>
+      </wsdl:documentation>
+      <wsdl:part name="body" element="tns:getAlarmSeverityAssignmentProfileRequest"/>
+   </wsdl:message>
+   <wsdl:message name="getAlarmSeverityAssignmentProfileResponse">
+      <wsdl:documentation>
+         <p>The getAlarmSeverityAssignmentProfile response message.</p>
+      </wsdl:documentation>
+      <wsdl:part name="body" element="tns:getAlarmSeverityAssignmentProfileResponse"/>
+   </wsdl:message>
+   <wsdl:message name="getAlarmSeverityAssignmentProfileException">
+      <wsdl:documentation>
+         <p>The getAlarmSeverityAssignmentProfile exception message.</p>
+      </wsdl:documentation>
+      <wsdl:part name="body" element="tns:getAlarmSeverityAssignmentProfileException"/>
+   </wsdl:message>
+   <wsdl:message name="getAlarmSeverityAssignmentProfilesRequest">
+      <wsdl:documentation>
+         <p>The getAlarmSeverityAssignmentProfiles request message.</p>
+      </wsdl:documentation>
+      <wsdl:part name="body" element="tns:getAlarmSeverityAssignmentProfilesRequest"/>
+   </wsdl:message>
+   <wsdl:message name="getAlarmSeverityAssignmentProfilesResponse">
+      <wsdl:documentation>
+         <p>The getAlarmSeverityAssignmentProfiles response message.</p>
+      </wsdl:documentation>
+      <wsdl:part name="body" element="tns:getAlarmSeverityAssignmentProfilesResponse"/>
+   </wsdl:message>
+   <wsdl:message name="getAlarmSeverityAssignmentProfilesException">
+      <wsdl:documentation>
+         <p>The getAlarmSeverityAssignmentProfiles exception message.</p>
+      </wsdl:documentation>
+      <wsdl:part name="body" element="tns:getAlarmSeverityAssignmentProfilesException"/>
+   </wsdl:message>
+   <wsdl:message name="getAlarmSeverityAssignmentProfileByResourceRequest">
+      <wsdl:documentation>
+         <p>The getAlarmSeverityAssignmentProfileByResource request message.</p>
+      </wsdl:documentation>
+      <wsdl:part name="body" element="tns:getAlarmSeverityAssignmentProfileByResourceRequest"/>
+   </wsdl:message>
+   <wsdl:message name="getAlarmSeverityAssignmentProfileByResourceResponse">
+      <wsdl:documentation>
+         <p>The getAlarmSeverityAssignmentProfileByResource response message.</p>
+      </wsdl:documentation>
+      <wsdl:part name="body" element="tns:getAlarmSeverityAssignmentProfileByResourceResponse"/>
+   </wsdl:message>
+   <wsdl:message name="getAlarmSeverityAssignmentProfileByResourceException">
+      <wsdl:documentation>
+         <p>The getAlarmSeverityAssignmentProfileByResource exception message.</p>
+      </wsdl:documentation>
+      <wsdl:part name="body" element="tns:getAlarmSeverityAssignmentProfileByResourceException"/>
+   </wsdl:message>
+   <wsdl:message name="getAllAlarmSeverityAssignmentProfilesWrtOsRequest">
+      <wsdl:documentation>
+         <p>The getAllAlarmSeverityAssignmentProfilesWrtOs request message.</p>
+      </wsdl:documentation>
+      <wsdl:part name="body" element="tns:getAllAlarmSeverityAssignmentProfilesWrtOsRequest"/>
+   </wsdl:message>
+   <wsdl:message name="getAllAlarmSeverityAssignmentProfilesWrtOsResponse">
+      <wsdl:documentation>
+         <p>The getAllAlarmSeverityAssignmentProfilesWrtOs response message.</p>
+      </wsdl:documentation>
+      <wsdl:part name="body" element="tns:getAllAlarmSeverityAssignmentProfilesWrtOsResponse"/>
+   </wsdl:message>
+   <wsdl:message name="getAllAlarmSeverityAssignmentProfilesWrtOsException">
+      <wsdl:documentation>
+         <p>The getAllAlarmSeverityAssignmentProfilesWrtOs exception message.</p>
+      </wsdl:documentation>
+      <wsdl:part name="body" element="tns:getAllAlarmSeverityAssignmentProfilesWrtOsException"/>
+   </wsdl:message>
+   <wsdl:message name="getAsapAssociatedResourceNamesRequest">
+      <wsdl:documentation>
+         <p>The getAsapAssociatedResourceNames request message.</p>
+      </wsdl:documentation>
+      <wsdl:part name="body" element="tns:getAsapAssociatedResourceNamesRequest"/>
+   </wsdl:message>
+   <wsdl:message name="getAsapAssociatedResourceNamesResponse">
+      <wsdl:documentation>
+         <p>The getAsapAssociatedResourceNames response message.</p>
+      </wsdl:documentation>
+      <wsdl:part name="body" element="tns:getAsapAssociatedResourceNamesResponse"/>
+   </wsdl:message>
+   <wsdl:message name="getAsapAssociatedResourceNamesException">
+      <wsdl:documentation>
+         <p>The getAsapAssociatedResourceNames exception message.</p>
+      </wsdl:documentation>
+      <wsdl:part name="body" element="tns:getAsapAssociatedResourceNamesException"/>
+   </wsdl:message><!-- Port Type (abstract interface) Definitions of the Service Interface -->
+   <wsdl:portType name="ASAPRetrievalService">
+      <wsdl:documentation>
+         <p>This service interface provides the operations related to the retrieval of Alarm Severity Assignement Profiles (ASAP).</p>
+         <p/>
+         <p>This service interface  is  optional</p>
+      </wsdl:documentation>
+      <wsdl:operation name="getAlarmSeverityAssignmentProfile">
+         <wsdl:documentation>
+            <p>This is a request-response operation.</p>
+            <p>This operation returns an ASAP instance given its name.</p>
+            <p>This operation  is  not extendable</p>
+            <p>This operation  is  optional</p>
+         </wsdl:documentation>
+         <wsdl:input name="getAlarmSeverityAssignmentProfileRequest" message="tns:getAlarmSeverityAssignmentProfileRequest"/>
+         <wsdl:output name="getAlarmSeverityAssignmentProfileResponse" message="tns:getAlarmSeverityAssignmentProfileResponse"/>
+         <wsdl:fault name="getAlarmSeverityAssignmentProfileException" message="tns:getAlarmSeverityAssignmentProfileException"/>
+      </wsdl:operation>
+      <wsdl:operation name="getAlarmSeverityAssignmentProfiles">
+         <wsdl:documentation>
+            <p>This is a request-response operation.</p>
+            <p>This operation returns the ASAP instances matching a filter.</p>
+            <p>This operation  is  iterator bulk transfer pattern</p>
+            <p>This operation  is  not extendable</p>
+            <p>This operation  is  optional</p>
+         </wsdl:documentation>
+         <wsdl:input name="getAlarmSeverityAssignmentProfilesRequest" message="tns:getAlarmSeverityAssignmentProfilesRequest"/>
+         <wsdl:output name="getAlarmSeverityAssignmentProfilesResponse" message="tns:getAlarmSeverityAssignmentProfilesResponse"/>
+         <wsdl:fault name="getAlarmSeverityAssignmentProfilesException" message="tns:getAlarmSeverityAssignmentProfilesException"/>
+      </wsdl:operation>
+      <wsdl:operation name="getAlarmSeverityAssignmentProfileByResource">
+         <wsdl:documentation>
+            <p>This is a request-response operation.</p>
+            <p>This operation retrieves the ASAP(s) which are assigned to the addressed resource. The ASAP list can have zero or more elements, as all resources but TPs can refer to at most one ASAP. TPs can refer to more ASAPs, at most as many as the number of encapsulated layer rates.</p>
+            <p>This operation  is  iterator bulk transfer pattern</p>
+            <p>This operation  is  not extendable</p>
+            <p>This operation  is  optional</p>
+         </wsdl:documentation>
+         <wsdl:input name="getAlarmSeverityAssignmentProfileByResourceRequest" message="tns:getAlarmSeverityAssignmentProfileByResourceRequest"/>
+         <wsdl:output name="getAlarmSeverityAssignmentProfileByResourceResponse" message="tns:getAlarmSeverityAssignmentProfileByResourceResponse"/>
+         <wsdl:fault name="getAlarmSeverityAssignmentProfileByResourceException" message="tns:getAlarmSeverityAssignmentProfileByResourceException"/>
+      </wsdl:operation>
+      <wsdl:operation name="getAllAlarmSeverityAssignmentProfilesWrtOs">
+         <wsdl:documentation>
+            <p>This is a request-response operation.</p>
+            <p>This operation returns the data structure for each ASAP associated with a given subordinate OS. Note that Wrt in the name of the operation stands for "with respect to".</p>
+            <p>This operation  is  iterator bulk transfer pattern</p>
+            <p>This operation  is  not extendable</p>
+            <p>This operation  is  optional</p>
+         </wsdl:documentation>
+         <wsdl:input name="getAllAlarmSeverityAssignmentProfilesWrtOsRequest" message="tns:getAllAlarmSeverityAssignmentProfilesWrtOsRequest"/>
+         <wsdl:output name="getAllAlarmSeverityAssignmentProfilesWrtOsResponse" message="tns:getAllAlarmSeverityAssignmentProfilesWrtOsResponse"/>
+         <wsdl:fault name="getAllAlarmSeverityAssignmentProfilesWrtOsException" message="tns:getAllAlarmSeverityAssignmentProfilesWrtOsException"/>
+      </wsdl:operation>
+      <wsdl:operation name="getAsapAssociatedResourceNames">
+         <wsdl:documentation>
+            <p>This is a request-response operation.</p>
+            <p>This operation retrieves the names of all the resources (could be TPs, SNCs, etc.) which point to the addressed ASAP instance.</p>
+            <p>This operation  is  not extendable</p>
+            <p>This operation  is  optional</p>
+         </wsdl:documentation>
+         <wsdl:input name="getAsapAssociatedResourceNamesRequest" message="tns:getAsapAssociatedResourceNamesRequest"/>
+         <wsdl:output name="getAsapAssociatedResourceNamesResponse" message="tns:getAsapAssociatedResourceNamesResponse"/>
+         <wsdl:fault name="getAsapAssociatedResourceNamesException" message="tns:getAsapAssociatedResourceNamesException"/>
+      </wsdl:operation>
+   </wsdl:portType><!-- Binding - Concrete Service Interface deployment SOAP/HTTP -->
+   <wsdl:binding name="ASAPRetrievalServiceSoapHttpBinding" type="tns:ASAPRetrievalService">
+      <wsdl:documentation>
+         <p>Web Service (SOAP/HTTP) profile binding definitions.</p>
+      </wsdl:documentation>
+      <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/><!--wsaw:UsingAddressing wsdl:required="true"/-->
+      <wsdl:operation name="getAlarmSeverityAssignmentProfile">
+         <soap:operation soapAction="getAlarmSeverityAssignmentProfile" style="document"/>
+         <wsdl:input name="getAlarmSeverityAssignmentProfileRequest">
+            <soap:body use="literal"/>
+         </wsdl:input>
+         <wsdl:output name="getAlarmSeverityAssignmentProfileResponse">
+            <soap:body use="literal"/>
+         </wsdl:output>
+         <wsdl:fault name="getAlarmSeverityAssignmentProfileException">
+            <soap:fault name="getAlarmSeverityAssignmentProfileException" use="literal"/>
+         </wsdl:fault>
+      </wsdl:operation>
+      <wsdl:operation name="getAlarmSeverityAssignmentProfiles">
+         <soap:operation soapAction="getAlarmSeverityAssignmentProfiles" style="document"/>
+         <wsdl:input name="getAlarmSeverityAssignmentProfilesRequest">
+            <soap:body use="literal"/>
+         </wsdl:input>
+         <wsdl:output name="getAlarmSeverityAssignmentProfilesResponse">
+            <soap:body use="literal"/>
+         </wsdl:output>
+         <wsdl:fault name="getAlarmSeverityAssignmentProfilesException">
+            <soap:fault name="getAlarmSeverityAssignmentProfilesException" use="literal"/>
+         </wsdl:fault>
+      </wsdl:operation>
+      <wsdl:operation name="getAlarmSeverityAssignmentProfileByResource">
+         <soap:operation soapAction="getAlarmSeverityAssignmentProfileByResource" style="document"/>
+         <wsdl:input name="getAlarmSeverityAssignmentProfileByResourceRequest">
+            <soap:body use="literal"/>
+         </wsdl:input>
+         <wsdl:output name="getAlarmSeverityAssignmentProfileByResourceResponse">
+            <soap:body use="literal"/>
+         </wsdl:output>
+         <wsdl:fault name="getAlarmSeverityAssignmentProfileByResourceException">
+            <soap:fault name="getAlarmSeverityAssignmentProfileByResourceException" use="literal"/>
+         </wsdl:fault>
+      </wsdl:operation>
+      <wsdl:operation name="getAllAlarmSeverityAssignmentProfilesWrtOs">
+         <soap:operation soapAction="getAllAlarmSeverityAssignmentProfilesWrtOs" style="document"/>
+         <wsdl:input name="getAllAlarmSeverityAssignmentProfilesWrtOsRequest">
+            <soap:body use="literal"/>
+         </wsdl:input>
+         <wsdl:output name="getAllAlarmSeverityAssignmentProfilesWrtOsResponse">
+            <soap:body use="literal"/>
+         </wsdl:output>
+         <wsdl:fault name="getAllAlarmSeverityAssignmentProfilesWrtOsException">
+            <soap:fault name="getAllAlarmSeverityAssignmentProfilesWrtOsException" use="literal"/>
+         </wsdl:fault>
+      </wsdl:operation>
+      <wsdl:operation name="getAsapAssociatedResourceNames">
+         <soap:operation soapAction="getAsapAssociatedResourceNames" style="document"/>
+         <wsdl:input name="getAsapAssociatedResourceNamesRequest">
+            <soap:body use="literal"/>
+         </wsdl:input>
+         <wsdl:output name="getAsapAssociatedResourceNamesResponse">
+            <soap:body use="literal"/>
+         </wsdl:output>
+         <wsdl:fault name="getAsapAssociatedResourceNamesException">
+            <soap:fault name="getAsapAssociatedResourceNamesException" use="literal"/>
+         </wsdl:fault>
+      </wsdl:operation>
+   </wsdl:binding><!-- Service definition -->
+   <wsdl:service name="ASAPRetrievalServiceWs">
+      <wsdl:port name="ASAPRetrievalServiceHttpPort" binding="tns:ASAPRetrievalServiceSoapHttpBinding">
+         <soap:address location="http://localhost/ASAPRetrievalService"/>
+      </wsdl:port>
+      <wsdl:port name="NotificationProducerHttpPort" binding="wsn_bindings_http:NotificationProducerSoapHttpBinding">
+         <soap:address location="http://localhost/ASAPRetrievalService/NotificationProducer"/>
+      </wsdl:port>
+      <wsdl:port name="SubscriptionManagerHttpPort" binding="wsn_bindings_http:SubscriptionManagerSoapHttpBinding">
+         <soap:address location="http://localhost/ASAPRetrievalService/SubscriptionManager"/>
+      </wsdl:port>
+   </wsdl:service>
+</wsdl:definitions>
