@@ -1,0 +1,31 @@
+Q & A :In Post paid session server is not required .that is why we are not maintaing retundancy.
+
+Alarms for :
+           process
+	   I/O files
+	   Directories
+	   Invalid
+           Contigency --3chanel communication some issue.
+
+
+After break 
+------------
+siucontrol -n <collec_name> -c stratProc
+
+if name does not exist in config server then cause error
+
+# If session is from 12:10 and 12:20 and we get record of end time 12:25 then this issue can be resolved by modifying the end time.
+
+
+after lunch :
+-------------
+* aggrgrate prepraid session
+
+
+
+-------Aggregator &
+
+
+     
+
+	   

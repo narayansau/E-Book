@@ -1,0 +1,7 @@
+Mediation:
+------------------
+
+Navajo prepro (esxha126.es.sedc.internal.vodafone.com  62.87.4.144) perteneciente al grupo siuvoice   	-->  User:end2end   Password: ttp26nav 
+Massai prepro (esxha127.es.sedc.internal.vodafone.com 62.87.4.142) perteneciente al grupo siusms	-->  User:end2end   Password: ttp27mas	 			
+Apache prepro (esxha122.es.sedc.internal.vodafone.com 62.87.4.141) perteneciente al grupo siudata    	-->  User:end2end   Password: ttp22apa
+MMDB prepro (esxha123.es.sedc.internal.vodafone.com 62.87.1.79) perteneciente al grupo mmdba        		-->  User:end2end   Password: ttp23mmd
