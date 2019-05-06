@@ -1,0 +1,3195 @@
+<html>
+
+
+
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta name="author" content="Morgan Delagrange">
+<title>
+          Jakarta-Taglibs:
+          DBTags Tag library</title>
+</head>
+
+
+
+<body bgcolor="white">
+<center>
+<h1>Jakarta Project: DBTags Tag library</h1>
+<h3>Version: 1.0.0</h3>
+</center>
+<h3>Table of Contents</h3>
+<ul>
+<li>
+<a href="#overview">Overview</a>
+</li>
+<li>
+<a href="#requirements">Requirements</a>
+</li>
+<li>
+<a href="#config">Configuration</a>
+</li>
+<li>
+<a href="#documentation">Documentation</a>
+</li>
+<ul>
+      
+<li>
+<a href="#overview.usage">Simple Usage Example</a>
+</li>
+      
+<li>
+<a href="#overview.tags">Tags In Detail</a>
+</li>
+      
+<ul>
+        
+<li>
+<a href="#overview.tags.connection">Connection Tags</a>
+</li>
+        
+<li>
+<a href="#overview.tags.statement">Statement Tags</a>
+</li>
+        
+<li>
+<a href="#overview.tags.preparedstatement">PreparedStatement Tags</a>
+</li>
+        
+<li>
+<a href="#overview.tags.resultset">ResultSet Tags</a>
+</li>
+      
+</ul>
+    
+</ul>
+<li>
+<a href="#summary">Tag Summary</a>
+</li>
+<li>
+<a href="#reference">Tag Reference</a>
+</li>
+<li>
+<a href="#examples">Examples</a>
+</li>
+<li>
+<a href="#javadocs">Javadocs</a>
+</li>
+<li>
+<a href="#history">Revision History</a>
+</li>
+</ul>
+<a name="overview"></a>
+<h3>Overview</h3>
+<span id="description">
+    
+<P>The DBTags custom tag library contains tags which can be used to
+    read from and write to a SQL database.<b>NOTE: this taglib is deprecated - you should use JSTL's SQL instead!</b>
+</P>
+
+</span><a name="requirements"></a>
+<h3>Requirements</h3>
+<span id="requirements-info">
+
+
+<p>
+<i>JSP requirements</i>
+</p>
+
+
+<P>This custom tag library requires a servlet container
+that supports the JavaServer Pages Specification, version 1.2.</P>
+
+
+<P>The tag library also works in some JSP version 1.1 servlet containers, 
+such as Tomcat, but not in others, such as Weblogic.  The tags in this tag 
+library are designed according to the JSP 1.2 specification, which makes 
+this requirement of the &lt;jsp:getProperty ... /&gt; tag:</P>
+
+
+<DL>
+<DD>
+The value of the name attribute in jsp:setProperty and jsp:getProperty 
+will refer to an object that is obtained from the pageContext object 
+through its findAttribute() method.
+</DD>
+</DL>
+
+
+<P>The JSP 1.1 specification does not require this behaviour, and while 
+Tomcat happens to support it, Weblogic does not.  Note that it is fairly 
+straightforward to write a custom tag that emulates this behaviour for 
+Weblogic users.  Sample source code for such a tag can be 
+found <a href="GetPropertyTag.java">here</a>.</P>
+
+
+<p>
+<i>DBTags requirements</i>
+</p>
+
+
+<p>The DBTags tag library supports the use of DataSource objects, which are 
+not part of the Java 2 Standard Edition.  In order to use DataSources, 
+either use Java 2 Enterprise Edition, or download the Optional API for 
+JDBC 2.0.</p>
+
+
+</span><a name="config"></a>
+<h3>Configuration</h3>
+<p>Follow these steps to configure your web application with this tag
+     library:</p>
+<ul>
+<li>Copy the tag library descriptor file to the /WEB-INF subdirectory
+        of your web application.</li>
+<li>Copy the tag library JAR file to the /WEB-INF/lib subdirectory 
+        of your web application.</li>
+<li>Add a &lt;taglib&gt; element to your web application deployment
+        descriptor in /WEB-INF/web.xml like this:
+<pre>
+&lt;taglib&gt;
+  &lt;taglib-uri&gt;http://jakarta.apache.org/taglibs/dbtags&lt;/taglib-uri&gt;
+  &lt;taglib-location&gt;/WEB-INF/dbtags.tld&lt;/taglib-location&gt;
+&lt;/taglib&gt;
+</pre>
+</li>
+</ul>
+<p>To use the tags from this library in your JSP pages, add the following
+     directive at the top of each page: </p>
+<pre>
+&lt;%@ taglib uri="http://jakarta.apache.org/taglibs/dbtags" prefix="sql" %&gt;
+</pre>
+<p>where "<i>sql</i>" is the tag
+     name prefix you wish to use for tags from this library. You can change
+     this value to any prefix you like.</p>
+<a name="documentation"></a>
+<h3>Documentation</h3>
+<span id="documentation">
+
+<A NAME="overview.usage">
+<h2>Simple Usage Example</h2>
+</A>
+
+<P>Here is a JSP page that prints out the names of books in a table:</P>
+
+
+<pre>&lt;%@ taglib uri="http://jakarta.apache.org/taglibs/dbtags" prefix="sql" %&gt;
+
+&lt;%-- open a database connection --%&gt;
+&lt;sql:connection id="conn1"&gt;
+  &lt;sql:url&gt;jdbc:mysql://localhost/test&lt;/sql:url&gt;
+  &lt;sql:driver&gt;org.gjt.mm.mysql.Driver&lt;/sql:driver&gt;
+&lt;/sql:connection&gt;
+
+&lt;%-- open a database query --%&gt;
+&lt;table&gt;
+&lt;sql:statement id="stmt1" conn="conn1"&gt; 
+  &lt;sql:query&gt;
+    select id, name, description from test_books
+    order by 1
+  &lt;/sql:query&gt;
+  &lt;%-- loop through the rows of your query --%&gt;
+  &lt;sql:resultSet id="rset2"&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;sql:getColumn position="1"/&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;sql:getColumn position="2"/&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;sql:getColumn position="3"/&gt;
+          &lt;sql:wasNull&gt;[no description]&lt;/sql:wasNull&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/sql:resultSet&gt;
+&lt;/sql:statement&gt;
+&lt;/table&gt;
+
+&lt;%-- close a database connection --%&gt;
+&lt;sql:closeConnection conn="conn1"/&gt;</pre>
+      
+
+<A NAME="overview.tags">
+<h2>Tags in Detail</h2>
+</A>      
+
+
+<p>Here are general descriptions of the tags included in the DBTags tag library.  Some 
+details, such as the possible properties of the connection, statement, resultSet, and 
+preparedStatement tags, are not covered here.  An enumeration of all the configurable 
+aspects of these tags is in the <a href="#reference">Tag Reference</a> section.</p>
+
+
+<A NAME="overview.tags.connection">
+<h3>Connection Tags</h3>
+</A>
+
+
+<P>
+<B>Opening connections</B>
+</P>
+
+
+<P>There are two ways to open a database connection:</P>
+
+
+<P>
+<I>1. Use a database URL</I>
+</P>
+
+
+<P>The connection tag accepts a database URL that can obtain a Connection through 
+Driver Manager:</P>
+
+
+<pre>&lt;%-- open a database connection --%&gt;
+&lt;sql:connection id="conn1"&gt;
+
+  &lt;%-- required --%&gt;
+  &lt;sql:url&gt;jdbc:mysql://localhost/test&lt;/sql:url&gt;
+  
+  &lt;%-- optional --%&gt;
+  &lt;sql:driver&gt;org.gjt.mm.mysql.Driver&lt;/sql:driver&gt;
+  
+  &lt;%-- optional --%&gt; 
+  &lt;sql:userId&gt;root&lt;/sql:userId&gt;
+  
+  &lt;%-- optional --%&gt;
+  &lt;sql:password&gt;notVerySecure&lt;/sql:password&gt;
+
+&lt;/sql:connection&gt;</pre>
+
+
+<p>The "id" attribute is required by every "connection" tag.  After the end tag,
+a java.sql.Connection object will be added as a pageContext attribute, and it can 
+then be referenced by other tags, including statement, preparedStatement, and 
+closeConnection.</p>
+
+
+<P>Instead of including your database URL, driver name, user id, or password
+inside your tag body, you may optionally use the "initParameter" 
+attribute:</P>
+
+
+<pre>&lt;%-- store your connection info in the web.xml file --%&gt;
+&lt;sql:connection id="conn1"&gt;
+  &lt;sql:url initParameter="dbURL"/&gt; 
+  &lt;sql:driver initParameter="mysqlDriver"/&gt;
+  &lt;sql:userId initParameter="dbUserId"/&gt; 
+  &lt;sql:password initParameter="dbPassword"/&gt;
+&lt;/sql:connection&gt;</pre>
+
+
+<P>
+<I>2. Use a DataSource object</I>
+</P> 
+
+
+<P>The connection tag also accepts a reference to a Servlet attribute containing
+a javax.sql.DataSource object.  (The attribute is found via the
+findAttribute() method of PageContext.):</P>
+
+
+<pre>&lt;%-- open a database connection --%&gt;
+&lt;sql:connection id="conn1" dataSource="ds1"&gt;
+  
+  &lt;%-- optional --%&gt; 
+  &lt;sql:userId&gt;root&lt;/sql:userId&gt;
+  
+  &lt;%-- optional --%&gt;
+  &lt;sql:password&gt;notVerySecure&lt;/sql:password&gt;
+
+&lt;/sql:connection&gt;</pre>
+
+
+<P>
+<I>3. Use a JNDI named JDBC DataSource</I>
+</P>
+
+
+<p>The Connection tag also accepts a JNDI named JDBC DataSource.</p>
+
+
+<pre>&lt;%-- open a database connection --%&gt;
+&lt;sql:connection id="conn1" jndiName="java:/comp/jdbc/test"/&gt;</pre>
+
+
+<P>
+<B>Closing connections</B>
+</P>
+
+
+<P>Close a connection by passing its reference to the "closeConnection" tag:</P>
+
+
+<pre>&lt;%-- unless you're performing your own connection pooling, 
+always close your connection --%&gt;
+&lt;sql:closeConnection conn="conn1"/&gt;</pre>
+
+
+<A NAME="overview.tags.statement">
+<h3>Statement Tags</h3>
+</A>
+
+
+<P>"Statements" are one of two ways to submit a query to the database.  (The other
+method is the "<a href="#overview.tags.preparedstatement">preparedStatement</a>".)
+The syntax of a statement-based query should be familiar to anyone with
+knowledge of SQL.  In order to query the database, open a "statement" tag, pass
+it an sql "query", and then either "execute" the statement for inserts, updates, and
+deletes, or call the <a href="#overview.tags.resultset">resultSet</a> tag to 
+iterate over a select statement.  Here is a sample insert using the statement
+tag:</P>
+
+
+<pre>&lt;%-- insert a row into the database --%&gt;
+&lt;sql:statement id="stmt1" conn="conn1"&gt;
+  &lt;%-- set the SQL query --%&gt; 
+  &lt;sql:query&gt;
+    insert into test_books (id, name) 
+      values (3, '&lt;sql:escapeSql&gt;&lt;%=request.getParameter("book_title")%&gt;&lt;/sql:escapeSql&gt;')
+  &lt;/sql:query&gt;
+  &lt;%-- execute the query --%&gt;
+  &lt;sql:execute/&gt;
+&lt;/sql:statement&gt;</pre>
+
+
+<p>
+<b>escaping SQL</b>
+</p>
+
+
+<p>The "escapeSql" tag can be used inside a SQL query 
+to SQL-escape your input values if they contain single quotes.</p>
+
+
+<p>
+<b>error handling</b>
+</p>
+
+
+<p>By default, errors caused by the execution of the SQL query (e.g. primary key
+violations, malformed SQL statements) will cause the JSP page to fail.  You may
+optionally set the "ignoreErrors" attribute of the "execute" tag to true, which
+will print the SQL error to standard out without terminating the page:</p>
+
+
+<pre>&lt;sql:statement id="stmt1" conn="conn1"&gt;
+
+  &lt;%-- this SQL query is malformed --%&gt; 
+  &lt;sql:query&gt;delete * from test_books&lt;/sql:query&gt;
+  
+  &lt;%-- the query will fail, but the page will continue --%&gt;
+  &lt;sql:execute ignoreErrors="true"/&gt;
+  
+&lt;/sql:statement&gt;</pre>
+
+
+<p>
+<b>whitespace handling</b>
+</p>
+
+
+<p>All statements and preparedStatements automatically trim whitespace from the 
+body.</p>
+
+
+<A NAME="overview.tags.preparedstatement">
+<h3>PreparedStatement Tags</h3>
+</A>
+
+
+<P>"Prepared statements" are a somewhat more advanced format for generating SQL
+queries.  Instead of inserting values directly into the SQL statement, you
+include the '?' symbol in places where you want to set a value, and then you use 
+a separate group of tags to actually set the value.  Here is a version
+of the query we used in the <a href="#overview.tags.statement">statement</a>
+section, but this version uses the preparedstatement tag and syntax instead:</P>
+
+
+<pre>&lt;%-- insert a row into the database --%&gt;
+&lt;sql:preparedStatement id="stmt1" conn="conn1"&gt;
+
+  &lt;%-- set the SQL query.  note the lack of quotes around the "name" value --%&gt; 
+  &lt;sql:query&gt;
+    insert into test_books (id, name) 
+      values (?, ?)
+  &lt;/sql:query&gt;
+    
+  &lt;sql:execute&gt;
+    &lt;sql:setColumn position="1"&gt;3&lt;/sql:setColumn&gt;
+    &lt;sql:setColumn position="2"&gt;&lt;%=request.getParameter("book_title")%&gt;&lt;/sql:setColumn&gt;
+  &lt;/sql:execute&gt;
+  
+&lt;/sql:preparedStatement&gt;</pre>
+
+
+<p>One advantage of prepared statements is that you do not need to perform sql escaping on
+text, as you have to do in a standard statement.  However,
+be aware that standard statements may be more performant for databases and drivers that
+do not peform pooling of connections <i>and</i> prepared statements.</p>
+
+
+<p>
+<b>setColumn tag</b>
+</p>
+
+
+<p>You can put the setColumn tags of prepared statements either before the execute or 
+  resultset tag, or inside the execute tag.  The execute tag never outputs its body 
+  so putting setColumn tags inside may prevent unnecessary whitespace.</p>
+  
+
+<A NAME="overview.tags.resultset">
+<h3>ResultSet Tags</h3>
+</A>
+
+
+<p>Result sets are the product of a select statement.  The resultSet tag
+automatically loops, once per row, through a result set.  Use the "getColumn"
+tag to grab values from each row and either display them or store them away 
+as a String:</p>
+
+
+<pre>&lt;%-- print the rows in an HTML table --%&gt;
+&lt;table&gt;
+&lt;sql:statement id="stmt1" conn="conn1"&gt;
+ 
+  &lt;sql:query&gt;
+    select id, name, description from test_books
+    order by 1
+  &lt;/sql:query&gt;
+  
+  &lt;%-- loop through the rows of your query --%&gt;
+  &lt;sql:resultSet id="rset2"&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;sql:getColumn position="1"/&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;sql:getColumn position="2"/&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;sql:getColumn position="3"/&gt;
+          &lt;%-- print out a comment if the book has no description --%&gt;
+          &lt;sql:wasNull&gt;[no description]&lt;/sql:wasNull&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/sql:resultSet&gt;
+  
+&lt;/sql:statement&gt;
+&lt;/table&gt;</pre>
+
+
+<p>
+<b>"wasNull" and "wasNotNull" tags</b>
+</p>
+
+
+<p>The "wasNull" tag only executes its body if the previous "getColumn" tag encountered a 
+null value in the database.  You can only use the "wasNull" tag if you are
+inside a resultset and if a "getColumn" tag has already been executed.  The 
+"wasNotNull" tag 
+executes its body if the previous getColumn tag did <i>not</i> produce a null.
+See the <A HREF="#summary">Tag Reference</A> for examples.</p>
+
+
+
+<p>
+<b>"getColumn" tag</b>
+</p>
+
+
+<p>The getColumn tag performs one of two functions.  You may either:</p>
+
+
+<ol>
+  
+<li>
+<p>Write the column value directly to the JSP (default behavior)</p>
+  
+  
+<pre>&lt;%-- Print the value to the JSP output --%&gt;
+&lt;sql:getColumn position="1"/&gt;</pre>
+  
+  
+<p>, or</p>
+</li>
+  
+  
+<li>
+<p>Write the column value, as a String, to a page attribute via the "to"
+  attribute.  If you want, you may optionally assign a scope other
+  than "page" with the "scope" attribute.  If the database column is null, the 
+  getColumn tag <i>will not</i> create an attribute.  Here's a getColumn tag that 
+  creates an Integer request attribute:</p>
+
+
+
+<pre>&lt;%-- Note that the request attribute will be a String --%&gt;
+&lt;sql:getColumn position="1" to="someId" scope="request"/&gt;</pre>
+
+</li>
+
+</ol>
+
+
+<p>
+<b>"getNumber" tag</b>
+</p>
+
+
+<p>When you want more precise control over number formatting, use
+the getNumber tag.</p>  
+    
+
+<p>The "format" attribute can be either a pattern as
+accepted by the DecimalFormat constructor or a style: "CURRENCY", 
+"PERCENT" or "NUMBER".</p>  
+    
+
+<p>The "locale" attribute can have one to three 
+components as accepted by the Locale constructor: language,
+country and variant. They are separated by "_".  For example:</p>
+
+
+<p>
+<pre>&lt;%-- format a database value as English currency --%&gt;
+&lt;sql:getNumber colName="id" format="CURRENCY" locale="en_GB"/&gt;</pre>
+</p>
+    
+    If neither the format nor locale attribute is set, output should be
+    identical to getColumn.
+
+<p>
+<b>time tags</b>
+</p>
+
+
+<p>There are several tags designed for displaying time-related
+data: getTime, getTimestamp and getDate.</p>
+
+
+<p>The "format" attribute can be either a pattern as
+accepted by SimpleDateFormat or a style: "FULL",
+"LONG", "MEDIUM" or "SHORT".  This attribute is optional.</p>
+    
+
+<p>The "locale" attribute can have one to three 
+components as accepted by the Locale constructor: language,
+country and variant. They are separated by "_".</p>
+
+
+<p>
+<b>disabling looping</b>
+</p>
+
+
+<p>By default, the body of the result set tag is executed once per row in the 
+ResultSet.  By setting the option "loop" attribute to false, however, you may 
+disable this feature and manipulate the ResultSet object manually, or pass it
+off to another custom tag.</p>
+
+
+<pre>&lt;sql:statement id="stmt1" conn="conn1"&gt;
+ 
+  &lt;sql:query&gt;
+    select id, name, description from test_books
+    order by 1
+  &lt;/sql:query&gt;
+  
+  &lt;%-- disable looping in resultset tag --%&gt;
+  &lt;sql:resultSet id="rset2" loop="false"&gt;
+    &lt;% 
+       ResultSet rset = (ResultSet) pageContext.getAttribute("rset2");
+       // manual result set manipulation here
+    %&gt;
+  &lt;/sql:resultSet&gt;
+  
+&lt;/sql:statement&gt;</pre>
+
+
+<p>
+<b>using RowSets</b>
+</p>
+
+
+<p>You may also use the resultSet tag with a RowSet object. By setting the option
+ "name", the resultSet tag will look for a ResultSet object (including RowSets)
+stored under that name in the page, request, or session contexts. By setting the 
+option "scope", you can specify which context contains your ResultSet/RowSet. 
+Note that when you read a ResultSet/RowSet from an attribute, the resultSet tag
+does <i>not</i> need to be inside of a statement tag.</p>
+
+
+<pre>
+  &lt;%-- loop through the rows of your ResultSet/RowSet, 
+          wherever it came from --%&gt;
+  &lt;sql:resultSet id="rset1" name="rsetAtt"&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;sql:getColumn position="1"/&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;sql:getColumn position="2"/&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;sql:getColumn position="3"/&gt;
+          &lt;%-- print out a comment if the book has no description --%&gt;
+          &lt;sql:wasNull&gt;[no description]&lt;/sql:wasNull&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/sql:resultSet&gt;</pre>
+
+
+<p>
+<b>"wasEmpty" and "wasNotEmpty" tags</b>
+</p>
+
+
+<p>The "wasEmpty" tag only executes its body if the last ResultSet 
+tag received 0 rows from the database.  You must be after a resultSet tag,
+or an error will be generated.
+The "wasNotEmpty" tag executes its body if the last ResultSet
+received <i>more than</i> 0 rows from the database.
+See the <A HREF="#summary">Tag Reference</A> for examples.</p>
+
+
+<p>
+<b>"rowCount" tag</b>
+</p>
+
+
+<p>The "rowCount" tag prints out the number of rows retrieved from the database.
+It can be used inside a ResultSet tag to provide a running
+count of rows retreived, or after the ResultSet tag to
+display the total number.  See the <A HREF="#summary">Tag Reference</A> for examples.
+Using the tag before the ResultSet
+will produce an error.</p>
+
+
+</span><a name="summary"></a>
+<h3>Tag Summary</h3>
+<b>Connection Tags</b>
+<table cellspacing="3" cellpadding="3" width="90%" border="0">
+<tr>
+<td valign="top" width="25%"><a href="#connection">connection</a></td><td width="75%">
+        Get a java.sql.Connection object from the DriverManager or a DataSource.
+      </td>
+</tr>
+<tr>
+<td valign="top" width="25%"><a href="#url">url</a></td><td width="75%">
+        Sets the database URL of the enclosing connection tag.
+      </td>
+</tr>
+<tr>
+<td valign="top" width="25%"><a href="#jndiName">jndiName</a></td><td width="75%">
+        Sets the JNDI named JDBC DataSource of the enclosing connection tag.
+      </td>
+</tr>
+<tr>
+<td valign="top" width="25%"><a href="#driver">driver</a></td><td width="75%">
+        Sets the driver class name for the connection tag.
+      </td>
+</tr>
+<tr>
+<td valign="top" width="25%"><a href="#userId">userId</a></td><td width="75%">Sets the user id for the connection tag.</td>
+</tr>
+<tr>
+<td valign="top" width="25%"><a href="#password">password</a></td><td width="75%">
+        Sets the password for the connection tag.
+      </td>
+</tr>
+<tr>
+<td valign="top" width="25%"><a href="#closeConnection">closeConnection</a></td><td width="75%">
+        Close the specified connection.  The "conn" attribute is the name of a
+        connection object in the page context.
+      </td>
+</tr>
+<tr>
+<td colspan="2">&nbsp;</td>
+</tr>
+</table>
+<b>Statement Only Tags</b>
+<table cellspacing="3" cellpadding="3" width="90%" border="0">
+<tr>
+<td valign="top" width="25%"><a href="#statement">statement</a></td><td width="75%">
+        Create and execute a database query.
+      </td>
+</tr>
+<tr>
+<td valign="top" width="25%"><a href="#escapeSql">escapeSql</a></td><td width="75%">
+        Replaces each single quote in the tag body
+        with a pair of single quotes.
+      </td>
+</tr>
+<tr>
+<td colspan="2">&nbsp;</td>
+</tr>
+</table>
+<b>Statement/PreparedStatement Tags</b>
+<table cellspacing="3" cellpadding="3" width="90%" border="0">
+<tr>
+<td valign="top" width="25%"><a href="#query">query</a></td><td width="75%">
+        Set a query for a statement or preparedStatement tag
+      </td>
+</tr>
+<tr>
+<td valign="top" width="25%"><a href="#execute">execute</a></td><td width="75%">
+        Executes an insert, update or delete for a statement or 
+        preparedStatement tag
+      </td>
+</tr>
+<tr>
+<td colspan="2">&nbsp;</td>
+</tr>
+</table>
+<b>PreparedStatement Only Tags</b>
+<table cellspacing="3" cellpadding="3" width="90%" border="0">
+<tr>
+<td valign="top" width="25%"><a href="#preparedStatement">preparedStatement</a></td><td width="75%">
+        Create and execute a tokenized database query
+      </td>
+</tr>
+<tr>
+<td valign="top" width="25%"><a href="#setColumn">setColumn</a></td><td width="75%">
+        Set a field in a preparedStatement.  Set the value as a
+        String inside the tag body.
+      </td>
+</tr>
+<tr>
+<td colspan="2">&nbsp;</td>
+</tr>
+</table>
+<b>ResultSet Tags</b>
+<table cellspacing="3" cellpadding="3" width="90%" border="0">
+<tr>
+<td valign="top" width="25%"><a href="#resultSet">resultSet</a></td><td width="75%">
+        JSP tag resulset, executes the query and loops through the results
+for the enclosing statement or preparedstatement tag.  The body of
+this tag is executed once per row in the resultset.  The optional
+"loop" attribute, which default to true, specifies whether to execute
+the tag body once per row "true", or to simply assign the ResultSet
+to the page attribute specified by "id".
+      </td>
+</tr>
+<tr>
+<td valign="top" width="25%"><a href="#wasNull">wasNull</a></td><td width="75%">
+        Executes its body if the last getColumn tag received a null value
+from the database.  You must be inside a resultset tag and there must
+be a previous getColumn tag, or an error will be generated.
+      </td>
+</tr>
+<tr>
+<td valign="top" width="25%"><a href="#wasNotNull">wasNotNull</a></td><td width="75%">
+        Executes its body if the last getColumn tag did not encounter a 
+  null value from the database.  
+      </td>
+</tr>
+<tr>
+<td valign="top" width="25%"><a href="#getColumn">getColumn</a></td><td width="75%">
+        Gets the value, as a String, of a coulmn in the enclosing
+resultset.  The column number is set via the "position" attribute.
+You can optionally set the value, as a String, to a serlvet attribute 
+instead of the tag body with the "to" attribute.  The scope of the servlet
+attribute is specified by the "scope" XML attribute (default = page).  
+      </td>
+</tr>
+<tr>
+<td valign="top" width="25%"><a href="#getNumber">getNumber</a></td><td width="75%">
+        Similar to getColumn, but provides more precise control over
+    number formatting.  
+    
+    The "format" attribute can be either a pattern as
+    accepted by the DecimalFormat constructor or a style: "CURRENCY", 
+    "PERCENT" or "NUMBER".  
+    
+    The "locale" attribute can have one to three 
+    components as accepted by the Locale constructor: language,
+    country and variant. They are separated by "_".
+    
+    If neither the format nor locale attribute is set, output should be
+    identical to getColumn.  
+      </td>
+</tr>
+<tr>
+<td valign="top" width="25%"><a href="#getTime">getTime</a></td><td width="75%">
+        Similar to getColumn, but provides more precise control over
+    java.sql.Time formatting.  
+    
+    The "format" attribute can be either a pattern as
+    accepted by SimpleDateFormat or a style: "FULL",
+    "LONG", "MEDIUM" or "SHORT".  
+    
+    The "locale" attribute can have one to three 
+    components as accepted by the Locale constructor: language,
+    country and variant. They are separated by "_".
+    
+    If neither the format nor locale attribute is set, output should be
+    identical to getColumn.  
+      </td>
+</tr>
+<tr>
+<td valign="top" width="25%"><a href="#getTimestamp">getTimestamp</a></td><td width="75%">
+        Similar to getColumn, but provides more precise control over
+    java.sql.Timestamp formatting.  
+    
+    The "format" attribute can be either a pattern as
+    accepted by SimpleDateFormat or a style: "FULL",
+    "LONG", "MEDIUM" or "SHORT".  
+    
+    The "locale" attribute can have one to three 
+    components as accepted by the Locale constructor: language,
+    country and variant. They are separated by "_".
+    
+    If neither the format nor locale attribute is set, output should be
+    identical to getColumn.  
+      </td>
+</tr>
+<tr>
+<td valign="top" width="25%"><a href="#getDate">getDate</a></td><td width="75%">
+        Similar to getColumn, but provides more precise control over
+    java.sql.Date formatting.  
+    
+    The "format" attribute can be either a pattern as
+    accepted by SimpleDateFormat or a style: "FULL",
+    "LONG", "MEDIUM" or "SHORT".  It is required.  
+    
+    The "locale" attribute can have one to three 
+    components as accepted by the Locale constructor: language,
+    country and variant. They are separated by "_".  
+      </td>
+</tr>
+<tr>
+<td valign="top" width="25%"><a href="#wasEmpty">wasEmpty</a></td><td width="75%">
+        Executes its body if the last ResultSet tag received 0 rows
+        from the database.  You must be after a ResultSet tag, 
+        or an error will be generated.
+      </td>
+</tr>
+<tr>
+<td valign="top" width="25%"><a href="#wasNotEmpty">wasNotEmpty</a></td><td width="75%">
+        Executes its body if the last ResultSet tag received more than 0 rows
+        from the database.  You must be after a ResultSet tag, 
+        or an error will be generated.
+      </td>
+</tr>
+<tr>
+<td valign="top" width="25%"><a href="#rowCount">rowCount</a></td><td width="75%">
+        Prints out the number of rows retrieved from the database.
+It can be used inside a ResultSet tag to provide a running
+count of rows retreived, or after the ResultSet tag to
+display the total number.  Using the tag before the ResultSet
+will produce an error.
+      </td>
+</tr>
+<tr>
+<td colspan="2">&nbsp;</td>
+</tr>
+</table>
+<a name="reference"></a>
+<h3>Tag Reference</h3>
+<table cellspacing="3" cellpadding="3" width="90%" border="0">
+<tr bgcolor="#cccccc">
+<td colspan="5"><b><font size="+1"><a name="connection">connection</a></font></b></td><td width="17%" align="right">
+            Availability:&nbsp;1.0</td>
+</tr>
+<tr>
+<td colspan="6">
+<p>
+        Get a java.sql.Connection object from the DriverManager or a DataSource.
+      </p>
+</td>
+</tr>
+<tr>
+<td width="15%"><b>Tag Body</b></td><td width="17%">JSP</td><td width="17%">&nbsp;</td><td width="17%">&nbsp;</td><td width="17%">&nbsp;</td><td width="17%">&nbsp;</td>
+</tr>
+<tr>
+<td><b>Restrictions</b></td><td colspan="5">
+                None
+              </td>
+</tr>
+<tr>
+<td><b>Attributes</b></td><td>Name</td><td>Required</td><td colspan="2">
+                Runtime&nbsp;Expression&nbsp;Evaluation
+              </td><td>Availability</td>
+</tr>
+<tr bgcolor="#cccccc">
+<td bgcolor="#ffffff">&nbsp;</td><td><b>id</b></td><td>&nbsp;
+      Yes
+    </td><td colspan="2">&nbsp;
+      No
+    </td><td>&nbsp;1.0</td>
+</tr>
+<tr>
+<td bgcolor="#ffffff">&nbsp;</td><td colspan="5">
+<p>
+          Name of the resulting Connection attribute.
+        </p>
+</td>
+</tr>
+<tr bgcolor="#cccccc">
+<td bgcolor="#ffffff">&nbsp;</td><td><b>dataSource</b></td><td>&nbsp;
+      No
+    </td><td colspan="2">&nbsp;
+      No
+    </td><td>&nbsp;1.0</td>
+</tr>
+<tr>
+<td bgcolor="#ffffff">&nbsp;</td><td colspan="5">
+<p>
+          Name of an existing page attribute that 
+          contains a DataSource object.
+        </p>
+</td>
+</tr>
+<tr bgcolor="#cccccc">
+<td bgcolor="#ffffff">&nbsp;</td><td><b>jndiName</b></td><td>&nbsp;
+      No
+    </td><td colspan="2">&nbsp;
+      No
+    </td><td>&nbsp;1.0</td>
+</tr>
+<tr>
+<td bgcolor="#ffffff">&nbsp;</td><td colspan="5">
+<p>
+          Name used to find a datasource via jndi.
+        </p>
+</td>
+</tr>
+<tr>
+<td><b>Variables</b></td><td colspan="2">Name</td><td colspan="2">Scope</td><td>Availability</td>
+</tr>
+<tr bgcolor="#cccccc">
+<td bgcolor="#ffffff">&nbsp;</td><td colspan="2">&nbsp;<b>id</b>
+                      attribute value
+                    </td><td colspan="2">&nbsp;
+                      End of tag to end of page
+                    </td><td>&nbsp;1.0</td>
+</tr>
+<tr>
+<td>&nbsp;</td><td colspan="5"></td>
+</tr>
+<tr>
+<td>&nbsp;</td><td><b>Properties</b></td><td>Name</td><td>Get</td><td>Set</td><td>Availability</td>
+</tr>
+<tr bgcolor="#cccccc">
+<td bgcolor="#ffffff">&nbsp;</td><td bgcolor="#ffffff">&nbsp;</td><td>&nbsp;<b>catalog</b></td><td>&nbsp;yes</td><td>&nbsp;yes</td><td>&nbsp;1.0</td>
+</tr>
+<tr>
+<td>&nbsp;</td><td>&nbsp;</td><td colspan="4">
+<p>Set the catalog for this connection.</p>
+</td>
+</tr>
+<tr bgcolor="#cccccc">
+<td bgcolor="#ffffff">&nbsp;</td><td bgcolor="#ffffff">&nbsp;</td><td>&nbsp;<b>closed</b></td><td>&nbsp;yes</td><td>&nbsp;no</td><td>&nbsp;1.0</td>
+</tr>
+<tr>
+<td>&nbsp;</td><td>&nbsp;</td><td colspan="4">
+<p>False if the connection is open, true if it is not.</p>
+</td>
+</tr>
+<tr bgcolor="#cccccc">
+<td bgcolor="#ffffff">&nbsp;</td><td bgcolor="#ffffff">&nbsp;</td><td>&nbsp;<b>readOnly</b></td><td>&nbsp;yes</td><td>&nbsp;yes</td><td>&nbsp;1.0</td>
+</tr>
+<tr>
+<td>&nbsp;</td><td>&nbsp;</td><td colspan="4">
+<p>True if the connection has read-only permission.</p>
+</td>
+</tr>
+        
+<tr>
+<td><b>Examples</b></td><td bgcolor="#cccccc" colspan="5">
+            Method 1: using the DriverManager
+          &nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;</td><td colspan="5">
+<p>
+<pre>
+<code>
+
+&lt;%-- open a database connection --%&gt;
+&lt;sql:connection id="conn1"&gt;
+  &lt;%-- required --%&gt;
+  &lt;sql:url&gt;jdbc:mysql://localhost/test&lt;/sql:url&gt;  
+  &lt;%-- optional --%&gt;
+  &lt;sql:driver&gt;org.gjt.mm.mysql.Driver&lt;/sql:driver&gt;  
+  &lt;%-- optional --%&gt; 
+  &lt;sql:userId&gt;root&lt;/sql:userId&gt;  
+  &lt;%-- optional --%&gt;
+  &lt;sql:password&gt;notVerySecure&lt;/sql:password&gt;
+&lt;/sql:connection&gt;
+
+          </code>
+</pre>
+</p>
+</td>
+</tr>
+        
+<tr>
+<td></td><td bgcolor="#cccccc" colspan="5">
+            Method 2: using a DataSource
+          &nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;</td><td colspan="5">
+<p>
+<pre>
+<code>
+
+&lt;%-- open a database connection --%&gt;
+&lt;sql:connection id="conn1" dataSource="ds1"&gt;
+  &lt;%-- optional --%&gt; 
+  &lt;sql:userId&gt;root&lt;/sql:userId&gt;
+  &lt;%-- optional --%&gt;
+  &lt;sql:password&gt;notVerySecure&lt;/sql:password&gt;
+&lt;/sql:connection&gt;
+
+          </code>
+</pre>
+</p>
+</td>
+</tr>
+        
+<tr>
+<td></td><td bgcolor="#cccccc" colspan="5">
+            Method 3: using a jndi named DataSource
+          &nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;</td><td colspan="5">
+<p>
+<pre>
+<code>
+
+&lt;%-- open a database connection --%&gt;
+&lt;sql:connection id="conn1" jndiName="java:/comp/jdbc/test"/&gt;
+
+          </code>
+</pre>
+</p>
+</td>
+</tr>
+      
+</table>
+<table cellspacing="3" cellpadding="3" width="90%" border="0">
+<tr bgcolor="#cccccc">
+<td colspan="5"><b><font size="+1"><a name="url">url</a></font></b></td><td width="17%" align="right">
+            Availability:&nbsp;1.0</td>
+</tr>
+<tr>
+<td colspan="6">
+<p>
+        Sets the database URL of the enclosing connection tag.
+      </p>
+</td>
+</tr>
+<tr>
+<td width="15%"><b>Tag Body</b></td><td width="17%">JSP</td><td width="17%">&nbsp;</td><td width="17%">&nbsp;</td><td width="17%">&nbsp;</td><td width="17%">&nbsp;</td>
+</tr>
+<tr>
+<td><b>Restrictions</b></td><td colspan="5">
+<p>Use inside a connection tag.</p>
+</td>
+</tr>
+<tr>
+<td><b>Attributes</b></td><td>Name</td><td>Required</td><td colspan="2">
+                Runtime&nbsp;Expression&nbsp;Evaluation
+              </td><td>Availability</td>
+</tr>
+<tr bgcolor="#cccccc">
+<td bgcolor="#ffffff">&nbsp;</td><td><b>initParameter</b></td><td>&nbsp;
+      No
+    </td><td colspan="2">&nbsp;
+      No
+    </td><td>&nbsp;1.0</td>
+</tr>
+<tr>
+<td bgcolor="#ffffff">&nbsp;</td><td colspan="5">
+<p>
+          Optional attribute, indicating the name of 
+          an init parameter
+        </p>
+</td>
+</tr>
+<tr>
+<td><b>Variables</b></td><td colspan="5">None</td>
+</tr>
+        
+<tr>
+<td><b>Examples</b></td>
+</tr>
+<tr>
+<td>&nbsp;</td><td colspan="5">
+<p>
+<pre>
+<code>
+
+&lt;%-- example 1: using the tag body --%&gt;
+&lt;sql:connection id="conn1"&gt;
+  &lt;sql:url&gt;jdbc:mysql://localhost/test&lt;/sql:url&gt;  
+&lt;/sql:connection&gt;
+
+&lt;%-- example 2: using an init parameter --%&gt;
+&lt;sql:connection id="conn1"&gt;
+  &lt;sql:url initParameter="dbURL"/&gt;  
+&lt;/sql:connection&gt;
+    
+          </code>
+</pre>
+</p>
+</td>
+</tr>
+      
+</table>
+<table cellspacing="3" cellpadding="3" width="90%" border="0">
+<tr bgcolor="#cccccc">
+<td colspan="5"><b><font size="+1"><a name="jndiName">jndiName</a></font></b></td><td width="17%" align="right">
+            Availability:&nbsp;1.0</td>
+</tr>
+<tr>
+<td colspan="6">
+<p>
+        Sets the JNDI named JDBC DataSource of the enclosing connection tag.
+      </p>
+</td>
+</tr>
+<tr>
+<td width="15%"><b>Tag Body</b></td><td width="17%">JSP</td><td width="17%">&nbsp;</td><td width="17%">&nbsp;</td><td width="17%">&nbsp;</td><td width="17%">&nbsp;</td>
+</tr>
+<tr>
+<td><b>Restrictions</b></td><td colspan="5">
+<p>Use inside a connection tag.</p>
+</td>
+</tr>
+<tr>
+<td><b>Attributes</b></td><td>Name</td><td>Required</td><td colspan="2">
+                Runtime&nbsp;Expression&nbsp;Evaluation
+              </td><td>Availability</td>
+</tr>
+<tr bgcolor="#cccccc">
+<td bgcolor="#ffffff">&nbsp;</td><td><b>initParameter</b></td><td>&nbsp;
+      No
+    </td><td colspan="2">&nbsp;
+      No
+    </td><td>&nbsp;1.0</td>
+</tr>
+<tr>
+<td bgcolor="#ffffff">&nbsp;</td><td colspan="5">
+<p>
+          Optional attribute, indicating the name of
+          an init parameter
+        </p>
+</td>
+</tr>
+<tr>
+<td><b>Variables</b></td><td colspan="5">None</td>
+</tr>
+        
+<tr>
+<td><b>Examples</b></td>
+</tr>
+<tr>
+<td>&nbsp;</td><td colspan="5">
+<p>
+<pre>
+<code>
+
+&lt;%-- example 1: using the tag body --%&gt;
+&lt;sql:connection id="conn1"&gt;
+  &lt;sql:jndiName&gt;java:/comp/jdbc/test&lt;/sql:jndiName&gt;
+&lt;/sql:connection&gt;
+                                                      
+&lt;%-- example 2: using an init parameter --%&gt;
+&lt;sql:connection id="conn1"&gt;                 
+  &lt;sql:jndiName initParameter="jndiDataSource"/&gt;          
+&lt;/sql:connection&gt;
+
+          </code>
+</pre>
+</p>
+</td>
+</tr>
+      
+</table>
+<table cellspacing="3" cellpadding="3" width="90%" border="0">
+<tr bgcolor="#cccccc">
+<td colspan="5"><b><font size="+1"><a name="driver">driver</a></font></b></td><td width="17%" align="right">
+            Availability:&nbsp;1.0</td>
+</tr>
+<tr>
+<td colspan="6">
+<p>
+        Sets the driver class name for the connection tag.
+      </p>
+</td>
+</tr>
+<tr>
+<td width="15%"><b>Tag Body</b></td><td width="17%">JSP</td><td width="17%">&nbsp;</td><td width="17%">&nbsp;</td><td width="17%">&nbsp;</td><td width="17%">&nbsp;</td>
+</tr>
+<tr>
+<td><b>Restrictions</b></td><td colspan="5">
+<p>Use inside a connection tag.</p>
+</td>
+</tr>
+<tr>
+<td><b>Attributes</b></td><td>Name</td><td>Required</td><td colspan="2">
+                Runtime&nbsp;Expression&nbsp;Evaluation
+              </td><td>Availability</td>
+</tr>
+<tr bgcolor="#cccccc">
+<td bgcolor="#ffffff">&nbsp;</td><td><b>initParameter</b></td><td>&nbsp;
+      No
+    </td><td colspan="2">&nbsp;
+      No
+    </td><td>&nbsp;1.0</td>
+</tr>
+<tr>
+<td bgcolor="#ffffff">&nbsp;</td><td colspan="5">
+<p>Optional attribute, indicating the name of 
+        an init parameter.</p>
+</td>
+</tr>
+<tr>
+<td><b>Variables</b></td><td colspan="5">None</td>
+</tr>
+        
+<tr>
+<td><b>Examples</b></td>
+</tr>
+<tr>
+<td>&nbsp;</td><td colspan="5">
+<p>
+<pre>
+<code>
+
+&lt;%-- example 1: using the tag body --%&gt;
+&lt;sql:connection id="conn1"&gt;
+  &lt;sql:url&gt;jdbc:mysql://localhost/test&lt;/sql:url&gt;
+  &lt;sql:driver&gt;org.gjt.mm.mysql.Driver&lt;/sql:driver&gt;  
+&lt;/sql:connection&gt;
+
+&lt;%-- example 2: using an init parameter --%&gt;
+&lt;sql:connection id="conn1"&gt;
+  &lt;sql:url initParameter="dbURL"/&gt;  
+  &lt;sql:driver initParameter="dbDriver"/&gt;  
+&lt;/sql:connection&gt;
+         
+          </code>
+</pre>
+</p>
+</td>
+</tr>
+      
+</table>
+<table cellspacing="3" cellpadding="3" width="90%" border="0">
+<tr bgcolor="#cccccc">
+<td colspan="5"><b><font size="+1"><a name="userId">userId</a></font></b></td><td width="17%" align="right">
+            Availability:&nbsp;1.0</td>
+</tr>
+<tr>
+<td colspan="6">
+<p>Sets the user id for the connection tag.</p>
+</td>
+</tr>
+<tr>
+<td width="15%"><b>Tag Body</b></td><td width="17%">JSP</td><td width="17%">&nbsp;</td><td width="17%">&nbsp;</td><td width="17%">&nbsp;</td><td width="17%">&nbsp;</td>
+</tr>
+<tr>
+<td><b>Restrictions</b></td><td colspan="5">
+<p>Use inside a connection tag.</p>
+</td>
+</tr>
+<tr>
+<td><b>Attributes</b></td><td>Name</td><td>Required</td><td colspan="2">
+                Runtime&nbsp;Expression&nbsp;Evaluation
+              </td><td>Availability</td>
+</tr>
+<tr bgcolor="#cccccc">
+<td bgcolor="#ffffff">&nbsp;</td><td><b>initParameter</b></td><td>&nbsp;
+      No
+    </td><td colspan="2">&nbsp;
+      No
+    </td><td>&nbsp;1.0</td>
+</tr>
+<tr>
+<td bgcolor="#ffffff">&nbsp;</td><td colspan="5">
+<p>Optional attribute, indicating the name of 
+        an init parameter.</p>
+</td>
+</tr>
+<tr>
+<td><b>Variables</b></td><td colspan="5">None</td>
+</tr>
+        
+<tr>
+<td><b>Examples</b></td>
+</tr>
+<tr>
+<td>&nbsp;</td><td colspan="5">
+<p>
+<pre>
+<code>   
+
+&lt;%-- example 1: using the tag body --%&gt;
+&lt;sql:connection id="conn1"&gt;
+  &lt;sql:url&gt;jdbc:mysql://localhost/test&lt;/sql:url&gt;
+  &lt;sql:userId&gt;root&lt;/sql:userId&gt;   
+&lt;/sql:connection&gt;
+
+&lt;%-- example 2: using an init parameter --%&gt;
+&lt;sql:connection id="conn1"&gt;
+  &lt;sql:url initParameter="dbURL"/&gt;  
+  &lt;sql:userId initParameter="dbUserId"/&gt;   
+&lt;/sql:connection&gt;
+
+          </code>
+</pre>
+</p>
+</td>
+</tr>
+      
+</table>
+<table cellspacing="3" cellpadding="3" width="90%" border="0">
+<tr bgcolor="#cccccc">
+<td colspan="5"><b><font size="+1"><a name="password">password</a></font></b></td><td width="17%" align="right">
+            Availability:&nbsp;1.0</td>
+</tr>
+<tr>
+<td colspan="6">
+<p>
+        Sets the password for the connection tag.
+      </p>
+</td>
+</tr>
+<tr>
+<td width="15%"><b>Tag Body</b></td><td width="17%">JSP</td><td width="17%">&nbsp;</td><td width="17%">&nbsp;</td><td width="17%">&nbsp;</td><td width="17%">&nbsp;</td>
+</tr>
+<tr>
+<td><b>Restrictions</b></td><td colspan="5">
+<p>Use inside a connection tag.</p>
+</td>
+</tr>
+<tr>
+<td><b>Attributes</b></td><td>Name</td><td>Required</td><td colspan="2">
+                Runtime&nbsp;Expression&nbsp;Evaluation
+              </td><td>Availability</td>
+</tr>
+<tr bgcolor="#cccccc">
+<td bgcolor="#ffffff">&nbsp;</td><td><b>initParameter</b></td><td>&nbsp;
+      No
+    </td><td colspan="2">&nbsp;
+      No
+    </td><td>&nbsp;1.0</td>
+</tr>
+<tr>
+<td bgcolor="#ffffff">&nbsp;</td><td colspan="5">
+<p>
+          Optional attribute, indicating the name of 
+          an init parameter.
+        </p>
+</td>
+</tr>
+<tr>
+<td><b>Variables</b></td><td colspan="5">None</td>
+</tr>
+        
+<tr>
+<td><b>Examples</b></td>
+</tr>
+<tr>
+<td>&nbsp;</td><td colspan="5">
+<p>
+<pre>
+<code>   
+
+&lt;%-- example 1: using the tag body --%&gt;
+&lt;sql:connection id="conn1"&gt;
+  &lt;sql:url&gt;jdbc:mysql://localhost/test&lt;/sql:url&gt;
+  &lt;sql:userId&gt;root&lt;/sql:userId&gt;   
+  &lt;sql:password&gt;notVerySecure&lt;/sql:password&gt;   
+&lt;/sql:connection&gt;
+
+&lt;%-- example 2: using an init parameter --%&gt;
+&lt;sql:connection id="conn1"&gt;
+  &lt;sql:url initParameter="dbURL"/&gt;  
+  &lt;sql:userId initParameter="dbUserId"/&gt;   
+  &lt;sql:password initParameter="dbPassword"/&gt;   
+&lt;/sql:connection&gt;
+ 
+          </code>
+</pre>
+</p>
+</td>
+</tr>
+      
+</table>
+<table cellspacing="3" cellpadding="3" width="90%" border="0">
+<tr bgcolor="#cccccc">
+<td colspan="5"><b><font size="+1"><a name="closeConnection">closeConnection</a></font></b></td><td width="17%" align="right">
+            Availability:&nbsp;1.0</td>
+</tr>
+<tr>
+<td colspan="6">
+<p>
+        Close the specified connection.  The "conn" attribute is the name of a
+        connection object in the page context.
+      </p>
+</td>
+</tr>
+<tr>
+<td width="15%"><b>Tag Body</b></td><td width="17%">empty</td><td width="17%">&nbsp;</td><td width="17%">&nbsp;</td><td width="17%">&nbsp;</td><td width="17%">&nbsp;</td>
+</tr>
+<tr>
+<td><b>Restrictions</b></td><td colspan="5">
+                None
+              </td>
+</tr>
+<tr>
+<td><b>Attributes</b></td><td>Name</td><td>Required</td><td colspan="2">
+                Runtime&nbsp;Expression&nbsp;Evaluation
+              </td><td>Availability</td>
+</tr>
+<tr bgcolor="#cccccc">
+<td bgcolor="#ffffff">&nbsp;</td><td><b>conn</b></td><td>&nbsp;
+      Yes
+    </td><td colspan="2">&nbsp;
+      No
+    </td><td>&nbsp;1.0</td>
+</tr>
+<tr>
+<td bgcolor="#ffffff">&nbsp;</td><td colspan="5">
+<p>
+          Id of the connection you
+          want to close.
+        </p>
+</td>
+</tr>
+<tr>
+<td><b>Variables</b></td><td colspan="5">None</td>
+</tr>
+        
+<tr>
+<td><b>Examples</b></td>
+</tr>
+<tr>
+<td>&nbsp;</td><td colspan="5">
+<p>
+<pre>
+<code>
+
+&lt;%-- open a database connection --%&gt;
+&lt;sql:connection id="conn1"&gt;
+  &lt;sql:url&gt;jdbc:mysql://localhost/test&lt;/sql:url&gt;
+  &lt;sql:userId&gt;root&lt;/sql:userId&gt;   
+  &lt;sql:password&gt;notVerySecure&lt;/sql:password&gt;   
+&lt;/sql:connection&gt;
+
+&lt;%-- statement tags go here --%&gt;
+
+&lt;sql:closeConnection conn="conn1"/&gt;
+
+          </code>
+</pre>
+</p>
+</td>
+</tr>
+      
+</table>
+<table cellspacing="3" cellpadding="3" width="90%" border="0">
+<tr bgcolor="#cccccc">
+<td colspan="5"><b><font size="+1"><a name="statement">statement</a></font></b></td><td width="17%" align="right">
+            Availability:&nbsp;1.0</td>
+</tr>
+<tr>
+<td colspan="6">
+<p>
+        Create and execute a database query.
+      </p>
+</td>
+</tr>
+<tr>
+<td width="15%"><b>Tag Body</b></td><td width="17%">JSP</td><td width="17%">&nbsp;</td><td width="17%">&nbsp;</td><td width="17%">&nbsp;</td><td width="17%">&nbsp;</td>
+</tr>
+<tr>
+<td><b>Restrictions</b></td><td colspan="5">
+                None
+              </td>
+</tr>
+<tr>
+<td><b>Attributes</b></td><td>Name</td><td>Required</td><td colspan="2">
+                Runtime&nbsp;Expression&nbsp;Evaluation
+              </td><td>Availability</td>
+</tr>
+<tr bgcolor="#cccccc">
+<td bgcolor="#ffffff">&nbsp;</td><td><b>id</b></td><td>&nbsp;
+      Yes
+    </td><td colspan="2">&nbsp;
+      No
+    </td><td>&nbsp;1.0</td>
+</tr>
+<tr>
+<td bgcolor="#ffffff">&nbsp;</td><td colspan="5">
+<p>
+          Script variable id for use with standard jsp:getProperty tag.
+        </p>
+</td>
+</tr>
+<tr bgcolor="#cccccc">
+<td bgcolor="#ffffff">&nbsp;</td><td><b>conn</b></td><td>&nbsp;
+      Yes
+    </td><td colspan="2">&nbsp;
+      No
+    </td><td>&nbsp;1.0</td>
+</tr>
+<tr>
+<td bgcolor="#ffffff">&nbsp;</td><td colspan="5">
+<p>
+          id of the connection to use
+        </p>
+</td>
+</tr>
+<tr>
+<td><b>Variables</b></td><td colspan="2">Name</td><td colspan="2">Scope</td><td>Availability</td>
+</tr>
+<tr bgcolor="#cccccc">
+<td bgcolor="#ffffff">&nbsp;</td><td colspan="2">&nbsp;<b>id</b>
+                      attribute value
+                    </td><td colspan="2">&nbsp;
+                      Nested within tag
+                    </td><td>&nbsp;1.0</td>
+</tr>
+<tr>
+<td>&nbsp;</td><td colspan="5"></td>
+</tr>
+<tr>
+<td>&nbsp;</td><td><b>Properties</b></td><td>Name</td><td>Get</td><td>Set</td><td>Availability</td>
+</tr>
+<tr bgcolor="#cccccc">
+<td bgcolor="#ffffff">&nbsp;</td><td bgcolor="#ffffff">&nbsp;</td><td>&nbsp;<b>fetchSize</b></td><td>&nbsp;yes</td><td>&nbsp;yes</td><td>&nbsp;1.0</td>
+</tr>
+<tr>
+<td>&nbsp;</td><td>&nbsp;</td><td colspan="4">
+<p>
+            the number of rows that should be fetched from the 
+            database when more rows are needed
+          </p>
+</td>
+</tr>
+<tr bgcolor="#cccccc">
+<td bgcolor="#ffffff">&nbsp;</td><td bgcolor="#ffffff">&nbsp;</td><td>&nbsp;<b>maxRows</b></td><td>&nbsp;yes</td><td>&nbsp;yes</td><td>&nbsp;1.0</td>
+</tr>
+<tr>
+<td>&nbsp;</td><td>&nbsp;</td><td colspan="4">
+<p>
+            the maximum number of rows that a ResultSet object 
+            can contain (handy!)
+          </p>
+</td>
+</tr>
+<tr bgcolor="#cccccc">
+<td bgcolor="#ffffff">&nbsp;</td><td bgcolor="#ffffff">&nbsp;</td><td>&nbsp;<b>queryTimeout</b></td><td>&nbsp;yes</td><td>&nbsp;yes</td><td>&nbsp;1.0</td>
+</tr>
+<tr>
+<td>&nbsp;</td><td>&nbsp;</td><td colspan="4">
+<p>
+            the number of seconds the driver will wait for a 
+            Statement object to execute
+          </p>
+</td>
+</tr>
+        
+<tr>
+<td><b>Examples</b></td>
+</tr>
+<tr>
+<td>&nbsp;</td><td colspan="5">
+<p>
+<pre>
+<code>
+
+&lt;%-- insert a row into the database --%&gt;
+&lt;sql:statement id="stmt1" conn="conn1"&gt;
+  &lt;%-- set the SQL query --%&gt; 
+  &lt;sql:query&gt;
+    insert into test_books (id, name) 
+      values (3, 
+      '&lt;sql:escapeSql&gt;&lt;%= request.getParameter("book_title") %&gt;&lt;/sql:escapeSql&gt;')
+  &lt;/sql:query&gt;
+  &lt;%-- execute the query --%&gt;
+  &lt;sql:execute/&gt;
+&lt;/sql:statement&gt;
+     
+          </code>
+</pre>
+</p>
+</td>
+</tr>
+      
+</table>
+<table cellspacing="3" cellpadding="3" width="90%" border="0">
+<tr bgcolor="#cccccc">
+<td colspan="5"><b><font size="+1"><a name="escapeSql">escapeSql</a></font></b></td><td width="17%" align="right">
+            Availability:&nbsp;1.0</td>
+</tr>
+<tr>
+<td colspan="6">
+<p>
+        Replaces each single quote in the tag body
+        with a pair of single quotes.
+      </p>
+</td>
+</tr>
+<tr>
+<td width="15%"><b>Tag Body</b></td><td width="17%">JSP</td><td width="17%">&nbsp;</td><td width="17%">&nbsp;</td><td width="17%">&nbsp;</td><td width="17%">&nbsp;</td>
+</tr>
+<tr>
+<td><b>Restrictions</b></td><td colspan="5">
+<p>Use inside a query tag.</p>
+</td>
+</tr>
+<tr>
+<td><b>Attributes</b></td><td colspan="5">None</td>
+</tr>
+<tr>
+<td><b>Variables</b></td><td colspan="5">None</td>
+</tr>
+        
+<tr>
+<td><b>Examples</b></td>
+</tr>
+<tr>
+<td>&nbsp;</td><td colspan="5">
+<p>
+<pre>
+<code>
+
+&lt;%-- insert a row into the database --%&gt;
+&lt;sql:statement id="stmt1" conn="conn1"&gt;
+  &lt;%-- set the SQL query --%&gt; 
+  &lt;sql:query&gt;
+    insert into test_books (id, name) 
+      values (3, 
+      '&lt;sql:escapeSql&gt;&lt;%=request.getParameter("book_title")%&gt;&lt;/sql:escapeSql&gt;')
+  &lt;/sql:query&gt;
+  &lt;%-- execute the query --%&gt;
+  &lt;sql:execute/&gt;
+&lt;/sql:statement&gt;
+      
+          </code>
+</pre>
+</p>
+</td>
+</tr>
+      
+</table>
+<table cellspacing="3" cellpadding="3" width="90%" border="0">
+<tr bgcolor="#cccccc">
+<td colspan="5"><b><font size="+1"><a name="query">query</a></font></b></td><td width="17%" align="right">
+            Availability:&nbsp;1.0</td>
+</tr>
+<tr>
+<td colspan="6">
+<p>
+        Set a query for a statement or preparedStatement tag
+      </p>
+</td>
+</tr>
+<tr>
+<td width="15%"><b>Tag Body</b></td><td width="17%">JSP</td><td width="17%">&nbsp;</td><td width="17%">&nbsp;</td><td width="17%">&nbsp;</td><td width="17%">&nbsp;</td>
+</tr>
+<tr>
+<td><b>Restrictions</b></td><td colspan="5">
+<p>Use inside a statement or preparedStatement tag.</p>
+</td>
+</tr>
+<tr>
+<td><b>Attributes</b></td><td colspan="5">None</td>
+</tr>
+<tr>
+<td><b>Variables</b></td><td colspan="5">None</td>
+</tr>
+        
+<tr>
+<td><b>Examples</b></td>
+</tr>
+<tr>
+<td>&nbsp;</td><td colspan="5">
+<p>
+<pre>
+<code>
+
+&lt;%-- insert a row into the database --%&gt;
+&lt;sql:statement id="stmt1" conn="conn1"&gt;
+  &lt;%-- set the SQL query --%&gt; 
+  &lt;sql:query&gt;
+    insert into test_books (id, name) 
+      values (3, '&lt;sql:escapeSql&gt;&lt;%=request.getParameter("book_title")%&gt;&lt;/sql:escapeSql&gt;')
+  &lt;/sql:query&gt;
+  &lt;%-- execute the query --%&gt;
+  &lt;sql:execute/&gt;
+&lt;/sql:statement&gt;
+      
+          </code>
+</pre>
+</p>
+</td>
+</tr>
+      
+</table>
+<table cellspacing="3" cellpadding="3" width="90%" border="0">
+<tr bgcolor="#cccccc">
+<td colspan="5"><b><font size="+1"><a name="execute">execute</a></font></b></td><td width="17%" align="right">
+            Availability:&nbsp;1.0</td>
+</tr>
+<tr>
+<td colspan="6">
+<p>
+        Executes an insert, update or delete for a statement or 
+        preparedStatement tag
+      </p>
+</td>
+</tr>
+<tr>
+<td width="15%"><b>Tag Body</b></td><td width="17%">JSP</td><td width="17%">&nbsp;</td><td width="17%">&nbsp;</td><td width="17%">&nbsp;</td><td width="17%">&nbsp;</td>
+</tr>
+<tr>
+<td><b>Restrictions</b></td><td colspan="5">
+<p>Use inside a statement or preparedStatement tag.</p>
+</td>
+</tr>
+<tr>
+<td><b>Attributes</b></td><td>Name</td><td>Required</td><td colspan="2">
+                Runtime&nbsp;Expression&nbsp;Evaluation
+              </td><td>Availability</td>
+</tr>
+<tr bgcolor="#cccccc">
+<td bgcolor="#ffffff">&nbsp;</td><td><b>ignoreErrors</b></td><td>&nbsp;
+      No
+    </td><td colspan="2">&nbsp;
+      Yes
+    </td><td>&nbsp;1.0</td>
+</tr>
+<tr>
+<td bgcolor="#ffffff">&nbsp;</td><td colspan="5">
+<p>
+          Setting the "ignoreErrors" atttibute to true
+          will instruct the page to continue in the event of a SQLException,
+          otherwise by default exceptions will throw a JspTagException.
+        </p>
+</td>
+</tr>
+<tr>
+<td><b>Variables</b></td><td colspan="5">None</td>
+</tr>
+        
+<tr>
+<td><b>Examples</b></td>
+</tr>
+<tr>
+<td>&nbsp;</td><td colspan="5">
+<p>
+<pre>
+<code>
+
+&lt;%-- insert a row into the database --%&gt;
+&lt;sql:statement id="stmt1" conn="conn1"&gt;
+  &lt;%-- set the SQL query --%&gt; 
+  &lt;sql:query&gt;
+    insert into test_books (id, name) 
+      values (3, '&lt;sql:escapeSql&gt;&lt;%=request.getParameter("book_title")%&gt;&lt;/sql:escapeSql&gt;')
+  &lt;/sql:query&gt;
+  &lt;%-- execute the query --%&gt;
+  &lt;sql:execute/&gt;
+&lt;/sql:statement&gt;
+ 
+          </code>
+</pre>
+</p>
+</td>
+</tr>
+      
+</table>
+<table cellspacing="3" cellpadding="3" width="90%" border="0">
+<tr bgcolor="#cccccc">
+<td colspan="5"><b><font size="+1"><a name="preparedStatement">preparedStatement</a></font></b></td><td width="17%" align="right">
+            Availability:&nbsp;1.0</td>
+</tr>
+<tr>
+<td colspan="6">
+<p>
+        Create and execute a tokenized database query
+      </p>
+</td>
+</tr>
+<tr>
+<td width="15%"><b>Tag Body</b></td><td width="17%">JSP</td><td width="17%">&nbsp;</td><td width="17%">&nbsp;</td><td width="17%">&nbsp;</td><td width="17%">&nbsp;</td>
+</tr>
+<tr>
+<td><b>Restrictions</b></td><td colspan="5">
+<p>The scipt variable is not available until after the query
+     tag is called.</p>
+</td>
+</tr>
+<tr>
+<td><b>Attributes</b></td><td>Name</td><td>Required</td><td colspan="2">
+                Runtime&nbsp;Expression&nbsp;Evaluation
+              </td><td>Availability</td>
+</tr>
+<tr bgcolor="#cccccc">
+<td bgcolor="#ffffff">&nbsp;</td><td><b>id</b></td><td>&nbsp;
+      Yes
+    </td><td colspan="2">&nbsp;
+      No
+    </td><td>&nbsp;1.0</td>
+</tr>
+<tr>
+<td bgcolor="#ffffff">&nbsp;</td><td colspan="5">
+<p>
+          Script variable id
+        </p>
+</td>
+</tr>
+<tr bgcolor="#cccccc">
+<td bgcolor="#ffffff">&nbsp;</td><td><b>conn</b></td><td>&nbsp;
+      Yes
+    </td><td colspan="2">&nbsp;
+      No
+    </td><td>&nbsp;1.0</td>
+</tr>
+<tr>
+<td bgcolor="#ffffff">&nbsp;</td><td colspan="5">
+<p>
+          id of the connection to use
+        </p>
+</td>
+</tr>
+<tr>
+<td><b>Variables</b></td><td colspan="2">Name</td><td colspan="2">Scope</td><td>Availability</td>
+</tr>
+<tr bgcolor="#cccccc">
+<td bgcolor="#ffffff">&nbsp;</td><td colspan="2">&nbsp;<b>id</b>
+                      attribute value
+                    </td><td colspan="2">&nbsp;
+                      Nested within tag
+                    </td><td>&nbsp;1.0</td>
+</tr>
+<tr>
+<td>&nbsp;</td><td colspan="5"></td>
+</tr>
+<tr>
+<td>&nbsp;</td><td><b>Properties</b></td><td>Name</td><td>Get</td><td>Set</td><td>Availability</td>
+</tr>
+<tr bgcolor="#cccccc">
+<td bgcolor="#ffffff">&nbsp;</td><td bgcolor="#ffffff">&nbsp;</td><td>&nbsp;<b>fetchSize</b></td><td>&nbsp;yes</td><td>&nbsp;yes</td><td>&nbsp;1.0</td>
+</tr>
+<tr>
+<td>&nbsp;</td><td>&nbsp;</td><td colspan="4">
+<p>the number of rows that should be fetched from the 
+        database when more rows are needed</p>
+</td>
+</tr>
+<tr bgcolor="#cccccc">
+<td bgcolor="#ffffff">&nbsp;</td><td bgcolor="#ffffff">&nbsp;</td><td>&nbsp;<b>maxRows</b></td><td>&nbsp;yes</td><td>&nbsp;yes</td><td>&nbsp;1.0</td>
+</tr>
+<tr>
+<td>&nbsp;</td><td>&nbsp;</td><td colspan="4">
+<p>the maximum number of rows that a ResultSet object 
+        can contain (handy!)</p>
+</td>
+</tr>
+<tr bgcolor="#cccccc">
+<td bgcolor="#ffffff">&nbsp;</td><td bgcolor="#ffffff">&nbsp;</td><td>&nbsp;<b>queryTimeout</b></td><td>&nbsp;yes</td><td>&nbsp;yes</td><td>&nbsp;1.0</td>
+</tr>
+<tr>
+<td>&nbsp;</td><td>&nbsp;</td><td colspan="4">
+<p>the number of seconds the driver will wait for a 
+        Statement object to execute</p>
+</td>
+</tr>
+        
+<tr>
+<td><b>Examples</b></td>
+</tr>
+<tr>
+<td>&nbsp;</td><td colspan="5">
+<p>
+<pre>
+<code>
+
+&lt;%-- insert a row into the database --%&gt;
+&lt;sql:preparedStatement id="stmt1" conn="conn1"&gt;
+  &lt;sql:query&gt;
+    insert into test_books (id, name) 
+      values (?, ?)
+  &lt;/sql:query&gt;    
+  &lt;sql:execute&gt;
+    &lt;sql:setColumn position="1"&gt;3&lt;/sql:setColumn&gt;
+    &lt;sql:setColumn position="2"&gt;&lt;%=request.getParameter("book_title")%&gt;&lt;/sql:setColumn&gt;
+  &lt;/sql:execute&gt; 
+&lt;/sql:preparedStatement&gt;
+ 
+          </code>
+</pre>
+</p>
+</td>
+</tr>
+      
+</table>
+<table cellspacing="3" cellpadding="3" width="90%" border="0">
+<tr bgcolor="#cccccc">
+<td colspan="5"><b><font size="+1"><a name="setColumn">setColumn</a></font></b></td><td width="17%" align="right">
+            Availability:&nbsp;1.0</td>
+</tr>
+<tr>
+<td colspan="6">
+<p>
+        Set a field in a preparedStatement.  Set the value as a
+        String inside the tag body.
+      </p>
+</td>
+</tr>
+<tr>
+<td width="15%"><b>Tag Body</b></td><td width="17%">JSP</td><td width="17%">&nbsp;</td><td width="17%">&nbsp;</td><td width="17%">&nbsp;</td><td width="17%">&nbsp;</td>
+</tr>
+<tr>
+<td><b>Restrictions</b></td><td colspan="5">
+<p>Use within the preparedStatement tag</p>
+</td>
+</tr>
+<tr>
+<td><b>Attributes</b></td><td>Name</td><td>Required</td><td colspan="2">
+                Runtime&nbsp;Expression&nbsp;Evaluation
+              </td><td>Availability</td>
+</tr>
+<tr bgcolor="#cccccc">
+<td bgcolor="#ffffff">&nbsp;</td><td><b>position</b></td><td>&nbsp;
+      Yes
+    </td><td colspan="2">&nbsp;
+      No
+    </td><td>&nbsp;1.0</td>
+</tr>
+<tr>
+<td bgcolor="#ffffff">&nbsp;</td><td colspan="5">
+<p>
+          Column position
+        </p>
+</td>
+</tr>
+<tr>
+<td><b>Variables</b></td><td colspan="5">None</td>
+</tr>
+        
+<tr>
+<td><b>Examples</b></td>
+</tr>
+<tr>
+<td>&nbsp;</td><td colspan="5">
+<p>
+<pre>
+<code>
+
+&lt;%-- use the tag body --%&gt;
+&lt;sql:setColumn position="1"&gt;&lt;%= someValue %&gt;&lt;/sql:setColumn&gt;
+ 
+          </code>
+</pre>
+</p>
+</td>
+</tr>
+      
+</table>
+<table cellspacing="3" cellpadding="3" width="90%" border="0">
+<tr bgcolor="#cccccc">
+<td colspan="5"><b><font size="+1"><a name="resultSet">resultSet</a></font></b></td><td width="17%" align="right">
+            Availability:&nbsp;1.0</td>
+</tr>
+<tr>
+<td colspan="6">
+<p>
+        JSP tag resulset, executes the query and loops through the results
+for the enclosing statement or preparedstatement tag.  The body of
+this tag is executed once per row in the resultset.  The optional
+"loop" attribute, which default to true, specifies whether to execute
+the tag body once per row "true", or to simply assign the ResultSet
+to the page attribute specified by "id".
+      </p>
+</td>
+</tr>
+<tr>
+<td width="15%"><b>Tag Body</b></td><td width="17%">JSP</td><td width="17%">&nbsp;</td><td width="17%">&nbsp;</td><td width="17%">&nbsp;</td><td width="17%">&nbsp;</td>
+</tr>
+<tr>
+<td><b>Restrictions</b></td><td colspan="5">
+<p>If a name attribute is not supplied, use within a statement or 
+      preparedStatement and after a query.  If a name attribute is supplied,
+      there are no restrictions.</p>
+</td>
+</tr>
+<tr>
+<td><b>Attributes</b></td><td>Name</td><td>Required</td><td colspan="2">
+                Runtime&nbsp;Expression&nbsp;Evaluation
+              </td><td>Availability</td>
+</tr>
+<tr bgcolor="#cccccc">
+<td bgcolor="#ffffff">&nbsp;</td><td><b>id</b></td><td>&nbsp;
+      Yes
+    </td><td colspan="2">&nbsp;
+      No
+    </td><td>&nbsp;1.0</td>
+</tr>
+<tr>
+<td bgcolor="#ffffff">&nbsp;</td><td colspan="5">
+<p>
+          Script variable id
+        </p>
+</td>
+</tr>
+<tr bgcolor="#cccccc">
+<td bgcolor="#ffffff">&nbsp;</td><td><b>loop</b></td><td>&nbsp;
+      No
+    </td><td colspan="2">&nbsp;
+      No
+    </td><td>&nbsp;1.0</td>
+</tr>
+<tr>
+<td bgcolor="#ffffff">&nbsp;</td><td colspan="5">
+<p>
+          True: execute the tag body once per row in the
+        result set, automatically advancing the rows.  False: execute
+        the tag body once.
+        </p>
+</td>
+</tr>
+<tr bgcolor="#cccccc">
+<td bgcolor="#ffffff">&nbsp;</td><td><b>name</b></td><td>&nbsp;
+      No
+    </td><td colspan="2">&nbsp;
+      No
+    </td><td>&nbsp;1.0</td>
+</tr>
+<tr>
+<td bgcolor="#ffffff">&nbsp;</td><td colspan="5">
+<p>
+          Name of an attribute containing a ResultSet object.  If you pull a
+          ResultSet object from an attribute, it is not necessary to
+          place this tag inside of a statement.
+        </p>
+</td>
+</tr>
+<tr bgcolor="#cccccc">
+<td bgcolor="#ffffff">&nbsp;</td><td><b>scope</b></td><td>&nbsp;
+      No
+    </td><td colspan="2">&nbsp;
+      No
+    </td><td>&nbsp;1.0</td>
+</tr>
+<tr>
+<td bgcolor="#ffffff">&nbsp;</td><td colspan="5">
+<p>
+          Scope (page, request, session, or application) 
+          to search for the ResultSet attribute indicated in the "name"
+          attribute.  If this is not supplied, we use the default findAttribute()
+          behaviour.
+        </p>
+</td>
+</tr>
+<tr>
+<td><b>Variables</b></td><td colspan="2">Name</td><td colspan="2">Scope</td><td>Availability</td>
+</tr>
+<tr bgcolor="#cccccc">
+<td bgcolor="#ffffff">&nbsp;</td><td colspan="2">&nbsp;<b>id</b>
+                      attribute value
+                    </td><td colspan="2">&nbsp;
+                      Nested within tag
+                    </td><td>&nbsp;1.0</td>
+</tr>
+<tr>
+<td>&nbsp;</td><td colspan="5"></td>
+</tr>
+<tr>
+<td>&nbsp;</td><td><b>Properties</b></td><td>Name</td><td>Get</td><td>Set</td><td>Availability</td>
+</tr>
+<tr bgcolor="#cccccc">
+<td bgcolor="#ffffff">&nbsp;</td><td bgcolor="#ffffff">&nbsp;</td><td>&nbsp;<b>fetchSize</b></td><td>&nbsp;yes</td><td>&nbsp;yes</td><td>&nbsp;1.0</td>
+</tr>
+<tr>
+<td>&nbsp;</td><td>&nbsp;</td><td colspan="4">
+<p>the number of rows that should be fetched from the 
+        database when more rows are needed</p>
+</td>
+</tr>
+        
+<tr>
+<td><b>Examples</b></td>
+</tr>
+<tr>
+<td>&nbsp;</td><td colspan="5">
+<p>
+<pre>
+<code>
+
+&lt;%-- open a database query --%&gt;
+&lt;table&gt;
+&lt;sql:statement id="stmt1" conn="conn1"&gt; 
+  &lt;sql:query&gt;
+    select id, name, description from test_books
+    order by 1
+  &lt;/sql:query&gt;
+  &lt;%-- loop through the rows of your query --%&gt;
+  &lt;sql:resultSet id="rset2"&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;sql:getColumn position="1"/&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;sql:getColumn position="2"/&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;sql:getColumn position="3"/&gt;
+          &lt;sql:wasNull&gt;[no description]&lt;/sql:wasNull&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/sql:resultSet&gt;
+&lt;/sql:statement&gt;
+&lt;/table&gt;
+ 
+          </code>
+</pre>
+</p>
+</td>
+</tr>
+      
+</table>
+<table cellspacing="3" cellpadding="3" width="90%" border="0">
+<tr bgcolor="#cccccc">
+<td colspan="5"><b><font size="+1"><a name="wasNull">wasNull</a></font></b></td><td width="17%" align="right">
+            Availability:&nbsp;1.0</td>
+</tr>
+<tr>
+<td colspan="6">
+<p>
+        Executes its body if the last getColumn tag received a null value
+from the database.  You must be inside a resultset tag and there must
+be a previous getColumn tag, or an error will be generated.
+      </p>
+</td>
+</tr>
+<tr>
+<td width="15%"><b>Tag Body</b></td><td width="17%">JSP</td><td width="17%">&nbsp;</td><td width="17%">&nbsp;</td><td width="17%">&nbsp;</td><td width="17%">&nbsp;</td>
+</tr>
+<tr>
+<td><b>Restrictions</b></td><td colspan="5">
+<p>Must be used following a 
+     getColumn tag.</p>
+</td>
+</tr>
+<tr>
+<td><b>Attributes</b></td><td colspan="5">None</td>
+</tr>
+<tr>
+<td><b>Variables</b></td><td colspan="5">None</td>
+</tr>
+        
+<tr>
+<td><b>Examples</b></td>
+</tr>
+<tr>
+<td>&nbsp;</td><td colspan="5">
+<p>
+<pre>
+<code>
+
+&lt;%-- open a database query --%&gt;
+&lt;table&gt;
+&lt;sql:statement id="stmt1" conn="conn1"&gt; 
+  &lt;sql:query&gt;
+    select id, name, description from test_books
+    order by 1
+  &lt;/sql:query&gt;
+  &lt;%-- loop through the rows of your query --%&gt;
+  &lt;sql:resultSet id="rset2"&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;sql:getColumn position="1"/&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;sql:getColumn position="2"/&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;sql:getColumn position="3"/&gt;
+          &lt;sql:wasNull&gt;[no description]&lt;/sql:wasNull&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/sql:resultSet&gt;
+&lt;/sql:statement&gt;
+ 
+          </code>
+</pre>
+</p>
+</td>
+</tr>
+      
+</table>
+<table cellspacing="3" cellpadding="3" width="90%" border="0">
+<tr bgcolor="#cccccc">
+<td colspan="5"><b><font size="+1"><a name="wasNotNull">wasNotNull</a></font></b></td><td width="17%" align="right">
+            Availability:&nbsp;1.0</td>
+</tr>
+<tr>
+<td colspan="6">
+<p>
+        Executes its body if the last getColumn tag did not encounter a 
+  null value from the database.  
+      </p>
+</td>
+</tr>
+<tr>
+<td width="15%"><b>Tag Body</b></td><td width="17%">JSP</td><td width="17%">&nbsp;</td><td width="17%">&nbsp;</td><td width="17%">&nbsp;</td><td width="17%">&nbsp;</td>
+</tr>
+<tr>
+<td><b>Restrictions</b></td><td colspan="5">
+<p>Must be used following a 
+     getColumn tag.</p>
+</td>
+</tr>
+<tr>
+<td><b>Attributes</b></td><td colspan="5">None</td>
+</tr>
+<tr>
+<td><b>Variables</b></td><td colspan="5">None</td>
+</tr>
+        
+<tr>
+<td><b>Examples</b></td>
+</tr>
+<tr>
+<td>&nbsp;</td><td colspan="5">
+<p>
+<pre>
+<code>
+
+&lt;%-- open a database query --%&gt;
+&lt;table&gt;
+&lt;sql:statement id="stmt1" conn="conn1"&gt; 
+  &lt;sql:query&gt;
+    select id, name, description from test_books
+    order by 1
+  &lt;/sql:query&gt;
+  &lt;%-- loop through the rows of your query --%&gt;
+  &lt;sql:resultSet id="rset2"&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;sql:getColumn position="1"/&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;sql:getColumn position="2"/&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;sql:getColumn position="3" to="description"/&gt;
+          &lt;sql:wasNotNull&gt;Description: &lt;%= pageContext.getAttribute("description") %&gt;&lt;/sql:wasNotNull&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/sql:resultSet&gt;
+&lt;/sql:statement&gt;
+ 
+          </code>
+</pre>
+</p>
+</td>
+</tr>
+      
+</table>
+<table cellspacing="3" cellpadding="3" width="90%" border="0">
+<tr bgcolor="#cccccc">
+<td colspan="5"><b><font size="+1"><a name="getColumn">getColumn</a></font></b></td><td width="17%" align="right">
+            Availability:&nbsp;1.0</td>
+</tr>
+<tr>
+<td colspan="6">
+<p>
+        Gets the value, as a String, of a coulmn in the enclosing
+resultset.  The column number is set via the "position" attribute.
+You can optionally set the value, as a String, to a serlvet attribute 
+instead of the tag body with the "to" attribute.  The scope of the servlet
+attribute is specified by the "scope" XML attribute (default = page).  
+      </p>
+</td>
+</tr>
+<tr>
+<td width="15%"><b>Tag Body</b></td><td width="17%">empty</td><td width="17%">&nbsp;</td><td width="17%">&nbsp;</td><td width="17%">&nbsp;</td><td width="17%">&nbsp;</td>
+</tr>
+<tr>
+<td><b>Restrictions</b></td><td colspan="5">
+<p>Use within the resultSet tag</p>
+</td>
+</tr>
+<tr>
+<td><b>Attributes</b></td><td>Name</td><td>Required</td><td colspan="2">
+                Runtime&nbsp;Expression&nbsp;Evaluation
+              </td><td>Availability</td>
+</tr>
+<tr bgcolor="#cccccc">
+<td bgcolor="#ffffff">&nbsp;</td><td><b>position</b></td><td>&nbsp;
+      No
+    </td><td colspan="2">&nbsp;
+      No
+    </td><td>&nbsp;1.0</td>
+</tr>
+<tr>
+<td bgcolor="#ffffff">&nbsp;</td><td colspan="5">
+<p>
+          Column position
+        </p>
+</td>
+</tr>
+<tr bgcolor="#cccccc">
+<td bgcolor="#ffffff">&nbsp;</td><td><b>colName</b></td><td>&nbsp;
+      No
+    </td><td colspan="2">&nbsp;
+      No
+    </td><td>&nbsp;1.0</td>
+</tr>
+<tr>
+<td bgcolor="#ffffff">&nbsp;</td><td colspan="5">
+<p>
+          Column name
+        </p>
+</td>
+</tr>
+<tr bgcolor="#cccccc">
+<td bgcolor="#ffffff">&nbsp;</td><td><b>to</b></td><td>&nbsp;
+      No
+    </td><td colspan="2">&nbsp;
+      No
+    </td><td>&nbsp;1.0</td>
+</tr>
+<tr>
+<td bgcolor="#ffffff">&nbsp;</td><td colspan="5">
+<p>
+          Optionally assign the String to an attribute rather 
+        than the JSP output.
+        </p>
+</td>
+</tr>
+<tr bgcolor="#cccccc">
+<td bgcolor="#ffffff">&nbsp;</td><td><b>scope</b></td><td>&nbsp;
+      No
+    </td><td colspan="2">&nbsp;
+      No
+    </td><td>&nbsp;1.0</td>
+</tr>
+<tr>
+<td bgcolor="#ffffff">&nbsp;</td><td colspan="5">
+<p>
+          Optionally change the scope of the attribute designated
+        in "to" (default = page).
+        </p>
+</td>
+</tr>
+<tr>
+<td><b>Variables</b></td><td colspan="5">None</td>
+</tr>
+        
+<tr>
+<td><b>Examples</b></td>
+</tr>
+<tr>
+<td>&nbsp;</td><td colspan="5">
+<p>
+<pre>
+<code>
+
+&lt;%-- output to the JSP directly --%&gt;
+&lt;sql:getColumn position="1"/&gt;
+ 
+          </code>
+</pre>
+</p>
+</td>
+</tr>
+      
+</table>
+<table cellspacing="3" cellpadding="3" width="90%" border="0">
+<tr bgcolor="#cccccc">
+<td colspan="5"><b><font size="+1"><a name="getNumber">getNumber</a></font></b></td><td width="17%" align="right">
+            Availability:&nbsp;1.0</td>
+</tr>
+<tr>
+<td colspan="6">
+<p>
+        Similar to getColumn, but provides more precise control over
+    number formatting.  
+    
+    The "format" attribute can be either a pattern as
+    accepted by the DecimalFormat constructor or a style: "CURRENCY", 
+    "PERCENT" or "NUMBER".  
+    
+    The "locale" attribute can have one to three 
+    components as accepted by the Locale constructor: language,
+    country and variant. They are separated by "_".
+    
+    If neither the format nor locale attribute is set, output should be
+    identical to getColumn.  
+      </p>
+</td>
+</tr>
+<tr>
+<td width="15%"><b>Tag Body</b></td><td width="17%">empty</td><td width="17%">&nbsp;</td><td width="17%">&nbsp;</td><td width="17%">&nbsp;</td><td width="17%">&nbsp;</td>
+</tr>
+<tr>
+<td><b>Restrictions</b></td><td colspan="5">
+<p>Use within the resultSet tag</p>
+</td>
+</tr>
+<tr>
+<td><b>Attributes</b></td><td>Name</td><td>Required</td><td colspan="2">
+                Runtime&nbsp;Expression&nbsp;Evaluation
+              </td><td>Availability</td>
+</tr>
+<tr bgcolor="#cccccc">
+<td bgcolor="#ffffff">&nbsp;</td><td><b>position</b></td><td>&nbsp;
+      No
+    </td><td colspan="2">&nbsp;
+      No
+    </td><td>&nbsp;1.0</td>
+</tr>
+<tr>
+<td bgcolor="#ffffff">&nbsp;</td><td colspan="5">
+<p>
+          Column position
+        </p>
+</td>
+</tr>
+<tr bgcolor="#cccccc">
+<td bgcolor="#ffffff">&nbsp;</td><td><b>colName</b></td><td>&nbsp;
+      No
+    </td><td colspan="2">&nbsp;
+      No
+    </td><td>&nbsp;1.0</td>
+</tr>
+<tr>
+<td bgcolor="#ffffff">&nbsp;</td><td colspan="5">
+<p>
+          Column name
+        </p>
+</td>
+</tr>
+<tr bgcolor="#cccccc">
+<td bgcolor="#ffffff">&nbsp;</td><td><b>to</b></td><td>&nbsp;
+      No
+    </td><td colspan="2">&nbsp;
+      No
+    </td><td>&nbsp;1.0</td>
+</tr>
+<tr>
+<td bgcolor="#ffffff">&nbsp;</td><td colspan="5">
+<p>
+          Optionally assign the String to an attribute rather 
+        than the JSP output.
+        </p>
+</td>
+</tr>
+<tr bgcolor="#cccccc">
+<td bgcolor="#ffffff">&nbsp;</td><td><b>scope</b></td><td>&nbsp;
+      No
+    </td><td colspan="2">&nbsp;
+      No
+    </td><td>&nbsp;1.0</td>
+</tr>
+<tr>
+<td bgcolor="#ffffff">&nbsp;</td><td colspan="5">
+<p>
+          Optionally change the scope of the attribute designated
+        in "to" (default = page).
+        </p>
+</td>
+</tr>
+<tr bgcolor="#cccccc">
+<td bgcolor="#ffffff">&nbsp;</td><td><b>locale</b></td><td>&nbsp;
+      No
+    </td><td colspan="2">&nbsp;
+      Yes
+    </td><td>&nbsp;1.0</td>
+</tr>
+<tr>
+<td bgcolor="#ffffff">&nbsp;</td><td colspan="5">
+<p>
+          Format according to a particular locale.
+        </p>
+</td>
+</tr>
+<tr bgcolor="#cccccc">
+<td bgcolor="#ffffff">&nbsp;</td><td><b>format</b></td><td>&nbsp;
+      No
+    </td><td colspan="2">&nbsp;
+      Yes
+    </td><td>&nbsp;1.0</td>
+</tr>
+<tr>
+<td bgcolor="#ffffff">&nbsp;</td><td colspan="5">
+<p>
+          Specify a format for the number.
+        </p>
+</td>
+</tr>
+<tr>
+<td><b>Variables</b></td><td colspan="5">None</td>
+</tr>
+        
+<tr>
+<td><b>Examples</b></td>
+</tr>
+<tr>
+<td>&nbsp;</td><td colspan="5">
+<p>
+<pre>
+<code>
+
+&lt;%-- format a database value as English currency --%&gt;
+&lt;sql:getNumber colName="id" format="CURRENCY" locale="en_GB"/&gt;
+ 
+          </code>
+</pre>
+</p>
+</td>
+</tr>
+      
+</table>
+<table cellspacing="3" cellpadding="3" width="90%" border="0">
+<tr bgcolor="#cccccc">
+<td colspan="5"><b><font size="+1"><a name="getTime">getTime</a></font></b></td><td width="17%" align="right">
+            Availability:&nbsp;1.0</td>
+</tr>
+<tr>
+<td colspan="6">
+<p>
+        Similar to getColumn, but provides more precise control over
+    java.sql.Time formatting.  
+    
+    The "format" attribute can be either a pattern as
+    accepted by SimpleDateFormat or a style: "FULL",
+    "LONG", "MEDIUM" or "SHORT".  
+    
+    The "locale" attribute can have one to three 
+    components as accepted by the Locale constructor: language,
+    country and variant. They are separated by "_".
+    
+    If neither the format nor locale attribute is set, output should be
+    identical to getColumn.  
+      </p>
+</td>
+</tr>
+<tr>
+<td width="15%"><b>Tag Body</b></td><td width="17%">empty</td><td width="17%">&nbsp;</td><td width="17%">&nbsp;</td><td width="17%">&nbsp;</td><td width="17%">&nbsp;</td>
+</tr>
+<tr>
+<td><b>Restrictions</b></td><td colspan="5">
+<p>Use within the resultSet tag</p>
+</td>
+</tr>
+<tr>
+<td><b>Attributes</b></td><td>Name</td><td>Required</td><td colspan="2">
+                Runtime&nbsp;Expression&nbsp;Evaluation
+              </td><td>Availability</td>
+</tr>
+<tr bgcolor="#cccccc">
+<td bgcolor="#ffffff">&nbsp;</td><td><b>position</b></td><td>&nbsp;
+      No
+    </td><td colspan="2">&nbsp;
+      No
+    </td><td>&nbsp;1.0</td>
+</tr>
+<tr>
+<td bgcolor="#ffffff">&nbsp;</td><td colspan="5">
+<p>
+          Column position
+        </p>
+</td>
+</tr>
+<tr bgcolor="#cccccc">
+<td bgcolor="#ffffff">&nbsp;</td><td><b>colName</b></td><td>&nbsp;
+      No
+    </td><td colspan="2">&nbsp;
+      No
+    </td><td>&nbsp;1.0</td>
+</tr>
+<tr>
+<td bgcolor="#ffffff">&nbsp;</td><td colspan="5">
+<p>
+          Column name
+        </p>
+</td>
+</tr>
+<tr bgcolor="#cccccc">
+<td bgcolor="#ffffff">&nbsp;</td><td><b>to</b></td><td>&nbsp;
+      No
+    </td><td colspan="2">&nbsp;
+      No
+    </td><td>&nbsp;1.0</td>
+</tr>
+<tr>
+<td bgcolor="#ffffff">&nbsp;</td><td colspan="5">
+<p>
+          Optionally assign the String to an attribute rather 
+        than the JSP output.
+        </p>
+</td>
+</tr>
+<tr bgcolor="#cccccc">
+<td bgcolor="#ffffff">&nbsp;</td><td><b>scope</b></td><td>&nbsp;
+      No
+    </td><td colspan="2">&nbsp;
+      No
+    </td><td>&nbsp;1.0</td>
+</tr>
+<tr>
+<td bgcolor="#ffffff">&nbsp;</td><td colspan="5">
+<p>
+          Optionally change the scope of the attribute designated
+        in "to" (default = page).
+        </p>
+</td>
+</tr>
+<tr bgcolor="#cccccc">
+<td bgcolor="#ffffff">&nbsp;</td><td><b>locale</b></td><td>&nbsp;
+      No
+    </td><td colspan="2">&nbsp;
+      Yes
+    </td><td>&nbsp;1.0</td>
+</tr>
+<tr>
+<td bgcolor="#ffffff">&nbsp;</td><td colspan="5">
+<p>
+          Format according to a particular locale.
+        </p>
+</td>
+</tr>
+<tr bgcolor="#cccccc">
+<td bgcolor="#ffffff">&nbsp;</td><td><b>format</b></td><td>&nbsp;
+      No
+    </td><td colspan="2">&nbsp;
+      Yes
+    </td><td>&nbsp;1.0</td>
+</tr>
+<tr>
+<td bgcolor="#ffffff">&nbsp;</td><td colspan="5">
+<p>
+          Specify a format for the time.
+        </p>
+</td>
+</tr>
+<tr>
+<td><b>Variables</b></td><td colspan="5">None</td>
+</tr>
+        
+<tr>
+<td><b>Examples</b></td>
+</tr>
+<tr>
+<td>&nbsp;</td><td colspan="5">
+<p>
+<pre>
+<code>
+
+&lt;sql:getTime colName="time"/&gt;
+ 
+          </code>
+</pre>
+</p>
+</td>
+</tr>
+      
+</table>
+<table cellspacing="3" cellpadding="3" width="90%" border="0">
+<tr bgcolor="#cccccc">
+<td colspan="5"><b><font size="+1"><a name="getTimestamp">getTimestamp</a></font></b></td><td width="17%" align="right">
+            Availability:&nbsp;1.0</td>
+</tr>
+<tr>
+<td colspan="6">
+<p>
+        Similar to getColumn, but provides more precise control over
+    java.sql.Timestamp formatting.  
+    
+    The "format" attribute can be either a pattern as
+    accepted by SimpleDateFormat or a style: "FULL",
+    "LONG", "MEDIUM" or "SHORT".  
+    
+    The "locale" attribute can have one to three 
+    components as accepted by the Locale constructor: language,
+    country and variant. They are separated by "_".
+    
+    If neither the format nor locale attribute is set, output should be
+    identical to getColumn.  
+      </p>
+</td>
+</tr>
+<tr>
+<td width="15%"><b>Tag Body</b></td><td width="17%">empty</td><td width="17%">&nbsp;</td><td width="17%">&nbsp;</td><td width="17%">&nbsp;</td><td width="17%">&nbsp;</td>
+</tr>
+<tr>
+<td><b>Restrictions</b></td><td colspan="5">
+<p>Use within the resultSet tag</p>
+</td>
+</tr>
+<tr>
+<td><b>Attributes</b></td><td>Name</td><td>Required</td><td colspan="2">
+                Runtime&nbsp;Expression&nbsp;Evaluation
+              </td><td>Availability</td>
+</tr>
+<tr bgcolor="#cccccc">
+<td bgcolor="#ffffff">&nbsp;</td><td><b>position</b></td><td>&nbsp;
+      No
+    </td><td colspan="2">&nbsp;
+      No
+    </td><td>&nbsp;1.0</td>
+</tr>
+<tr>
+<td bgcolor="#ffffff">&nbsp;</td><td colspan="5">
+<p>
+          Column position
+        </p>
+</td>
+</tr>
+<tr bgcolor="#cccccc">
+<td bgcolor="#ffffff">&nbsp;</td><td><b>colName</b></td><td>&nbsp;
+      No
+    </td><td colspan="2">&nbsp;
+      No
+    </td><td>&nbsp;1.0</td>
+</tr>
+<tr>
+<td bgcolor="#ffffff">&nbsp;</td><td colspan="5">
+<p>
+          Column name
+        </p>
+</td>
+</tr>
+<tr bgcolor="#cccccc">
+<td bgcolor="#ffffff">&nbsp;</td><td><b>to</b></td><td>&nbsp;
+      No
+    </td><td colspan="2">&nbsp;
+      No
+    </td><td>&nbsp;1.0</td>
+</tr>
+<tr>
+<td bgcolor="#ffffff">&nbsp;</td><td colspan="5">
+<p>
+          Optionally assign the String to an attribute rather 
+        than the JSP output.
+        </p>
+</td>
+</tr>
+<tr bgcolor="#cccccc">
+<td bgcolor="#ffffff">&nbsp;</td><td><b>scope</b></td><td>&nbsp;
+      No
+    </td><td colspan="2">&nbsp;
+      No
+    </td><td>&nbsp;1.0</td>
+</tr>
+<tr>
+<td bgcolor="#ffffff">&nbsp;</td><td colspan="5">
+<p>
+          Optionally change the scope of the attribute designated
+        in "to" (default = page).
+        </p>
+</td>
+</tr>
+<tr bgcolor="#cccccc">
+<td bgcolor="#ffffff">&nbsp;</td><td><b>locale</b></td><td>&nbsp;
+      No
+    </td><td colspan="2">&nbsp;
+      Yes
+    </td><td>&nbsp;1.0</td>
+</tr>
+<tr>
+<td bgcolor="#ffffff">&nbsp;</td><td colspan="5">
+<p>
+          Format according to a particular locale.
+        </p>
+</td>
+</tr>
+<tr bgcolor="#cccccc">
+<td bgcolor="#ffffff">&nbsp;</td><td><b>format</b></td><td>&nbsp;
+      No
+    </td><td colspan="2">&nbsp;
+      Yes
+    </td><td>&nbsp;1.0</td>
+</tr>
+<tr>
+<td bgcolor="#ffffff">&nbsp;</td><td colspan="5">
+<p>
+          Specify a format for the timestamp.
+        </p>
+</td>
+</tr>
+<tr>
+<td><b>Variables</b></td><td colspan="5">None</td>
+</tr>
+        
+<tr>
+<td><b>Examples</b></td>
+</tr>
+<tr>
+<td>&nbsp;</td><td colspan="5">
+<p>
+<pre>
+<code>
+
+&lt;sql:getTimestamp colName="time"/&gt;
+ 
+          </code>
+</pre>
+</p>
+</td>
+</tr>
+      
+</table>
+<table cellspacing="3" cellpadding="3" width="90%" border="0">
+<tr bgcolor="#cccccc">
+<td colspan="5"><b><font size="+1"><a name="getDate">getDate</a></font></b></td><td width="17%" align="right">
+            Availability:&nbsp;1.0</td>
+</tr>
+<tr>
+<td colspan="6">
+<p>
+        Similar to getColumn, but provides more precise control over
+    java.sql.Date formatting.  
+    
+    The "format" attribute can be either a pattern as
+    accepted by SimpleDateFormat or a style: "FULL",
+    "LONG", "MEDIUM" or "SHORT".  It is required.  
+    
+    The "locale" attribute can have one to three 
+    components as accepted by the Locale constructor: language,
+    country and variant. They are separated by "_".  
+      </p>
+</td>
+</tr>
+<tr>
+<td width="15%"><b>Tag Body</b></td><td width="17%">empty</td><td width="17%">&nbsp;</td><td width="17%">&nbsp;</td><td width="17%">&nbsp;</td><td width="17%">&nbsp;</td>
+</tr>
+<tr>
+<td><b>Restrictions</b></td><td colspan="5">
+<p>Use within the resultSet tag</p>
+</td>
+</tr>
+<tr>
+<td><b>Attributes</b></td><td>Name</td><td>Required</td><td colspan="2">
+                Runtime&nbsp;Expression&nbsp;Evaluation
+              </td><td>Availability</td>
+</tr>
+<tr bgcolor="#cccccc">
+<td bgcolor="#ffffff">&nbsp;</td><td><b>position</b></td><td>&nbsp;
+      No
+    </td><td colspan="2">&nbsp;
+      No
+    </td><td>&nbsp;1.0</td>
+</tr>
+<tr>
+<td bgcolor="#ffffff">&nbsp;</td><td colspan="5">
+<p>
+          Column position
+        </p>
+</td>
+</tr>
+<tr bgcolor="#cccccc">
+<td bgcolor="#ffffff">&nbsp;</td><td><b>colName</b></td><td>&nbsp;
+      No
+    </td><td colspan="2">&nbsp;
+      No
+    </td><td>&nbsp;1.0</td>
+</tr>
+<tr>
+<td bgcolor="#ffffff">&nbsp;</td><td colspan="5">
+<p>
+          Column name
+        </p>
+</td>
+</tr>
+<tr bgcolor="#cccccc">
+<td bgcolor="#ffffff">&nbsp;</td><td><b>to</b></td><td>&nbsp;
+      No
+    </td><td colspan="2">&nbsp;
+      No
+    </td><td>&nbsp;1.0</td>
+</tr>
+<tr>
+<td bgcolor="#ffffff">&nbsp;</td><td colspan="5">
+<p>
+          Optionally assign the String to an attribute rather 
+        than the JSP output.
+        </p>
+</td>
+</tr>
+<tr bgcolor="#cccccc">
+<td bgcolor="#ffffff">&nbsp;</td><td><b>scope</b></td><td>&nbsp;
+      No
+    </td><td colspan="2">&nbsp;
+      No
+    </td><td>&nbsp;1.0</td>
+</tr>
+<tr>
+<td bgcolor="#ffffff">&nbsp;</td><td colspan="5">
+<p>
+          Optionally change the scope of the attribute designated
+        in "to" (default = page).
+        </p>
+</td>
+</tr>
+<tr bgcolor="#cccccc">
+<td bgcolor="#ffffff">&nbsp;</td><td><b>locale</b></td><td>&nbsp;
+      No
+    </td><td colspan="2">&nbsp;
+      Yes
+    </td><td>&nbsp;1.0</td>
+</tr>
+<tr>
+<td bgcolor="#ffffff">&nbsp;</td><td colspan="5">
+<p>
+          Format according to a particular locale.
+        </p>
+</td>
+</tr>
+<tr bgcolor="#cccccc">
+<td bgcolor="#ffffff">&nbsp;</td><td><b>format</b></td><td>&nbsp;
+      No
+    </td><td colspan="2">&nbsp;
+      Yes
+    </td><td>&nbsp;1.0</td>
+</tr>
+<tr>
+<td bgcolor="#ffffff">&nbsp;</td><td colspan="5">
+<p>
+          Specify a format for the date.
+        </p>
+</td>
+</tr>
+<tr>
+<td><b>Variables</b></td><td colspan="5">None</td>
+</tr>
+        
+<tr>
+<td><b>Examples</b></td>
+</tr>
+<tr>
+<td>&nbsp;</td><td colspan="5">
+<p>
+<pre>
+<code>
+
+&lt;sql:getDate colName="time" format="FULL"/&gt;
+ 
+          </code>
+</pre>
+</p>
+</td>
+</tr>
+      
+</table>
+<table cellspacing="3" cellpadding="3" width="90%" border="0">
+<tr bgcolor="#cccccc">
+<td colspan="5"><b><font size="+1"><a name="wasEmpty">wasEmpty</a></font></b></td><td width="17%" align="right">
+            Availability:&nbsp;1.0</td>
+</tr>
+<tr>
+<td colspan="6">
+<p>
+        Executes its body if the last ResultSet tag received 0 rows
+        from the database.  You must be after a ResultSet tag, 
+        or an error will be generated.
+      </p>
+</td>
+</tr>
+<tr>
+<td width="15%"><b>Tag Body</b></td><td width="17%">JSP</td><td width="17%">&nbsp;</td><td width="17%">&nbsp;</td><td width="17%">&nbsp;</td><td width="17%">&nbsp;</td>
+</tr>
+<tr>
+<td><b>Restrictions</b></td><td colspan="5">
+<p>Use after a ResultSet tag.</p>
+</td>
+</tr>
+<tr>
+<td><b>Attributes</b></td><td colspan="5">None</td>
+</tr>
+<tr>
+<td><b>Variables</b></td><td colspan="5">None</td>
+</tr>
+        
+<tr>
+<td><b>Examples</b></td>
+</tr>
+<tr>
+<td>&nbsp;</td><td colspan="5">
+<p>
+<pre>
+<code>
+
+&lt;%-- showing the contents of the table --%&gt;
+&lt;table&gt;
+&lt;tr&gt;&lt;th&gt;id&lt;/th&gt;&lt;th&gt;name&lt;/th&gt;&lt;th&gt;description&lt;/th&gt;&lt;/tr&gt;
+&lt;sql:preparedStatement id="stmt6" conn="conn1"&gt; 
+  &lt;sql:query&gt;
+    select id, name, description from test_books
+  &lt;/sql:query&gt;
+  &lt;sql:resultSet id="rset4"&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;sql:getColumn position="1"/&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;sql:getColumn position="2"/&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;sql:getColumn position="3" to="description"/&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/sql:resultSet&gt;
+  &lt;tr&gt;
+    &lt;td colspan="3"&gt;
+    &lt;%-- show different text, depending on whether or not
+    any rows were retrieved --%&gt;
+    &lt;sql:wasEmpty&gt;No rows retrieved.&lt;/sql:wasEmpty&gt;
+    &lt;sql:wasNotEmpty&gt;&lt;sql:rowCount/&gt; rows retrieved.&lt;/sql:wasNotEmpty&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/sql:preparedStatement&gt;
+ 
+          </code>
+</pre>
+</p>
+</td>
+</tr>
+      
+</table>
+<table cellspacing="3" cellpadding="3" width="90%" border="0">
+<tr bgcolor="#cccccc">
+<td colspan="5"><b><font size="+1"><a name="wasNotEmpty">wasNotEmpty</a></font></b></td><td width="17%" align="right">
+            Availability:&nbsp;1.0</td>
+</tr>
+<tr>
+<td colspan="6">
+<p>
+        Executes its body if the last ResultSet tag received more than 0 rows
+        from the database.  You must be after a ResultSet tag, 
+        or an error will be generated.
+      </p>
+</td>
+</tr>
+<tr>
+<td width="15%"><b>Tag Body</b></td><td width="17%">JSP</td><td width="17%">&nbsp;</td><td width="17%">&nbsp;</td><td width="17%">&nbsp;</td><td width="17%">&nbsp;</td>
+</tr>
+<tr>
+<td><b>Restrictions</b></td><td colspan="5">
+<p>Use after a ResultSet tag.</p>
+</td>
+</tr>
+<tr>
+<td><b>Attributes</b></td><td colspan="5">None</td>
+</tr>
+<tr>
+<td><b>Variables</b></td><td colspan="5">None</td>
+</tr>
+        
+<tr>
+<td><b>Examples</b></td>
+</tr>
+<tr>
+<td>&nbsp;</td><td colspan="5">
+<p>
+<pre>
+<code>
+
+&lt;%-- showing the contents of the table --%&gt;
+&lt;table&gt;
+&lt;tr&gt;&lt;th&gt;id&lt;/th&gt;&lt;th&gt;name&lt;/th&gt;&lt;th&gt;description&lt;/th&gt;&lt;/tr&gt;
+&lt;sql:preparedStatement id="stmt6" conn="conn1"&gt; 
+  &lt;sql:query&gt;
+    select id, name, description from test_books
+  &lt;/sql:query&gt;
+  &lt;sql:resultSet id="rset4"&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;sql:getColumn position="1"/&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;sql:getColumn position="2"/&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;sql:getColumn position="3" to="description"/&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/sql:resultSet&gt;
+  &lt;tr&gt;
+    &lt;td colspan="3"&gt;
+    &lt;%-- show different text, depending on whether or not
+    any rows were retrieved --%&gt;
+    &lt;sql:wasEmpty&gt;No rows retrieved.&lt;/sql:wasEmpty&gt;
+    &lt;sql:wasNotEmpty&gt;&lt;sql:rowCount/&gt; rows retrieved.&lt;/sql:wasNotEmpty&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/sql:preparedStatement&gt;
+ 
+          </code>
+</pre>
+</p>
+</td>
+</tr>
+      
+</table>
+<table cellspacing="3" cellpadding="3" width="90%" border="0">
+<tr bgcolor="#cccccc">
+<td colspan="5"><b><font size="+1"><a name="rowCount">rowCount</a></font></b></td><td width="17%" align="right">
+            Availability:&nbsp;1.0</td>
+</tr>
+<tr>
+<td colspan="6">
+<p>
+        Prints out the number of rows retrieved from the database.
+It can be used inside a ResultSet tag to provide a running
+count of rows retreived, or after the ResultSet tag to
+display the total number.  Using the tag before the ResultSet
+will produce an error.
+      </p>
+</td>
+</tr>
+<tr>
+<td width="15%"><b>Tag Body</b></td><td width="17%">empty</td><td width="17%">&nbsp;</td><td width="17%">&nbsp;</td><td width="17%">&nbsp;</td><td width="17%">&nbsp;</td>
+</tr>
+<tr>
+<td><b>Restrictions</b></td><td colspan="5">
+<p>Use inside or after a ResultSet tag (not before).</p>
+</td>
+</tr>
+<tr>
+<td><b>Attributes</b></td><td colspan="5">None</td>
+</tr>
+<tr>
+<td><b>Variables</b></td><td colspan="5">None</td>
+</tr>
+        
+<tr>
+<td><b>Examples</b></td>
+</tr>
+<tr>
+<td>&nbsp;</td><td colspan="5">
+<p>
+<pre>
+<code>
+
+&lt;%-- showing the contents of the table --%&gt;
+&lt;table&gt;
+&lt;tr&gt;&lt;th&gt;id&lt;/th&gt;&lt;th&gt;name&lt;/th&gt;&lt;th&gt;description&lt;/th&gt;&lt;/tr&gt;
+&lt;sql:preparedStatement id="stmt6" conn="conn1"&gt; 
+  &lt;sql:query&gt;
+    select id, name, description from test_books
+  &lt;/sql:query&gt;
+  &lt;sql:resultSet id="rset4"&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;sql:getColumn position="1"/&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;sql:getColumn position="2"/&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;sql:getColumn position="3" to="description"/&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/sql:resultSet&gt;
+  &lt;tr&gt;
+    &lt;td colspan="3"&gt;
+    &lt;%-- show different text, depending on whether or not
+    any rows were retrieved --%&gt;
+    &lt;sql:wasEmpty&gt;No rows retrieved.&lt;/sql:wasEmpty&gt;
+    &lt;sql:wasNotEmpty&gt;&lt;sql:rowCount/&gt; rows retrieved.&lt;/sql:wasNotEmpty&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/sql:preparedStatement&gt;
+ 
+          </code>
+</pre>
+</p>
+</td>
+</tr>
+      
+</table>
+<a name="examples">
+<h3>Examples</h3>
+</a>
+<p>See the example application
+    DBTags-examples.war for examples of the usage
+    of the tags from this custom tag library.</p>
+<a name="javadocs">
+<h3>Java Docs</h3>
+</a>
+<p>Java programmers can view the java class documentation for this tag
+    library as <a href="javadoc/index.html">javadocs</a>.</p>
+<a name="history">
+<h3>Revision History</h3>
+</a>
+<p>Review the complete <a href="changes.html">revision history</a> of
+    this tag library.</p>
+</body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</html>

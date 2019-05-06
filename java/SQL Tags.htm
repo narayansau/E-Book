@@ -1,0 +1,355 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Final//EN">
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1">
+<meta name="LASTUPDATED" content="Thu Aug 01 13:37:52 2002">
+<title>SQL Tags  </title>
+</head>
+
+<body BGCOLOR="#ffffff" LINK="#666699">
+<B><FONT SIZE="-1">The Java<sup><font size="-2">TM</font></sup> Web Services Tutorial</FONT></B>
+<br>
+<table width="550">
+<tr>
+<td align="left" valign="center">
+<font size="-1">
+<a href="../index.html" target="_top">Home</a>
+<br>
+<a href="JavaWSTutorialTOC.html">TOC</a>
+<br>
+<a href="JavaWSTutorialIX.html">Index</a></font>
+</td>
+
+<td align="center" valign="center">
+<a href="JSTL7.html"><img src="images/PreviousArrow.gif" align="center" width="26" height="26"
+    border="0" alt="PREV"></a>
+<a href="JSTL.html"><img src="images/UpArrow.gif" align="center" width="26" height="26"
+    border="0" alt="TOP"></a>
+<a href="JSTL9.html"><img src="images/NextArrow.gif" align="center" width="26" height="26"
+    border="0" alt="NEXT"></a>
+</td>
+
+<td align="right" valign="center">
+<font size="-1">
+</font>
+</td>
+
+</tr>
+</table>
+<img src="images/blueline.gif" width="550" height="8" ALIGN="BOTTOM" NATURALSIZEFLAG="3" ALT="Divider">
+<br>
+
+
+
+<blockquote>
+<h2>
+  <a name="63722"> </a><font color="#666699" face="sans-serif">SQL Tags</font>
+</h2>
+
+
+<p>
+  <a name="71159"> </a><font >The JSTL SQL tags are designed for quick prototyping and simple applications. For production applications, database operations are normally encapsulated in JavaBeans components.<p></p>
+<table border="1" cellpadding="5" cellspacing="0">
+  <caption align=left><b><font face=""><a name="71007"> </a>Table 16-7    SQL Tags&nbsp;</font></b></caption>
+  <tr align="center" bgcolor="#CCCCCC">
+    <th><font face="" color="#666699">
+<a name="71017"> </a><font >Area<br></font>
+
+</font></th>
+    <th><font face="" color="#666699">
+<a name="71019"> </a><font >Function<br></font>
+
+</font></th>
+    <th><font face="" color="#666699">
+<a name="71021"> </a><font >Tags<br></font>
+
+</font></th>
+    <th><font face="" color="#666699">
+<a name="71023"> </a><font >TLD<br></font>
+
+</font></th>
+    <th><font face="" color="#666699">
+<a name="71025"> </a><font >Prefix<br></font>
+
+</font></th>
+  </tr>
+  <tr>
+    <td colspan="1" rowspan="2"><font face="">
+<a name="71137"> </a><font >Database<br></font>
+
+</font></td>
+    <td><font face="">
+<a name="71139"> </a><font ><br></font>
+
+</font></td>
+    <td><font face="">
+<a name="71141"> </a><font ><code>setDataSource</code><br></font>
+
+</font></td>
+    <td colspan="1" rowspan="2"><font face="">
+<a name="71143"> </a><font ><code>/jstl-sql</code><br></font>
+
+</font></td>
+    <td colspan="1" rowspan="2"><font face="">
+<a name="71145"> </a><font ><code>sql</code><br></font>
+
+</font></td>
+  </tr>
+  <tr>
+    <td><font face="">
+<a name="71149"> </a><font >SQL<br></font>
+
+</font></td>
+    <td><font face="">
+<a name="73434"> </a><font ><code>query</code><br></font>
+
+
+<a name="73435"> </a><font ><code>&nbsp;&nbsp;dateParam&nbsp;&nbsp;paramtransaction</code><br></font>
+
+
+<a name="73436"> </a><font ><code>update&nbsp;&nbsp;dateParam</code><br></font>
+
+
+<a name="71154"> </a><font ><code>&nbsp;&nbsp;param</code><br></font>
+
+</font></td>
+  </tr>
+</table>
+
+
+
+</font>
+</p>
+
+
+<p>
+  <a name="67498"> </a><font >The <code>setDataSource</code> tag is provided to allow you to set data source information for the database. You can provide a JNDI name or <code>DriverManager</code> parameters to set the data source information. All the Duke's Bookstore pages that have more than one SQL tag use the following statement to set the data source:</font>
+</p>
+
+<blockquote><pre>
+&lt;sql:setDataSource dataSource="jdbc/BookDB" /&gt;
+<a name="82764"> </a>
+</pre></blockquote>
+
+<p>
+  <a name="82761"> </a><font >The <code>query</code> tag is used to perform an SQL query that returns a result set. For parameterized SQL queries, you use a nested <code>param</code> tag inside the <code>query</code> tag. </font>
+</p>
+
+
+<p>
+  <a name="67907"> </a><font >In <code><a href="../examples/web/bookstore4/web/catalog.txt" TARGET=_blank>catalog.jsp</a></code>, the value of the <code>Add</code> request parameter determines which book information should be retrieved from the database. This parameter is saved as the attribute name <code>bid</code> and passed to the <code>param</code> tag. Notice that the <code>query</code> tag obtains its data source from the context attribute <code>bookDS</code> set in the context listener. </font>
+</p>
+
+<blockquote><pre>
+&lt;c:set var="bid" value="${param.Add}"/&gt;
+&lt;sql:query var="books" &gt;
+&nbsp;&nbsp;select * from PUBLIC.books where id = ?
+&nbsp;&nbsp;&lt;sql:param value="${bid}" /&gt;
+&lt;/sql:query&gt;
+<a name="76167"> </a>
+</pre></blockquote>
+
+<p>
+  <a name="76187"> </a><font >The <code>update</code> tag is used to update a database row. The <code>transaction</code> tag is used to perform a series of SQL statements atomically. </font>
+</p>
+
+
+<p>
+  <a name="77080"> </a><font >The JSP page <code>receipt.jsp</code> page uses both tags to update the database inventory for each purchase. Since a shopping cart can contain more than one book, the <code>transaction</code> tag is used to wrap multiple queries and updates. First the page establishes that there is sufficient inventory, then the updates are performed.</font>
+</p>
+
+<blockquote><pre>
+&lt;c:set var="sufficientInventory" value="true" /&gt;
+&lt;sql:transaction&gt;
+&nbsp;&nbsp;&lt;c:forEach var="item" items="${sessionScope.cart.items}"&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;c:set var="book" value="${item.item}" /&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;c:set var="bookId" value="${book.bookId}" /&gt;
+
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;sql:query var="books" 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sql="select * from PUBLIC.books where id = ?" &gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;sql:param value="${bookId}" /&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;/sql:query&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;jsp:useBean id="inventory"
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;class="database.BookInventory" /&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;c:forEach var="bookRow" begin="0"
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;items="${books.rowsByIndex}"&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;jsp:useBean id="bookRow"  type="java.lang.Object[]" /&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;jsp:setProperty name="inventory" property="quantity"
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value="&lt;%=(Integer)bookRow[7]%&gt;" /&gt;
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;c:if test="${item.quantity &gt; inventory.quantity}"&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;c:set var="sufficientInventory" value="false" /&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;h3&gt;&lt;font color="red" size="+2"&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;fmt:message key="OrderError"/&gt; 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;There is insufficient inventory for 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;i&gt;&lt;c:out value="${bookRow[3]}"/&gt;&lt;/i&gt;.&lt;/font&gt;&lt;/h3&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/c:if&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;/c:forEach&gt;
+&nbsp;&nbsp;&lt;/c:forEach&gt;
+
+&nbsp;&nbsp;&lt;c:if test="${sufficientInventory == 'true'}" /&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;c:forEach var="item" items="${sessionScope.cart.items}"&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;  &lt;c:set var="book" value="${item.item}" /&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;  &lt;c:set var="bookId" value="${book.bookId}" /&gt;
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;sql:query var="books" 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sql="select * from PUBLIC.books where id = ?" &gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;sql:param value="${bookId}" /&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/sql:query&gt;
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;c:forEach var="bookRow" begin="0"
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;items="${books.rows}"&gt;&nbsp;&nbsp;          
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;sql:update var="books" sql="update PUBLIC.books set
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;inventory = inventory - ? where id = ?" &gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;sql:param value="${item.quantity}" /&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;sql:param value="${bookId}" /&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/sql:update&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/c:forEach&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;/c:forEach&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;h3&gt;&lt;fmt:message key="ThankYou"/&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;c:out value="${param.cardname}" /&gt;.&lt;/h3&gt;&lt;br&gt;  
+&nbsp;&nbsp;&lt;/c:if&gt;
+&lt;/sql:transaction&gt;
+<a name="77246"> </a>
+</pre></blockquote>
+
+<h3>
+  <a name="77082"> </a><font color="#666699" face="sans-serif">query Tag Result Interface</font>
+</h3>
+
+
+<p>
+  <a name="75351"> </a><font >The <code>Result</code> interface is used to retrieve information from objects returned from a <code>query</code> tag. </font>
+</p>
+
+<blockquote><pre>
+public interface Result
+&nbsp;&nbsp;public String[] getColumnNames();
+&nbsp;&nbsp;public int getRowCount()
+&nbsp;&nbsp;public Map[] getRows();
+&nbsp;&nbsp;public Object[][] getRowsByIndex();
+&nbsp;&nbsp;public boolean isLimitedByMaxRows();
+<a name="76211"> </a>
+</pre></blockquote>
+
+<p>
+  <a name="75325"> </a><font >For complete information about this interface, see the API documentation for the <code><a href="../../api/javax/servlet/jsp/jstl/sql/package-summary.html" TARGET=_blank>javax.servlet.jsp.jstl.sql</a></code> package.</font>
+</p>
+
+
+<p>
+  <a name="75363"> </a><font >The <code>var</code> attribute set by a <code>query</code> tag is of type <code>Result</code>. The <code>getRows</code> method returns an array of maps that can be supplied to the <code>items</code> attribute of a <code>forEach</code> tag. The JSTL expression language converts the syntax <code>${</code><code><i>result</i></code><code>.rows}</code> to a call to <code><i>result</i></code><code>.getRows</code>. The expression <code>${books.rows}</code> in the following example returns an array of maps.</font>
+</p>
+
+
+<p>
+  <a name="70265"> </a><font >When you provide a array of maps to the <code>forEach</code> tag, the <code>var</code> attribute set by the tag is of type <code>Map</code>. To retrieve information from a row, use the <code>get("</code><code><i>colname</i></code><code>")</code> method to get a column value. The JSTL expression language converts the syntax <code>${</code><code><i>map</i></code><code>.</code><code><i>colname</i></code><code>}</code> to a call to <code><i>map</i></code><code>.get("</code><code><i>colname</i></code><code>")</code>. For example, the expression <code>${book.title}</code> returns the value of the title entry of a book map.</font>
+</p>
+
+
+<p>
+  <a name="70191"> </a><font >The Duke's Bookstore page <code><a href="../examples/web/bookstore4/web/bookdetails.txt" TARGET=_blank>bookdetails.jsp</a></code> retrieves the column values from the <code>book</code> map as follows.</font>
+</p>
+
+<blockquote><pre>
+&lt;c:forEach var="book" begin="0" items="${books.rows}"&gt;
+&nbsp;&nbsp;&lt;h2&gt;&lt;c:out value="${book.title}"/&gt;&lt;/h2&gt;
+&nbsp;&nbsp;&amp;nbsp;&lt;fmt:message key="By"/&gt; &lt;em&gt;&lt;c:out
+&nbsp;&nbsp;value="${book.firstname}"/&gt; &lt;c:out
+&nbsp;&nbsp;value="${book.surname}"/&gt;&lt;/em&gt;&amp;nbsp;&amp;nbsp;
+&nbsp;&nbsp;(&lt;c:out value="${book.year}"/&gt;)&lt;br&gt; &amp;nbsp; &lt;br&gt;
+&nbsp;&nbsp;&lt;h4&gt;&lt;fmt:message key="Critics"/&gt;&lt;/h4&gt;
+&nbsp;&nbsp;&lt;blockquote&gt;&lt;c:out value="${book.description}"/&gt;
+&nbsp;&nbsp;&lt;/blockquote&gt;
+&nbsp;&nbsp;&lt;h4&gt;&lt;fmt:message key="ItemPrice"/&gt;: 
+&nbsp;&nbsp;&lt;fmt:formatNumber value="${book.price}" type="currency"/&gt; 
+&nbsp;&nbsp;&lt;/h4&gt;
+&lt;/c:forEach&gt;
+<a name="70165"> </a>
+</pre></blockquote>
+
+<p>
+  <a name="68160"> </a><font >The following excerpt from <code><a href="../examples/web/bookstore4/web/catalog.txt" TARGET=_blank>catalog.jsp</a></code> uses the <code>Row</code> interface to retrieve values from the columns of a book row using scripting language expressions. First the book row that matches a request parameter (<code>bid</code>) is retrieved from the database. Since the <code>bid</code> and <code>bookRow</code> objects are later used by tags that use scripting language expressions to set attribute values and a scriptlet that adds a book to the shopping cart, both objects are declared as scripting variables using the <code>jsp:useBean</code> tag. The page creates a bean that describes the book and scripting language expressions are used to set the book properties from book row column values. Finally the book is added to the shopping cart.</font>
+</p>
+
+
+<p>
+  <a name="69951"> </a><font >You might want to compare this version of <code>catalog.jsp</code> to the versions in <a href="JSPIntro.html#69778">JavaServer Pages Technology</a> and <a href="JSPTags.html#69949">Custom Tags in JSP Pages</a> that use a book database JavaBeans component. </font>
+</p>
+
+<blockquote><pre>
+&lt;sql:query var="books" 
+&nbsp;&nbsp;dataSource="${applicationScope.bookDS}"&gt;
+&nbsp;&nbsp;select * from PUBLIC.books where id = ?
+&nbsp;&nbsp;&lt;sql:param value="${bid}" /&gt;
+&lt;/sql:query&gt;
+&lt;c:forEach var="bookRow" begin="0"
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;items="${books.rowsByIndex}"&gt; 
+&nbsp;&nbsp;&lt;jsp:useBean id="bid"  type="java.lang.String" /&gt;
+&nbsp;&nbsp;&lt;jsp:useBean id="bookRow" type="java.lang.Object[]" /&gt;
+&nbsp;&nbsp;&lt;jsp:useBean id="addedBook" class="database.BookDetails"
+&nbsp;&nbsp;&nbsp;&nbsp;scope="page" /&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;jsp:setProperty name="addedBook" property="bookId"
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value="&lt;%=bookRow[0]%&gt;" /&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;jsp:setProperty name="addedBook" property="surname"
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value="&lt;%=bookRow[1]%&gt;" /&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;jsp:setProperty name="addedBook" property="firstName"
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value="&lt;%=bookRow[2]%&gt;" /&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;jsp:setProperty name="addedBook" property="title"
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value="&lt;%=bookRow[3]%&gt;" /&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;jsp:setProperty name="addedBook" property="price"
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value="&lt;%=((Double)bookRow[4]).floatValue()%&gt;" /&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;jsp:setProperty name="addedBook" property="year"
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value="&lt;%=(Integer)bookRow[5]%&gt;" /&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;jsp:setProperty name="addedBook" 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;property="description" value="&lt;%=bookRow[6]%&gt;" /&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;jsp:setProperty name="addedBook" property="inventory"
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value="&lt;%=(Integer)bookRow[7]%&gt;" /&gt;
+&nbsp;&nbsp;&lt;/jsp:useBean&gt;
+&nbsp;&nbsp;&lt;% cart.add(bid, addedBook); %&gt;
+&nbsp;&nbsp;...
+&lt;/c:forEach&gt;
+<a name="69926"> </a>
+</pre></blockquote>
+</blockquote>
+
+<img src="images/blueline.gif" width="550" height="8" ALIGN="BOTTOM" NATURALSIZEFLAG="3" ALT="Divider">
+
+<table width="550">
+<tr>
+
+<td align="left" valign="center">
+<font size="-1">
+<a href="../index.html" target="_top">Home</a>
+<br>
+<a href="JavaWSTutorialTOC.html">TOC</a>
+<br>
+<a href="JavaWSTutorialIX.html">Index</a></font>
+
+</td>
+
+<td align="center" valign="center">
+<a href="JSTL7.html"><img src="images/PreviousArrow.gif" align="center" width="26" height="26"
+    border="0" alt="PREV"></a>
+<a href="JSTL.html"><img src="images/UpArrow.gif" align="center" width="26" height="26"
+    border="0" alt="TOP"></a>
+<a href="JSTL9.html"><img src="images/NextArrow.gif" align="center" width="26" height="26"
+    border="0" alt="NEXT"></a>
+    </td>
+
+<td align="right" valign="center">
+<font size="-1">
+</font>
+</td>
+
+</tr>
+</table>
+<img src="images/blueline.gif" width="550" height="8" ALIGN="BOTTOM" NATURALSIZEFLAG="3" ALT="Divider">
+<p><font size="-2">This tutorial contains information on the 1.0 version of the Java Web Services Developer Pack.</p>
+
+<p>All of the material in <em>The Java Web Services Tutorial</em> is 
+<a href="Copyright.html">copyright</a>-protected and may not be published in other works
+without express written permission from Sun Microsystems.</font>
+</body>
+</html>
